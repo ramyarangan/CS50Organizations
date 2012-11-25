@@ -19,6 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `project`
 --
+CREATE DATABASE IF NOT EXISTS  `project` ;
 
 -- --------------------------------------------------------
 
@@ -26,7 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `announcements`
 --
 
-CREATE TABLE IF NOT EXISTS `announcements` (
+CREATE TABLE IF NOT EXISTS `project`.`announcements` (
   `id` int(10) unsigned NOT NULL,
   `text` longtext NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -40,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `announcements` (
 -- Table structure for table `clubs`
 --
 
-CREATE TABLE IF NOT EXISTS `clubs` (
+CREATE TABLE IF NOT EXISTS `project`.`clubs` (
   `id` int(10) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
   `abbreviation` varchar(63) NOT NULL,
@@ -58,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `clubs` (
 -- Table structure for table `events`
 --
 
-CREATE TABLE IF NOT EXISTS `events` (
+CREATE TABLE IF NOT EXISTS `project`.`events` (
   `id` int(10) unsigned NOT NULL,
   `privacy` int(4) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -75,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `events` (
 -- Table structure for table `privacy`
 --
 
-CREATE TABLE IF NOT EXISTS `privacy` (
+CREATE TABLE IF NOT EXISTS `project`.`privacy` (
   `level` int(4) unsigned NOT NULL,
   `description` varchar(255) NOT NULL,
   PRIMARY KEY (`level`)
@@ -85,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `privacy` (
 -- Dumping data for table `privacy`
 --
 
-INSERT INTO `privacy` (`level`, `description`) VALUES
+INSERT INTO `project`.`privacy` (`level`, `description`) VALUES
 (0, 'public'),
 (1, 'all club'),
 (2, 'comp'),
@@ -99,7 +100,7 @@ INSERT INTO `privacy` (`level`, `description`) VALUES
 -- Table structure for table `subscriptions`
 --
 
-CREATE TABLE IF NOT EXISTS `subscriptions` (
+CREATE TABLE IF NOT EXISTS `project`.`subscriptions` (
   `userID` int(10) unsigned NOT NULL,
   `clubID` int(10) unsigned NOT NULL,
   `level` int(4) unsigned NOT NULL,
@@ -113,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `subscriptions` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE IF NOT EXISTS `project`.`users` (
   `id` int(10) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
