@@ -1,32 +1,124 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.2.2
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Nov 25, 2012 at 11:46 AM
+-- Server version: 5.5.27
+-- PHP Version: 5.4.6
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
 --
 -- Database: `project`
 --
- 
-CREATE DATABASE IF NOT EXISTS  `project` ;
- 
- 
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `announcements`
+--
+
+CREATE TABLE IF NOT EXISTS `announcements` (
+  `id` int(10) unsigned NOT NULL,
+  `text` longtext NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `title` varchar(255) NOT NULL,
+  KEY `id` (`id`,`time`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clubs`
+--
+
+CREATE TABLE IF NOT EXISTS `clubs` (
+  `id` int(10) unsigned NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `abbreviation` varchar(63) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `privacy` tinyint(1) NOT NULL,
+  `information` longtext NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`,`abbreviation`,`email`),
+  KEY `name_2` (`name`,`abbreviation`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `events`
+--
+
+CREATE TABLE IF NOT EXISTS `events` (
+  `id` int(10) unsigned NOT NULL,
+  `privacy` int(4) unsigned NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `startTime` datetime NOT NULL,
+  `endTime` datetime NOT NULL,
+  `information` longtext NOT NULL,
+  PRIMARY KEY (`privacy`,`name`),
+  KEY `id` (`id`,`privacy`,`name`,`startTime`,`endTime`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `privacy`
+--
+
+CREATE TABLE IF NOT EXISTS `privacy` (
+  `level` int(4) unsigned NOT NULL,
+  `description` varchar(255) NOT NULL,
+  PRIMARY KEY (`level`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `privacy`
+--
+
+INSERT INTO `privacy` (`level`, `description`) VALUES
+(0, 'public'),
+(1, 'all club'),
+(2, 'comp'),
+(3, 'non-comp'),
+(4, 'admin'),
+(5, 'personal');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscriptions`
+--
+
+CREATE TABLE IF NOT EXISTS `subscriptions` (
+  `userID` int(10) unsigned NOT NULL,
+  `clubID` int(10) unsigned NOT NULL,
+  `level` int(4) unsigned NOT NULL,
+  PRIMARY KEY (`userID`,`clubID`),
+  KEY `level` (`level`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `users`
 --
- 
-CREATE TABLE IF NOT EXISTS `project`.`users` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) NOT NULL,
-  `hash` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
- 
---
--- Dumping data for table `project`.`users`
---
- 
-INSERT IGNORE INTO `project`.`users` VALUES(1, 'caesar', '$1$50$GHABNWBNE/o4VL7QjmQ6x0');
-INSERT IGNORE INTO `project`.`users` VALUES(2, 'cs50', '$1$50$ceNa7BV5AoVQqilACNLuC1');
-INSERT IGNORE INTO `project`.`users` VALUES(3, 'jharvard', '$1$50$RX3wnAMNrGIbgzbRYrxM1/');
-INSERT IGNORE INTO `project`.`users` VALUES(4, 'malan', '$1$HA$azTGIMVlmPi9W9Y12cYSj/');
-INSERT IGNORE INTO `project`.`users` VALUES(5, 'nate', '$1$50$sUyTaTbiSKVPZCpjJckan0');
-INSERT IGNORE INTO `project`.`users` VALUES(6, 'rbowden', '$1$50$lJS9HiGK6sphej8c4bnbX.');
-INSERT IGNORE INTO `project`.`users` VALUES(7, 'skroob', '$1$50$euBi4ugiJmbpIbvTTfmfI.');
-INSERT IGNORE INTO `project`.`users` VALUES(8, 'tmacwilliam', '$1$50$91ya4AroFPepdLpiX.bdP1');
-INSERT IGNORE INTO `project`.`users` VALUES(9, 'zamyla', '$1$50$Suq.MOtQj51maavfKvFsW1');
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(10) unsigned NOT NULL,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
