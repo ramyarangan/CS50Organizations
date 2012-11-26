@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 25, 2012 at 11:46 AM
+-- Generation Time: Nov 25, 2012 at 10:37 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.6
 
@@ -19,6 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `project`
 --
+
 CREATE DATABASE IF NOT EXISTS  `project` ;
 
 -- --------------------------------------------------------
@@ -32,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `project`.`announcements` (
   `text` longtext NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `title` varchar(255) NOT NULL,
+  `privacy` int(4) NOT NULL,
   KEY `id` (`id`,`time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -117,6 +119,8 @@ CREATE TABLE IF NOT EXISTS `project`.`subscriptions` (
 CREATE TABLE IF NOT EXISTS `project`.`users` (
   `id` int(10) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `admin` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
