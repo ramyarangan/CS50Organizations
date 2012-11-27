@@ -49,53 +49,6 @@
         session_destroy();
     }
 
-    /**
-     * Returns a stock by symbol (case-insensitively) else false if not found.
-     */
-    function lookup($symbol)
-    {
-        // reject symbols that start with ^
-        if (preg_match("/^\^/", $symbol))
-        {
-            return false;
-        }
-
-        // reject symbols that contain commas
-        if (preg_match("/,/", $symbol))
-        {
-            return false;
-        }
-
-        // open connection to Yahoo
-        $handle = @fopen("http://download.finance.yahoo.com/d/quotes.csv?f=snl1&s=$symbol", "r");
-        if ($handle === false)
-        {
-            return false;
-        }
-
-        // download first line of CSV file
-        $data = fgetcsv($handle);
-        if ($data === false || count($data) == 1)
-        {
-            return false;
-        }
-
-        // close connection to Yahoo
-        fclose($handle);
-
-        // ensure symbol was found
-        if ($data[2] === "0.00")
-        {
-            return false;
-        }
-
-        // return stock as an associative array
-        return [
-            "symbol" => $data[0],
-            "name" => $data[1],
-            "price" => $data[2],
-        ];
-    }
 
     /**
      * Executes SQL statement, possibly with parameters, returning
@@ -214,6 +167,17 @@
         else
         {
             trigger_error("Invalid template: $template", E_USER_ERROR);
+        }
+    }
+    
+    function checkForm($values = [])
+    {
+        foreach($values as $item)
+        {
+            if(empty($_POST[$item]))
+            {
+                apologize("You did not fill out all required fields.");
+            }
         }
     }
 

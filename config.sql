@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 25, 2012 at 10:37 PM
+-- Generation Time: Nov 27, 2012 at 03:06 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.6
 
@@ -21,7 +21,6 @@ SET time_zone = "+00:00";
 --
 
 CREATE DATABASE IF NOT EXISTS  `project` ;
-
 -- --------------------------------------------------------
 
 --
@@ -44,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `project`.`announcements` (
 --
 
 CREATE TABLE IF NOT EXISTS `project`.`clubs` (
-  `id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `abbreviation` varchar(63) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -53,7 +52,14 @@ CREATE TABLE IF NOT EXISTS `project`.`clubs` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`,`abbreviation`,`email`),
   KEY `name_2` (`name`,`abbreviation`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `clubs`
+--
+
+INSERT INTO `project`.`clubs` (`id`, `name`, `abbreviation`, `email`, `privacy`, `information`) VALUES
+(3, 'Yale', 'Y', 'harvard_rejects@yale.edu', 1, 'Oh how we wish we went to Harvard.');
 
 -- --------------------------------------------------------
 
@@ -62,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `project`.`clubs` (
 --
 
 CREATE TABLE IF NOT EXISTS `project`.`events` (
-  `id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `privacy` int(4) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
   `startTime` datetime NOT NULL,
@@ -70,7 +76,14 @@ CREATE TABLE IF NOT EXISTS `project`.`events` (
   `information` longtext NOT NULL,
   PRIMARY KEY (`privacy`,`name`),
   KEY `id` (`id`,`privacy`,`name`,`startTime`,`endTime`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `project`.`events` (`id`, `privacy`, `name`, `startTime`, `endTime`, `information`) VALUES
+(19, 1, 'Harvard-Yale', '2012-11-26 17:56:00', '2012-11-26 19:58:00', 'asdf');
 
 -- --------------------------------------------------------
 
@@ -89,12 +102,12 @@ CREATE TABLE IF NOT EXISTS `project`.`privacy` (
 --
 
 INSERT INTO `project`.`privacy` (`level`, `description`) VALUES
-(0, 'public'),
-(1, 'all club'),
-(2, 'comp'),
-(3, 'non-comp'),
-(4, 'admin'),
-(5, 'personal');
+(1, 'public'),
+(2, 'all club'),
+(3, 'comp'),
+(4, 'non-comp'),
+(5, 'admin'),
+(6, 'personal');
 
 -- --------------------------------------------------------
 
@@ -110,6 +123,13 @@ CREATE TABLE IF NOT EXISTS `project`.`subscriptions` (
   KEY `level` (`level`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `subscriptions`
+--
+
+INSERT INTO `project`.`subscriptions` (`userID`, `clubID`, `level`) VALUES
+(1, 3, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -117,12 +137,19 @@ CREATE TABLE IF NOT EXISTS `project`.`subscriptions` (
 --
 
 CREATE TABLE IF NOT EXISTS `project`.`users` (
-  `id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `admin` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `project`.`users` (`id`, `name`, `password`, `admin`) VALUES
+(1, 'jharvard', '$1$1VCbRSmT$EaGmoKp2hobug8rciIlX8/', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -17,7 +17,7 @@
         }
 
         // query database for user
-        $rows = query("SELECT * FROM users WHERE username = ?", $_POST["username"]);
+        $rows = query("SELECT * FROM users WHERE name = ?", $_POST["username"]);
 
         // if we found user, check password
         if (count($rows) == 1)
@@ -26,19 +26,29 @@
             $row = $rows[0];
 
             // compare hash of user's input against hash that's in database
-            if (crypt($_POST["password"], $row["hash"]) == $row["hash"])
+            if (crypt($_POST["password"], $row["password"]) == $row["password"])
             {
                 // remember that user's now logged in by storing user's ID in session
                 $_SESSION["id"] = $row["id"];
-
+                
+                //print("Logged in.");
                 // redirect to portfolio
                 redirect("/");
+            }
+            // else apologize
+            else
+            {
+                apologize("Invalid username and/or password.");
             }
         }
 
         // else apologize
-        apologize("Invalid username and/or password.");
+        else
+        {   
+            apologize("Invalid username and/or password.");
+        }
     }
+    
     else
     {
         // else render form
