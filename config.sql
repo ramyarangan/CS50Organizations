@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 27, 2012 at 03:06 AM
+-- Generation Time: Nov 27, 2012 at 08:59 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.6
 
@@ -35,6 +35,14 @@ CREATE TABLE IF NOT EXISTS `project`.`announcements` (
   `privacy` int(4) NOT NULL,
   KEY `id` (`id`,`time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `announcements`
+--
+
+INSERT INTO `project`.`announcements` (`id`, `text`, `time`, `title`, `privacy`) VALUES
+(3, 'Yale has added the event Harvard-Yale. Go check it out!', '2012-11-28 01:41:20', 'Harvard-Yale', 1),
+(3, 'Just wanted to announce that we fail.', '2012-11-28 01:56:59', 'Fale', 1);
 
 -- --------------------------------------------------------
 
@@ -68,7 +76,7 @@ INSERT INTO `project`.`clubs` (`id`, `name`, `abbreviation`, `email`, `privacy`,
 --
 
 CREATE TABLE IF NOT EXISTS `project`.`events` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL,
   `privacy` int(4) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
   `startTime` datetime NOT NULL,
@@ -76,14 +84,14 @@ CREATE TABLE IF NOT EXISTS `project`.`events` (
   `information` longtext NOT NULL,
   PRIMARY KEY (`privacy`,`name`),
   KEY `id` (`id`,`privacy`,`name`,`startTime`,`endTime`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `events`
 --
 
 INSERT INTO `project`.`events` (`id`, `privacy`, `name`, `startTime`, `endTime`, `information`) VALUES
-(19, 1, 'Harvard-Yale', '2012-11-26 17:56:00', '2012-11-26 19:58:00', 'asdf');
+(3, 1, 'Harvard-Yale', '2012-11-26 17:56:00', '2012-11-26 19:58:00', 'The event in which Harvard beats Yale.');
 
 -- --------------------------------------------------------
 
