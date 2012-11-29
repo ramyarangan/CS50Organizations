@@ -8,7 +8,7 @@
         $user = query("SELECT * FROM users WHERE id=?", $_SESSION["id"])[0];
     }
 
-    $allannouncements = query("SELECT * FROM announcements");
+    $allannouncements = query("SELECT * FROM announcements ORDER BY time DESC");
     $index = 0;
     $current = 0;
     while ($index < 25 && $current < count($allannouncements))

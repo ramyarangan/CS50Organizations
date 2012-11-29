@@ -1,5 +1,10 @@
+<form action="allClubs.php" method="get">
+
 <?php
     print("<h1>".$club["name"]."</h1></br>");
+
+    print("<button type=\"button\">LA</button>");
+    
     foreach ($announcements as $announcement)
     {
         print("<div>");
@@ -11,3 +16,4 @@
     }
 ?>
 
+</form>
