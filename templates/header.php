@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php /*<!DOCTYPE html>
 
 <html>
 
@@ -83,4 +83,162 @@
 
             </div>
 
+*/
+?>
+<!DOCTYPE html>
+
+
+<html>
+
+    <head>
+
+    <style type="text/css">
+
+    html, body, .container, .content {
+        height: 100%;
+    }
+
+    .container, .content {
+        position: relative;
+    }
+
+    .proper-content {
+        padding-top: 40px; /* >= navbar height */
+    }
+
+    .wrapper {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        margin: 0 auto -50px; /* same as the footer */
+    }
+
+    .push {
+        height: 50px; /* same as the footer */
+    }
+
+    .footer-wrapper {
+        position: relative;
+        height: 50px;
+        background-color:#ffddcc;
+        margin:0;
+        padding:0;
+
+    }
+
+    .page-header
+    {
+        text-align:center;
+    }
+
+    .page-header h1
+    {
+        font-size: 100px;
+        font-weight: 500;
+        letter-spacing: -5px;
+        color: #333333;
+    }
+
+    .page-header p
+    {
+        font-size: 20px;
+        font-weight: 200;
+        letter-spacing: 1px;
+        color: #999999;
+        line-height: 3;
+    }
+
+
+    .tab-content
+    {
+        height:500px;
+        overflow-y:auto;
+        text-align:center;
+    }
+
+    </style>
+
+        <link href="css/bootstrap.css" rel="stylesheet"/>
+        <link href="css/bootstrap-responsive.css" rel="stylesheet"/>
+        <link href="css/jquery-ui.css" rel="stylesheet"/>
+        <link href="css/jquery-ui-timepicker-addon.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/styles.css" />
+
+        <?php if (isset($title)): ?>
+            <title><?= htmlspecialchars($title) ?></title>
+        <?php else: ?>
+            <title></title>
+        <?php endif ?>
+     
+        <script type="text/javascript" src="js/jquery-1.8.2.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-sliderAccess.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/scripts.js"></script>
+        <script>
+            $(document).ready(function(){
+                $(".datetime").click(function(){
+                    $(this).datetimepicker({});
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+
+                <div class="container">
+
+                    <a class="brand" href="index.php">CS50 Organizations</a>
+
+                    <ul class="nav">
+                        <li class="divider-vertical"></li>
+                        <li><a href="calendar.php"></i> All Clubs</a></li>
+                        <li class="divider-vertical"></li>
+                        <li><a href="register.php">Link 2</a></li>
+                    </ul>
+                    
+                    <form class="navbar-search pull-left">
+                        <input type="text" class="search-query" placeholder="Search site">
+                    </form>
+
+
+                    <?php if (isset($_SESSION["id"])): ?>
+
+                    <ul class="nav pull-right">
+                        <li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+Connect
+<b class="caret"></b>
+</a>
+<ul class="dropdown-menu">
+<li><a href="login.php"> Connect via Facebook </a></li>
+<li><a href="login.php"> Connect via Google </a></li>
+</ul>
+</li>
+</ul>
+
+                    <?php else: ?>
+                        <ul class="nav pull-right"> 
+                            <li><a href="login.php"> <img src="img/harvard_icon.gif"> Login via HUID </a></li>
+                        </ul>
+
+                    <?php endif; ?>
+
+
+                </div>
+                
+            </div>
+        </div>	
+</body>
+        <div class="container">
+
+            <div class="content" style="padding-top:60px">
+
+                <div class="wrapper">
+                    <div class="proper-content">
+                   
 
