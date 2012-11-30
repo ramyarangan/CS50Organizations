@@ -200,7 +200,7 @@
 
                     <ul class="nav">
                         <li class="divider-vertical"></li>
-                        <li><a href="calendar.php"></i> All Clubs</a></li>
+                        <li><a href="allClubs.php"></i> All Clubs</a></li>
                         <li class="divider-vertical"></li>
                         <li><a href="register.php">Link 2</a></li>
                     </ul>
