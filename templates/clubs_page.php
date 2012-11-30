@@ -1,4 +1,4 @@
-<form action="allClubs.php" method="post">
+<form action="allClubs.php" method="get">
     <select name="club">
         <?php
             foreach ($clubs as $club)

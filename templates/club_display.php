@@ -1,10 +1,10 @@
-<form action="allClubs.php" method="get">
+<form action="sendMail.php" method="link">
 
 <?php
     print("<h1>".$club["name"]."</h1></br>");
 
-    print("<button type=\"button\">LA</button>");
-    
+    print("<button type=\"submit value = ".$club["name"]."\">Send us an email!</button>");
+        
     foreach ($announcements as $announcement)
     {
         print("<div>");
