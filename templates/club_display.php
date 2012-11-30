@@ -1,9 +1,11 @@
+
 <form action="sendMail.php" method="link">
 
 <?php
     print("<h1>".$club["name"]."</h1></br>");
 
-    print("<button type=\"submit value = ".$club["name"]."\">Send us an email!</button>");
+    print("<input type=\"hidden\" name=\"club\" value=\"".$club["name"]."\">");
+    print("<button type=\"submit\">Send us an email!</button>");
         
     foreach ($announcements as $announcement)
     {
