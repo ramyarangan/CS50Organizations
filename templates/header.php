@@ -163,13 +163,17 @@
         <link href="css/jquery-ui.css" rel="stylesheet"/>
         <link href="css/jquery-ui-timepicker-addon.css" rel="stylesheet"/>
         <link rel="stylesheet" href="css/styles.css" />
-
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+        
         <?php if (isset($title)): ?>
             <title><?= htmlspecialchars($title) ?></title>
         <?php else: ?>
             <title></title>
         <?php endif ?>
-     
+
+   
+        <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>     
         <script type="text/javascript" src="js/jquery-1.8.2.js"></script>
         <script type="text/javascript" src="js/jquery-ui.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
@@ -178,8 +182,8 @@
         <script src="js/scripts.js"></script>
         <script>
             $(document).ready(function(){
-                $(".datetime").click(function(){
-                    $(this).datetimepicker({});
+                $(".datetime").hover(function(){
+                    $(this).datetimepicker({controlType: 'select', timeFormat: 'hh:mm tt', stepMinute: 5});
                 });
             });
         </script>
@@ -220,7 +224,11 @@ Connect
 </ul>
 </li>
 </ul>
-
+                             <?php
+                              print("<li><a href=\"createClub.php\">Register New Club</a></li>"); 
+                             print("<li><a href=\"makeEvent.php\">Make an Event</a></li>");
+                                print("<li><a href=\"makeAnnouncement.php\">Make an Announcement</a></li>");
+                    ?>
                     <?php else: ?>
                         <ul class="nav pull-right"> 
                             <li><a href="login.php"> <img src="img/harvard_icon.gif"> Login via HUID </a></li>
