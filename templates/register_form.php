@@ -15,6 +15,9 @@
             <input name="confirmation" placeholder="Confirmation" type="password"/>
         </div>
         <div class="control-group">
+            <input name="email" placeholder="Your Email" type="email"/>
+        </div>
+        <div class="control-group">
             <button type="submit" class="btn">Register</button>
         </div>
     </fieldset>

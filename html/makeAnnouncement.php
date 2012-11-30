@@ -28,8 +28,9 @@
     }
     else
     {
-        // else render stock sale form, passing the user's stock information
-        $rows = query("SELECT * FROM subscriptions WHERE userID = ? AND level = 4", $_SESSION["id"]);
+        // create list of clubs that the currently logged in user owns
+        $privacy = query("SELECT * FROM privacy WHERE description = 'admin'")[0]["level"]; 
+        $rows = query("SELECT * FROM subscriptions WHERE userID = ? AND level = ?", $_SESSION["id"], $privacy);
         $clubsOwned = array();
 
         foreach($rows as $row)

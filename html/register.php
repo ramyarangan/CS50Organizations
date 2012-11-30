@@ -19,10 +19,14 @@
         {
             apologize("Your password must match the confirmation.");
         }
+        else if (empty($_POST["email"]))
+        {   
+            apologize("You must provide your email.");
+        }
         
         // insert new user into database
-        $result = query("INSERT INTO users (name, password, admin) VALUES(?, ?, 0)",
-                     $_POST["username"], crypt($_POST["password"]));
+        $result = query("INSERT INTO users (name, password, email, admin) VALUES(?, ?, ?, 0)",
+                     $_POST["username"], crypt($_POST["password"]), $_POST["email"]);
         
         // if user not added, notify user      
         if($result === false)
