@@ -6,7 +6,7 @@
 
     <ul id="MainTabs" class="nav nav-tabs ">
 <li><a data-target="#events" data-toggle="tab" href="/calendar.php"><i class="icon-calendar"></i>&nbsp;&nbsp;Events</a></li>
-<li><a data-target="#announcements" data-toggle="tab" href="/announcements.php"><i class="icon-exclamation-sign"></i>&nbsp;&nbsp;Announcements</a></li>
+<li><a data-target="#announcements" data-toggle="tab" href="/viewAnnouncements.php"><i class="icon-exclamation-sign"></i>&nbsp;&nbsp;Announcements</a></li>
     </ul>
 
     <div class="tab-content">
