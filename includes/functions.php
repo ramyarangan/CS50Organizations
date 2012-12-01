@@ -196,7 +196,7 @@
         {
             if(empty($_POST[$item]))
             {
-                apologize("You did not fill out all required fields.");
+                apologize("You did not fill out all required field: " . $item);
             }
         }
     }

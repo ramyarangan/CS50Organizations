@@ -10,7 +10,7 @@
         </div>
         <div class="control-group">
             <input autofocus name="abbreviation" placeholder="Abbreviation" type="text"/>
-        </div>
+        </div>        
         <div class="control-group">
             <input name="email" placeholder="Club Email" type="email"/>
         </div>
@@ -19,7 +19,20 @@
              <INPUT type="radio" name="privacy" value="open"> Open<BR>
              <INPUT type="radio" name="privacy" value="closed"> Closed<BR>
         </div>
- 
+        <div class="control-group">
+        	<BR>
+			What type of club is this? (Select all that apply.) <BR>
+            <?php
+                foreach ($categories as $categoryID => $category)
+                {
+                    print("<input type=\"checkbox\" name=\"categories[]\" value='"
+                          . $categoryID . "'>" . $category . " <br> ");          
+                }    
+            	print("<input type=\"checkbox\" name=\"categories[]\" value=\"". $otherID . "\"> Other <br>");
+            ?>
+            <BR>
+        </div>
+
         <div class="control-group">
             <TEXTAREA name="info" rows="20" cols="80" placeholder="Describe your club."></TEXTAREA>
         </div>

@@ -16,12 +16,18 @@
             OR die(mysql_error());
 
         //add seconds component to the time
-        $startTime = mysql_real_escape_string($_POST["startDatetime"] . ":00");
-        $endTime = mysql_real_escape_string($_POST["endDatetime"] . ":00");
+        $startTime = mysql_real_escape_string($_POST["startDatetime"]);
+        $endTime = mysql_real_escape_string($_POST["endDatetime"]);
+        
+        print($_POST["club"] . "\n");
+        print($_POST["privacy"] . "\n");
+        print($_POST["name"] . "\n");
+        print($_POST["info"] . "\n");
+        print($startTime);
         
         // insert new event into database
         $result = query("INSERT INTO events (id, privacy, name, startTime, endTime, information) 
-                VALUES(?, ?, ?, STR_TO_DATE(?, '%m/%d/%Y %H:%i:%s'), STR_TO_DATE(?, '%m/%d/%Y %H:%i:%s'), ?)",
+                VALUES(?, ?, ?, STR_TO_DATE(?, '%m/%d/%Y %H:%i'), STR_TO_DATE(?, '%m/%d/%Y %H:%i'), ?)",
                 $_POST["club"], $_POST["privacy"], $_POST["name"], $startTime, $endTime, $_POST["info"]);
         
         // if event not added, notify user      
@@ -43,13 +49,15 @@
             apologize("The corresponding event announcement could not be added.");
         }
         
-        //redirect to portfolio
+        //redirect to home page
         redirect("/");
+        
     }
     else
     {
-        // else render stock sale form, passing the user's stock information
-        $rows = query("SELECT * FROM subscriptions WHERE userID = ? AND level = 4", $_SESSION["id"]);
+        // create list of clubs that the currently logged in user owns
+        $privacy = query("SELECT * FROM privacy WHERE description = 'admin'")[0]["level"]; 
+        $rows = query("SELECT * FROM subscriptions WHERE userID = ? AND level = ?", $_SESSION["id"], $privacy);
         $clubsOwned = array();
 
         foreach($rows as $row)
@@ -58,6 +66,7 @@
             $clubsOwned[$row["clubID"]] = $club[0]["name"];
         }
         
+        // create list of privacy settings to display on form
         $rows = query("SELECT * FROM privacy"); 
         $privacy = array();
         
@@ -66,6 +75,7 @@
             $privacy[$row["description"]] = $row["level"];
         }
         
+        // render form
         render("makeEvent_form.php", ["title" => "Make New Event", "clubsOwned" => $clubsOwned, "privacy" => $privacy]);
     }
 ?>

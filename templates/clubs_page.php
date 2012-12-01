@@ -1,4 +1,4 @@
-<form action="allClubs.php" method="post">
+<form action="allClubs.php" method="POST">
     <select name="club">
         <?php
             foreach ($clubs as $club)
@@ -8,12 +8,4 @@
         ?>
     </select>
     <button type="submit" class="btn">Go!</button>
-    <div>
-        <?php   
-            foreach ($clubs as $club) 
-            {   
-                print($club["name"]);
-            }    
-        ?>
-    </div>
 </form>
