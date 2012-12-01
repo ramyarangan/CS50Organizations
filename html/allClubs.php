@@ -4,9 +4,9 @@
     require("../includes/config.php"); 
 
     // if form was submitted
-    if ($_SERVER["REQUEST_METHOD"] == "POST")
+    if (!empty($_GET["club"]))
     {
-        $club = query("SELECT * FROM clubs WHERE name=?", $_POST["club"])[0];
+        $club = query("SELECT * FROM clubs WHERE name=?", $_GET["club"])[0];
         $privacy = 1;
         if (!empty($_SESSION["id"]))
         {
