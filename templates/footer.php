@@ -1,12 +1,12 @@
 
                 </div><!-- /.proper-content -->
 
-                <div class="push"></div>
+                <div class="push"></div>/Users/michelle/Dropbox/cs/templates/footer.php
 
                 </div><!-- /.wrapper -->
 
                 <div class="footer-wrapper">
-                    voici le footer
+                    Copyright &#169; 2012 CS50
                 </div>
 
             </div>
@@ -16,17 +16,3 @@
     </body>
 
 </html>
-
-<?php /*
-            </div>
-
-            <div id="bottom">
-                Copyright &#169; John Harvard
-            </div>
-
-        </div>
-
-    </body>
-
-</html> */
-?>

@@ -156,6 +156,11 @@
         text-align:center;
     }
 
+    .dropdown
+{
+    text-align:left;
+}
+
     </style>
 
         <link href="css/bootstrap.css" rel="stylesheet"/>
@@ -206,20 +211,48 @@
                     </form>
 
 
-                    <?php if (isset($_SESSION["id"])): ?>
+                    <?php if (isset($_SESSION["id"])): 
+                        
+                        $myclubs = query("SELECT * FROM subscriptions JOIN clubs WHERE userID = ? AND subscriptions.ClubID = clubs.id", $_SESSION["id"]);?>
+
+
+                    <ul class="nav" style:>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            My Clubs
+                            <b class="caret"></b>
+                            </a>
+<ul class="dropdown-menu">
+
+<li class="nav-header">My Club Pages</li>
+
+<?php foreach ($myclubs as $club):?>
+
+<li><a href=""> <?=$club["name"]?> </a></li>
+
+<?endforeach?>
+
+<li class="nav-header">Manage Clubs</li>
+<li><a href="makeAnnouncement.php"> Make Announcement </a></li>
+<li><a href="makeEvent.php"> Create Event </a></li>
+</ul>
+
+</li>
+</ul>
+
 
                     <ul class="nav pull-right">
                         <li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-Connect
-<b class="caret"></b>
-</a>
-<ul class="dropdown-menu">
-<li><a href="login.php"> Connect via Facebook </a></li>
-<li><a href="login.php"> Connect via Google </a></li>
-</ul>
-</li>
-</ul>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Connect
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="login.php"> Connect via Facebook </a></li>
+                                <li><a href="login.php"> Connect via Google </a></li>
+                            </ul>
+                        </li>
+                        </ul>
 
                     <?php else: ?>
                         <ul class="nav pull-right"> 
@@ -229,8 +262,7 @@ Connect
                     <?php endif; ?>
 
 
-                </div>
-                
+                </div>                
             </div>
         </div>	
 </body>
@@ -240,5 +272,5 @@ Connect
 
                 <div class="wrapper">
                     <div class="proper-content">
-                   
+     
 
