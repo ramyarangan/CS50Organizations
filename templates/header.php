@@ -125,6 +125,33 @@
         padding:0;
 
     }
+    .club-header
+{
+    padding: 30px;
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 30px;
+    color: inherit;
+    text-align:left;
+
+}
+
+.club-header h1
+{
+    margin-bottom: 0;
+    font-size: 50px;
+    line-height: 1;
+    letter-spacing: -1px;
+    color: inherit;
+}
+
+.club-header h1 small
+{
+    margin-bottom: 0;
+    font-size: 26px;
+    font-weight: 300;
+    font-color: #999999;
+}
 
     .page-header
     {
