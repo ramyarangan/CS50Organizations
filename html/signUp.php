@@ -17,6 +17,35 @@
         {
             print("You are already signed up!");
         }
+        else if($club["privacy"] == 0)
+        {
+                    require("PHPMailer/class.phpmailer.php");
+        $mail = new PHPMailer();
+
+          // use SMTP
+          $mail->IsSMTP();
+          $mail->Host = "smtp.fas.harvard.edu";
+
+          $mail->SetFrom("cs50organizations@gmail.com");
+
+          // set To:
+          $mail->AddAddress($club["email"]);
+
+          // set Subject:
+          $mail->Subject = "Request to Join Club";
+
+          // set body
+          $mail->Body = $user["name"]." would like to join your club.";
+
+          // send mail
+          if ($mail->Send() == false)
+          {
+              die($mail->ErrInfo);
+          }
+          
+          print("Your request has been sent!");
+
+        }
         else
         {    
             $result = query("INSERT INTO subscriptions (userID, clubID, level) VALUES(?, ?, 2)",$user["id"],$club["id"]);
