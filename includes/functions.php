@@ -153,6 +153,7 @@
             // extract variables into local scope
             extract($values);
 
+            
             // render header
             require("../templates/header.php");
 
