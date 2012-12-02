@@ -257,14 +257,15 @@
 
 <li class="nav-header">My Club Pages</li>
 
-<?php foreach ($myclubs as $club):?>
+<?php foreach ($myclubs as $club){
 
-<li><a href=""> <?=$club["name"]?> </a></li>
+    print("<li><a href=\"allClubs.php?club=".str_replace(" ", "+", $club["name"])."\">".$club["name"]."</a></li>");
 
-<?endforeach?>
+}?>
 
 <li class="nav-header">Manage Clubs</li>
 <li><a href="makeAnnouncement.php"> Make Announcement </a></li>
+<li><a href="createClub.php"> Create Club </a></li>
 <li><a href="makeEvent.php"> Create Event </a></li>
 </ul>
 

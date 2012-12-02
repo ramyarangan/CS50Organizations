@@ -1,7 +1,7 @@
 
                 </div><!-- /.proper-content -->
 
-                <div class="push"></div>/Users/michelle/Dropbox/cs/templates/footer.php
+                <div class="push"></div>
 
                 </div><!-- /.wrapper -->
 

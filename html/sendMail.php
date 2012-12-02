@@ -46,6 +46,6 @@
     }
     else
     {
-        render('email_form.php',["club" => $_GET["club"]]);
+        render_div('email_form.php',["club" => $_GET["club"]]);
     }
 ?>

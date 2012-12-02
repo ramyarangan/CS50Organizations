@@ -15,10 +15,11 @@
             if(!empty($subscription))
             {
                 $privacy = $subscription[0]["level"];
-            }    
+            }
         }
-        $announcements = query("SELECT * FROM announcements WHERE id=? AND privacy <= ? ORDER BY time DESC",$club["id"],$privacy);
-        render("club_display.php",["club" => $club,"announcements" => $announcements]);
+        $announcements = query("SELECT * FROM announcements WHERE id=? AND privacy <= ? ORDER BY time DESC", $club["id"], $privacy);
+        
+        render("club_display.php", ["title" => $club["name"]." ".$club["abbreviation"] , "clubInfo" => $club, "announcements" => $announcements, "level" => $privacy]);
     }
     else
     {
@@ -26,3 +27,5 @@
         render("clubs_page.php", ["title" => "All Clubs", "clubs" => $clubs]);
     }
 ?>
+
+
