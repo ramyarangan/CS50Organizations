@@ -125,6 +125,33 @@
         padding:0;
 
     }
+    .club-header
+{
+    padding: 30px;
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 30px;
+    color: inherit;
+    text-align:left;
+
+}
+
+.club-header h1
+{
+    margin-bottom: 0;
+    font-size: 50px;
+    line-height: 1;
+    letter-spacing: -1px;
+    color: inherit;
+}
+
+.club-header h1 small
+{
+    margin-bottom: 0;
+    font-size: 26px;
+    font-weight: 300;
+    font-color: #999999;
+}
 
     .page-header
     {
@@ -155,6 +182,11 @@
         overflow-y:auto;
         text-align:center;
     }
+
+    .dropdown
+{
+    text-align:left;
+}
 
     </style>
 
@@ -210,25 +242,48 @@
                     </form>
 
 
-                    <?php if (isset($_SESSION["id"])): ?>
+                    <?php if (isset($_SESSION["id"])): 
+                        
+                        $myclubs = query("SELECT * FROM subscriptions JOIN clubs WHERE userID = ? AND subscriptions.ClubID = clubs.id", $_SESSION["id"]);?>
 
-                    <ul class="nav pull-right">
+
+                    <ul class="nav" style:>
                         <li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-Connect
-<b class="caret"></b>
-</a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            My Clubs
+                            <b class="caret"></b>
+                            </a>
 <ul class="dropdown-menu">
-<li><a href="login.php"> Connect via Facebook </a></li>
-<li><a href="login.php"> Connect via Google </a></li>
+
+<li class="nav-header">My Club Pages</li>
+
+<?php foreach ($myclubs as $club){
+
+    print("<li><a href=\"allClubs.php?club=".str_replace(" ", "+", $club["name"])."\">".$club["name"]."</a></li>");
+
+}?>
+
+<li class="nav-header">Manage Clubs</li>
+<li><a href="makeAnnouncement.php"> Make Announcement </a></li>
+<li><a href="createClub.php"> Create Club </a></li>
+<li><a href="makeEvent.php"> Create Event </a></li>
 </ul>
+
 </li>
 </ul>
-                             <?php
-                              print("<li><a href=\"createClub.php\">Register New Club</a></li>"); 
-                             print("<li><a href=\"makeEvent.php\">Make an Event</a></li>");
-                                print("<li><a href=\"makeAnnouncement.php\">Make an Announcement</a></li>");
-                    ?>
+                    <ul class="nav pull-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Connect
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="login.php"> Connect via Facebook </a></li>
+                                <li><a href="login.php"> Connect via Google </a></li>
+                            </ul>
+                        </li>
+                        </ul>
+
                     <?php else: ?>
                         <ul class="nav pull-right"> 
                             <li><a href="login.php"> <img src="img/harvard_icon.gif"> Login via HUID </a></li>
@@ -237,8 +292,7 @@ Connect
                     <?php endif; ?>
 
 
-                </div>
-                
+                </div>                
             </div>
         </div>	
 </body>
@@ -248,5 +302,5 @@ Connect
 
                 <div class="wrapper">
                     <div class="proper-content">
-                   
+     
 
