@@ -230,65 +230,78 @@
 
                     <a class="brand" href="index.php">CS50 Organizations</a>
 
-                    <ul class="nav">
-                        <li class="divider-vertical"></li>
-                        <li><a href="allClubs.php"></i> All Clubs</a></li>
-                        <li class="divider-vertical"></li>
-                        <li><a href="register.php">Link 2</a></li>
-                    </ul>
-                    
-                    <form class="navbar-search pull-left">
-                        <input type="text" class="search-query" placeholder="Search site">
-                    </form>
-
-
+                    <!--IF LOGGED IN-->
                     <?php if (isset($_SESSION["id"])): 
-                        
                         $myclubs = query("SELECT * FROM subscriptions JOIN clubs WHERE userID = ? AND subscriptions.ClubID = clubs.id", $_SESSION["id"]);?>
 
-
                     <ul class="nav" style:>
-                        <li class="dropdown">
+                        <li class="dropdown pull-left">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            My Clubs
-                            <b class="caret"></b>
+                                Clubs
+                                <b class="caret"></b>
                             </a>
-<ul class="dropdown-menu">
+                        
+                            <ul class="dropdown-menu">
+                                <li class="nav-header">My Clubs</li>
 
-<li class="nav-header">My Club Pages</li>
+                                <?php foreach ($myclubs as $club){
+                                    print("<li><a href=\"allClubs.php?club=".str_replace(" ", "+", $club["name"])."\">".$club["name"]."</a></li>");
 
-<?php foreach ($myclubs as $club){
+                                }?>
 
-    print("<li><a href=\"allClubs.php?club=".str_replace(" ", "+", $club["name"])."\">".$club["name"]."</a></li>");
+                                <li class="nav-header">Manage Clubs</li>
+                                <li><a href="makeAnnouncement.php"> Make Announcement </a></li>
+                                <li><a href="createClub.php"> Create Club </a></li>
+                                <li><a href="makeEvent.php"> Create Event </a></li>
+                                <li class="divider"></li>
+                                <li><a href="allClubs.php"> All Clubs </a></li>
+                            </ul>
+                        </li>
+                    </ul>
 
-}?>
+                    <form class="navbar-search pull-left">
+                        <input type="text" class="search-query" placeholder="Search clubs and events">
+                    </form>
 
-<li class="nav-header">Manage Clubs</li>
-<li><a href="makeAnnouncement.php"> Make Announcement </a></li>
-<li><a href="createClub.php"> Create Club </a></li>
-<li><a href="makeEvent.php"> Create Event </a></li>
-</ul>
-
-</li>
-</ul>
                     <ul class="nav pull-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Connect
+                                <i class="icon-user"></i>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="login.php"> Connect via Facebook </a></li>
                                 <li><a href="login.php"> Connect via Google </a></li>
+                                <li class="divider"></li>
+                                <li><a href="logout.php"> Account Settings </a></li>
+                                <li><a href="logout.php"> Log Out </a></li>
                             </ul>
                         </li>
                         </ul>
 
+                    <!--IF NOT LOGGED IN-->
                     <?php else: ?>
+
+<ul class="nav" style:>
+<li class="dropdown pull-left">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+Clubs
+<b class="caret"></b>
+</a>
+
+<ul class="dropdown-menu">
+    <li><a href="allClubs.php"> All Clubs </a></li>
+</ul>
+</li>
+</ul>
+
+                        <form class="navbar-search pull-left">
+                            <input type="text" class="search-query" placeholder="Search site">
+                        </form>
+
                         <ul class="nav pull-right"> 
                             <li><a href="login.php"> <img src="img/harvard_icon.gif"> Login via HUID </a></li>
                         </ul>
-
                     <?php endif; ?>
 
 
@@ -298,7 +311,7 @@
 </body>
         <div class="container">
 
-            <div class="content" style="padding-top:60px">
+            <div class="content" style="padding-top:40px">
 
                 <div class="wrapper">
                     <div class="proper-content">
