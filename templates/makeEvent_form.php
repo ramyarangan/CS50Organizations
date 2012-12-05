@@ -37,6 +37,10 @@
         </div>
         
         <div class="control-group">
+            <input autofocus name="location" placeholder="Location" type="text"/>
+        </div>
+                
+        <div class="control-group">
 			<div>
 				<input type="text" name="startDatetime" placeholder="Start Date/Time" class="datetime" value=""/>
 		    </div>
