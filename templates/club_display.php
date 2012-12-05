@@ -20,6 +20,12 @@
         <form action="signUp.php" method="link">
 
             <p>
+
+<div class="btn-toolbar">
+
+
+
+
                 <button type ="button" class="btn" data-toggle="collapse" data-target="#info">
                     <i class = "icon-info-sign"></i>
                 </button>
@@ -37,10 +43,19 @@
                 ?>
             
                 <?php elseif($level == 5):?>
+                    <div class="btn-group">
                     <a href="#announcementModal" role="button" class="btn" data-toggle="modal">
                         <i class="icon-bullhorn"></i>
                     </a>
+
+                    <a href="#announcementModal" role="button" class="btn" data-toggle="modal">
+<i class="icon-bullhorn"></i>
+</a>
+
+                    </div>
                 <?php endif ?>
+
+</div>
             </p>
         
             <div id="info" class="collapse out"> 
