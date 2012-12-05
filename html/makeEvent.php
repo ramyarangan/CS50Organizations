@@ -26,9 +26,10 @@
         print($startTime);
         
         // insert new event into database
-        $result = query("INSERT INTO events (id, privacy, name, startTime, endTime, information) 
-                VALUES(?, ?, ?, STR_TO_DATE(?, '%m/%d/%Y %H:%i'), STR_TO_DATE(?, '%m/%d/%Y %H:%i'), ?)",
-                $_POST["club"], $_POST["privacy"], $_POST["name"], $startTime, $endTime, $_POST["info"]);
+        $result = query("INSERT INTO events (id, privacy, name, location, startTime, endTime, information) 
+                VALUES(?, ?, ?, ?, STR_TO_DATE(?, '%m/%d/%Y %H:%i'), STR_TO_DATE(?, '%m/%d/%Y %H:%i'), ?)",
+                $_POST["club"], $_POST["privacy"], $_POST["name"], $_POST["location"],
+                $startTime, $endTime, $_POST["info"]);
         
         // if event not added, notify user      
         if($result === false)
