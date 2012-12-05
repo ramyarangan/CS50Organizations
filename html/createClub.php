@@ -3,6 +3,11 @@
     // configuration
     require("../includes/config.php");
 
+    if (empty($_SESSION["id"]))
+    {
+        redirect("login.php?go=createClub.php");
+    }
+
     // if form was submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
@@ -86,7 +91,10 @@
             } 
 
             query("INSERT INTO calendarLinks (id, link) 
-                    VALUES(?, ?)", $clubID.".".$i, substr($appCalUrl,38,strlen($appCalUrl)-51));
+                    VALUES(?, ?)", $clubID.".".$i, $appCalUrl);
+//            query("INSERT INTO calendarLinks (id, link) 
+//                    VALUES(?, ?)", $clubID.".".$i, substr($appCalUrl,38,strlen($appCalUrl)-51));
+
         }
         // redirect to home
         redirect("/"); 
