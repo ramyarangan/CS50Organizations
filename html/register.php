@@ -7,6 +7,10 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
         // validate submission
+        if (empty($_POST["realname"]))
+        {
+            apologize("You must provide your name.");
+        }
         if (empty($_POST["username"]))
         {
             apologize("You must provide your username.");
@@ -25,8 +29,8 @@
         }
         
         // insert new user into database
-        $result = query("INSERT INTO users (name, password, email, admin) VALUES(?, ?, ?, 0)",
-                     $_POST["username"], crypt($_POST["password"]), $_POST["email"]);
+        $result = query("INSERT INTO users (name, password, email, admin, realname) VALUES(?, ?, ?, 0, ?)",
+                     $_POST["username"], crypt($_POST["password"]), $_POST["email"], $_POST["realname"]);
         
         // if user not added, notify user      
         if($result === false)

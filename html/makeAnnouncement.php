@@ -20,8 +20,8 @@
         $clubName = $clubs[0]["name"];
         
         //add announcement
-        $result = query("INSERT INTO announcements (id, text, title, privacy) VALUES(?, ?, ?, ?)",
-                    $_POST["club"], $_POST["info"], $_POST["name"], $_POST["privacy"]);
+        $result = query("INSERT INTO announcements (id, userID, text, title, privacy) VALUES(?, ?, ?, ?, ?)",
+                    $_POST["club"], $_SESSION["id"], $_POST["info"], $_POST["name"], $_POST["privacy"]);
         
         if($result === false)
         {

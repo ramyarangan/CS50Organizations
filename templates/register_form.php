@@ -6,6 +6,9 @@
 <form action="register.php" method="post">
     <fieldset>
         <div class="control-group">
+            <input autofocus name="realname" placeholder="Name" type="text"/>
+        </div>
+        <div class="control-group">
             <input autofocus name="username" placeholder="Username" type="text"/>
         </div>
         <div class="control-group">
