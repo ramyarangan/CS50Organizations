@@ -77,7 +77,7 @@
             $createdEntry = $gc->insertEvent($newEntry, $url);
         }
 
-        redirect to home page
+        //redirect to home page
         redirect("/");
         
     }
