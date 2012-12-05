@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 30, 2012 at 02:26 AM
+-- Generation Time: Dec 05, 2012 at 10:07 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.6
 
@@ -21,13 +21,14 @@ SET time_zone = "+00:00";
 --
 
 CREATE DATABASE IF NOT EXISTS  `project` ;
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `announcements`
 --
 
-CREATE TABLE `project`.`announcements` (
+CREATE TABLE IF NOT EXISTS `project`.`announcements` (
   `id` int(10) unsigned NOT NULL,
   `text` longtext NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -47,10 +48,29 @@ INSERT INTO `project`.`announcements` (`id`, `text`, `time`, `title`, `privacy`)
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `calendarLinks`
+--
+
+CREATE TABLE IF NOT EXISTS `project`.`calendarLinks` (
+  `id` varchar(6) NOT NULL,
+  `link` varchar(255) NOT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `calendarLinks`
+--
+
+INSERT INTO `project`.`calendarLinks` (`id`, `link`) VALUES
+('4.5', 'https://www.google.com/calendar/embed?src=2ah0qjho0ctekccbmtmpatunco%40group.calendar.google.com&ctz=America/New_York');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `clubs`
 --
 
-CREATE TABLE `project`.`clubs` (
+CREATE TABLE IF NOT EXISTS `project`.`clubs` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `abbreviation` varchar(63) NOT NULL,
@@ -75,7 +95,7 @@ INSERT INTO `project`.`clubs` (`id`, `name`, `abbreviation`, `email`, `privacy`,
 -- Table structure for table `clubTypePairs`
 --
 
-CREATE TABLE `project`.`clubTypePairs` (
+CREATE TABLE IF NOT EXISTS `project`.`clubTypePairs` (
   `clubID` int(10) unsigned NOT NULL,
   `clubTypeID` int(6) unsigned NOT NULL,
   PRIMARY KEY (`clubID`,`clubTypeID`),
@@ -96,7 +116,7 @@ INSERT INTO `project`.`clubTypePairs` (`clubID`, `clubTypeID`) VALUES
 -- Table structure for table `clubTypes`
 --
 
-CREATE TABLE `project`.`clubTypes` (
+CREATE TABLE IF NOT EXISTS `project`.`clubTypes` (
   `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
   `description` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
@@ -117,7 +137,7 @@ INSERT INTO `project`.`clubTypes` (`id`, `description`) VALUES
 -- Table structure for table `events`
 --
 
-CREATE TABLE `project`.`events` (
+CREATE TABLE IF NOT EXISTS `project`.`events` (
   `id` int(10) unsigned NOT NULL,
   `privacy` int(4) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -141,7 +161,7 @@ INSERT INTO `project`.`events` (`id`, `privacy`, `name`, `startTime`, `endTime`,
 -- Table structure for table `privacy`
 --
 
-CREATE TABLE `project`.`privacy` (
+CREATE TABLE IF NOT EXISTS `project`.`privacy` (
   `level` int(4) unsigned NOT NULL,
   `description` varchar(255) NOT NULL,
   PRIMARY KEY (`level`)
@@ -165,7 +185,7 @@ INSERT INTO `project`.`privacy` (`level`, `description`) VALUES
 -- Table structure for table `subscriptions`
 --
 
-CREATE TABLE `project`.`subscriptions` (
+CREATE TABLE IF NOT EXISTS `project`.`subscriptions` (
   `userID` int(10) unsigned NOT NULL,
   `clubID` int(10) unsigned NOT NULL,
   `level` int(4) unsigned NOT NULL,
@@ -186,7 +206,7 @@ INSERT INTO `project`.`subscriptions` (`userID`, `clubID`, `level`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE `project`.`users` (
+CREATE TABLE IF NOT EXISTS `project`.`users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
