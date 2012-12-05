@@ -19,36 +19,17 @@
         }
         else if($club["privacy"] == 0)
         {
-                    require("PHPMailer/class.phpmailer.php");
-        $mail = new PHPMailer();
-
-          // use SMTP
-          $mail->IsSMTP();
-          $mail->Host = "smtp.fas.harvard.edu";
-
-          $mail->SetFrom("cs50organizations@gmail.com");
-
-          // set To:
-          $mail->AddAddress($club["email"]);
-
-          // set Subject:
-          $mail->Subject = "Request to Join Club";
-
-          // set body
-          $mail->Body = $user["name"]." would like to join your club.";
-
-          // send mail
-          if ($mail->Send() == false)
-          {
-              die($mail->ErrInfo);
-          }
-          
-          print("Your request has been sent!");
+            $privacy = query("SELECT * FROM privacy WHERE description=\"public\"")[0]["level"];
+            $result = query("INSERT INTO subscriptions (userID, clubID, level) VALUES(?, ?, ?)",$user["id"],$club["id"],
+                $privacy);            
+            print("Your request to join the club has been sent!");
 
         }
         else
         {    
-            $result = query("INSERT INTO subscriptions (userID, clubID, level) VALUES(?, ?, 2)",$user["id"],$club["id"]);
+            $privacy = query("SELECT level FROM privacy WHERE description=\"all club\"")[0]["level"];
+            $result = query("INSERT INTO subscriptions (userID, clubID, level) VALUES(?, ?, ?)",$user["id"],$club["id"],
+                $privacy);
             
             print("You are now signed up!");
         }

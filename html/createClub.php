@@ -3,6 +3,11 @@
     // configuration
     require("../includes/config.php");
 
+    if (empty($_SESSION["id"]))
+    {
+        redirect("login.php?go=createClub.php");
+    }
+
     // if form was submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
@@ -57,6 +62,40 @@
             apologize("Your subscription to this club could not be added to the database.");
         }        
         
+        $gdataCal = new Zend_Gdata_Calendar($_SESSION["client"]);
+
+        //Get list of existing calendars
+        $calFeed = $gdataCal->getCalendarListFeed();
+
+        for($i = 1; $i <= 5; $i++)
+        { 
+            // I actually had to guess this method based on Google API's "magic" factory
+            $appCal = $gdataCal -> newListEntry();
+            // I only set the title, other options like color are available.
+            $appCal -> title = $gdataCal-> newTitle($abbreviation.$i); 
+
+            //This is the right URL to post to for new calendars...
+            //Notice that the user's info is nowhere in there
+            $own_cal = "http://www.google.com/calendar/feeds/default/owncalendars/full";
+
+            //And here's the payoff. 
+            //Use the insertEvent method, set the second optional var to the right URL
+            $gdataCal->insertEvent($appCal, $own_cal);
+            
+            $calFeed = $gdataCal->getCalendarListFeed();
+            foreach ($calFeed as $calendar) {
+                if($calendar->title->text == $abbreviation.$i)
+                //This is the money, you need to use '->content-src'
+                //Anything else and you have to manipulate it to get it right. 
+                $appCalUrl = $calendar->content->src;
+            } 
+
+            query("INSERT INTO calendarLinks (id, link) 
+                    VALUES(?, ?)", $clubID.".".$i, $appCalUrl);
+//            query("INSERT INTO calendarLinks (id, link) 
+//                    VALUES(?, ?)", $clubID.".".$i, substr($appCalUrl,38,strlen($appCalUrl)-51));
+
+        }
         // redirect to home
         redirect("/"); 
     }
