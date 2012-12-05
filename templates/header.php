@@ -127,13 +127,43 @@
     }
     .club-header
 {
-    padding: 30px;
     font-size: 18px;
     font-weight: 200;
     line-height: 30px;
     color: inherit;
     text-align:left;
 
+}
+
+.announcement-subject{
+    text-shadow: 0 2px 0 rgba(255, 255, 255, 0.5);
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 24px;
+    text-align:left;
+}
+
+.announcement{
+    padding:20px;
+}
+
+.announcement-content{
+padding: 8px 35px 8px 14px;
+    margin-bottom: 5px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    background-color: #fcf8e3;
+border: 1px solid #fbeed5;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    text-align:left;
+}
+
+.announcement-info{
+    font-size: 12px;
+    font-weight: 300;
+    text-align:right;
+    font-color: #999999;
 }
 
 .club-header h1

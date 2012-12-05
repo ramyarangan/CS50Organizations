@@ -2,7 +2,7 @@
 
 <div class="row-fluid">
 
-    <div class="club-header">
+    <div class="club-header span6 offset3">
 
         <h1>
         <?php 
@@ -75,42 +75,14 @@
 
 <div class = "row-fluid">
 
-
     <ul id="MainTabs" class="nav nav-tabs">
-        <li><a data-target="#events" data-toggle="tab"><i class="icon-calendar"></i>&nbsp;&nbsp;Events</a></li>
-        <li><a data-target="#announcements" data-toggle="tab"> <i class="icon-exclamation-sign"></i>&nbsp;&nbsp;Announcements</a></li>
+        <li><a data-target="#events" data-toggle="tab" href="/calendar.php"><i class="icon-calendar"></i>&nbsp;&nbsp;Events</a></li>
+        <li><a data-target="#announcements" data-toggle="tab" href="/announcements.php"><i class="icon-exclamation-sign"></i>&nbsp;&nbsp;Announcements</a></li>
     </ul>
 
     <div class="tab-content">
-        <div class="tab-pane" id="events">
-            <iframe src="https://www.google.com/calendar/embed?src=2ah0qjho0ctekccbmtmpatunco%40group.calendar.google.com&ctz=America/New_York" style="border: 0" width="700" height="450" frameborder="0" scrolling="no">
-            </iframe>
-        </div>
-        <div class="tab-pane" id="announcements">
-            <?php   
-                
-                if ($announcements == NULL)
-                    print("There are no announcements.");
-                
-                else{
-                    foreach ($announcements as $announcement)
-                    {                    
-                    print("<div class = \"announcement\">");
-                    print("<div class = \"announcement-subject\">");
-                          print($announcement["title"]);
-                    print("</div>");  
-                    
-                    print("<div class = \"announcement-content\">");
-                        print($announcement["text"]);
-                    print("</div>"); 
-                    
-                    print("<div class = \"announcement-info\">");
-                        print("posted ".$announcement["time"]." by "."SOMEBODY");
-                    print("</div>");
-                    }
-                }
-                ?>
-        </div>
+        <div class="tab-pane" id="events">Loading calendar...</div>
+        <div class="tab-pane" id="announcements">Loading announcements... </div>
     </div>
 
     <script>
@@ -129,4 +101,20 @@
 
 </div>
 
+<div>
+
+
+<?php    
+  
+    foreach ($announcements as $announcement)
+    {
+        print("<div>");
+        print("<h4>".$announcement["title"]."</h4>");
+        print("<h5>"."Posted ".$announcement["time"]."</h5>");
+        print($announcement["text"]);
+        print("</br>");
+        print("</div>");                
+    }
+?>
+</div>
 </form>
