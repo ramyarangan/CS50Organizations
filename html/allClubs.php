@@ -17,6 +17,7 @@
                 $privacy = $subscription[0]["level"];
             }
         }
+        
         $announcements = query("SELECT * FROM announcements WHERE id=? AND privacy <= ? ORDER BY time DESC", $club["id"], $privacy);
         
         render("club_display.php", ["title" => $club["name"]." ".$club["abbreviation"] , "clubInfo" => $club, "announcements" => $announcements, "level" => $privacy]);
