@@ -3,6 +3,11 @@
     // configuration
     require("../includes/config.php");
 
+    if (empty($_SESSION["id"]))
+    {
+        redirect("login.php?go=makeEvent.php");
+    }
+
     // if form was submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
