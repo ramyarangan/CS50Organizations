@@ -10,7 +10,8 @@
     }
     else
     {   
-        $club = query("SELECT * FROM clubs WHERE name=?",$_GET["club"])[0];
+        $club = query("SELECT * FROM clubs WHERE name=?",$_GET["club"]);
+        $club = $club[0];
         $user = query("SELECT * FROM users WHERE id=?",$_SESSION["id"])[0];
         $temp = query("SELECT * FROM subscriptions WHERE userID=? AND clubID=?",$user["id"],$club["id"]);
         if(!empty($temp))
@@ -19,7 +20,8 @@
         }
         else if($club["privacy"] == 0)
         {
-            $privacy = query("SELECT * FROM privacy WHERE description=\"public\"")[0]["level"];
+            $privacy = query("SELECT * FROM privacy WHERE description=\"public\"");
+            $privacy = $privacy[0]["level"];
             $result = query("INSERT INTO subscriptions (userID, clubID, level) VALUES(?, ?, ?)",$user["id"],$club["id"],
                 $privacy);            
             print("Your request to join the club has been sent!");
@@ -27,7 +29,8 @@
         }
         else
         {    
-            $privacy = query("SELECT level FROM privacy WHERE description=\"all club\"")[0]["level"];
+            $privacy = query("SELECT level FROM privacy WHERE description=\"all club\"");
+            $privacy = $privacy[0]["level"];
             $result = query("INSERT INTO subscriptions (userID, clubID, level) VALUES(?, ?, ?)",$user["id"],$club["id"],
                 $privacy);
             

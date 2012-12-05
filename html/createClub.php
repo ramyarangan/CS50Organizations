@@ -114,10 +114,11 @@
         }
         
         // get the ID of the "Other" club category and pass to the form
-        $otherID = query("SELECT * FROM clubTypes WHERE description = 'Other'")[0]["id"];         
+        $otherID = query("SELECT * FROM clubTypes WHERE description = 'Other'");
+        $otherID = $otherID[0]["id"];         
         
         // render form
-        render("createClub_form.php", ["title" => "Register", "categories" => $categories, 
-            "otherID" => $otherID]);
+        render("createClub_form.php", array("title" => "Register", "categories" => $categories, 
+            "otherID" => $otherID));
     }
 ?>

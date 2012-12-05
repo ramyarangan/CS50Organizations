@@ -5,7 +5,8 @@
     $privacy = 1;
     if (!empty($_SESSION["id"]))
     {
-        $user = query("SELECT * FROM users WHERE id=?", $_SESSION["id"])[0];
+        $user = query("SELECT * FROM users WHERE id=?", $_SESSION["id"]);
+        $user = $user[0];
     }
 
     $allannouncements = query("SELECT * FROM announcements ORDER BY time DESC");
@@ -29,6 +30,6 @@
     {
         $clubs[$key] = query("SELECT * FROM clubs WHERE id=?", $announcement["id"])[0];
     }
-    render("announcements_page.php", ["title" => "Recent Announcements", "announcements" => $announcements,"clubs" => $clubs]);
+    render("announcements_page.php", array("title" => "Recent Announcements", "announcements" => $announcements,"clubs" => $clubs));
 
 ?>

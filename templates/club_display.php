@@ -105,7 +105,9 @@
                     print("</div>"); 
                     
                     print("<div class = \"announcement-info\">");
-                        print("posted ".$announcement["time"]." by "."SOMEBODY");
+                    $poster = query("SELECT * FROM users WHERE id=?", $announcement["userID"]);
+                    $poster = $poster[0];
+                        print("posted ".$announcement["time"]." by ".$poster["realname"]);
                     print("</div>");
                     }
                 }
