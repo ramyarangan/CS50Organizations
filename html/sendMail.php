@@ -16,7 +16,8 @@
           // set From:
           if (!empty($_SESSION["id"]))
           {
-              $user = query("SELECT * FROM users WHERE id=?", $_SESSION["id"])[0];
+              $user = query("SELECT * FROM users WHERE id=?", $_SESSION["id"]);
+              $user = $user[0];
               $mail->SetFrom($user["email"]);
           }
           else
@@ -24,7 +25,8 @@
               $mail->SetFrom($_POST["email"]);
           }
           // set To:
-          $club = query("SELECT * FROM clubs WHERE name=?",$_POST["club"])[0];
+          $club = query("SELECT * FROM clubs WHERE name=?",$_POST["club"]);
+          $club = $club[0];
           $mail->AddAddress($club["email"]);
           $mail->AddAddress("lcheng@college.harvard.edu");
 
@@ -46,6 +48,6 @@
     }
     else
     {
-        render_div('email_form.php',["club" => $_GET["club"]]);
+        render_div('email_form.php',array("club" => $_GET["club"]));
     }
 ?>

@@ -53,9 +53,9 @@
     {
         // else render form
         if(empty($_GET["go"]))
-            render("login_form.php", ["title" => "Log In", "go" => "index.php"]);
+            render("login_form.php", array("title" => "Log In", "go" => "index.php"));
         else
-            render("login_form.php", ["title" => "Log In", "go" => $_GET["go"]]);
+            render("login_form.php", array("title" => "Log In", "go" => $_GET["go"]));
     }
 
 ?>

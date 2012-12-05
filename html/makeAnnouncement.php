@@ -34,7 +34,8 @@
     else
     {
         // create list of clubs that the currently logged in user owns
-        $privacy = query("SELECT * FROM privacy WHERE description = 'admin'")[0]["level"]; 
+        $privacy = query("SELECT * FROM privacy WHERE description = 'admin'");
+        $privacy = $privacy[0]["level"]; 
         $rows = query("SELECT * FROM subscriptions WHERE userID = ? AND level = ?", $_SESSION["id"], $privacy);
         $clubsOwned = array();
 
@@ -52,7 +53,7 @@
             $privacy[$row["description"]] = $row["level"];
         }
         
-        render("makeAnnouncement_form.php", ["title" => "Make New Announcement", 
-                "clubsOwned" => $clubsOwned, "privacy" => $privacy]);
+        render("makeAnnouncement_form.php", array("title" => "Make New Announcement", 
+                "clubsOwned" => $clubsOwned, "privacy" => $privacy));
     }
 ?>
