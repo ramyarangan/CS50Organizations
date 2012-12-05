@@ -12,6 +12,9 @@
     // display errors, warnings, and notices
     ini_set("display_errors", true);
     error_reporting(E_ALL);
+    
+    $clientLibraryPath = '/home/jharvard/vhosts/project/ZendFramework-1.12.0/library';
+    set_include_path(get_include_path() . PATH_SEPARATOR . $clientLibraryPath);
 
     // requirements
     require("constants.php");

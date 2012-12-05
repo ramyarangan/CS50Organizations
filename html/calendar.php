@@ -5,5 +5,6 @@
     
     // else render form
     render_div("calendar_display.php");
-    ?>
+
+?>
 
