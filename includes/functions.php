@@ -16,7 +16,7 @@
      */
     function apologize($message)
     {
-        render("apology.php", ["message" => $message]);
+        render("apology.php", array("message" => $message));
         exit;
     }
 
@@ -87,7 +87,7 @@
         if ($statement === false)
         {
             // trigger (big, orange) error
-            trigger_error($handle->errorInfo()[2], E_USER_ERROR);
+            trigger_error($handle->errorInfo(), E_USER_ERROR);
             exit;
         }
 
@@ -145,7 +145,7 @@
     /**
      * Renders template, passing in values.
      */
-    function render($template, $values = [])
+    function render($template, $values = array())
     {
         // if template exists, render it
         if (file_exists("../templates/$template"))
@@ -171,7 +171,7 @@
         }
     }
     
-    function render_div($template, $values = [])
+    function render_div($template, $values = array())
     {
         // if template exists, render it
         if (file_exists("../templates/$template"))
@@ -190,7 +190,7 @@
         }
     }
     
-    function checkForm($values = [])
+    function checkForm($values = array())
     {
         foreach($values as $item)
         {

@@ -6,6 +6,9 @@
         <div class="control-group">
             <input name="password" placeholder="Password" type="password"/>
         </div>
+        <?php
+            print("<input type=\"hidden\" name=\"go\" value=\"".$go."\">");
+        ?>
         <div class="control-group">
             <button type="submit" class="btn">Log In</button>
         </div>
