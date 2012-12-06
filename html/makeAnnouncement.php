@@ -28,6 +28,16 @@
             apologize("The corresponding event announcement could not be added.");
         }
         
+        $members = query("SELECT * FROM subscriptions WHERE clubID = ?", $_POST["club"]);
+
+        foreach($members as $member)
+        {
+            if($member["level"] >= $_POST["privacy"])
+                query("INSERT INTO notifications (userID, time, text, seen) VALUES(?, NOW(), ?, 0)", $member["userID"], 
+                    $clubName . ' has added the announcement: '.$_POST["name"].'!');
+        }
+
+        
         //redirect to portfolio
         redirect("/");
     }
