@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 05, 2012 at 09:12 PM
+-- Generation Time: Dec 05, 2012 at 09:55 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.6
 
@@ -21,14 +21,16 @@ SET time_zone = "+00:00";
 --
 
 CREATE DATABASE IF NOT EXISTS  `project` ;
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `announcements`
 --
 
-CREATE TABLE IF NOT EXISTS  `project`.`announcements` (
+CREATE TABLE IF NOT EXISTS `project`.`announcements` (
   `id` int(10) unsigned NOT NULL,
+  `userID` int(11) NOT NULL,
   `text` longtext NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `title` varchar(255) NOT NULL,
@@ -40,11 +42,17 @@ CREATE TABLE IF NOT EXISTS  `project`.`announcements` (
 -- Dumping data for table `announcements`
 --
 
-INSERT INTO  `project`.`announcements` (`id`, `text`, `time`, `title`, `privacy`) VALUES
-(4, 'Yale has added the event Harvard-Yale. Go check it out!', '2012-11-30 07:20:55', 'Harvard-Yale', 1),
-(4, 'We fail.', '2012-11-30 07:22:18', 'Fale', 1),
-(4, 'Yale has added the event test. Go check it out!', '2012-12-05 22:40:23', 'test', 5),
-(4, 'Yale has added the event testing. Go check it out!', '2012-12-05 22:41:32', 'testing', 5);
+INSERT INTO `project`.`announcements` (`id`, `userID`, `text`, `time`, `title`, `privacy`) VALUES
+(4, 2, 'Yale has added the event Harvard-Yale. Go check it out!', '2012-11-30 07:20:55', 'Harvard-Yale', 1),
+(4, 1, 'We fail.', '2012-11-30 07:22:18', 'Fale', 1),
+(7, 1, 'haiii', '2012-12-05 21:18:03', 'HI MICHELLE!', 2),
+(7, 0, 'CS50 has added the event Hackathon. Go check it out!', '2012-12-06 02:23:14', 'Hackathon', 1),
+(7, 0, 'CS50 has added the event Hackathon2. Go check it out!', '2012-12-06 02:28:34', 'Hackathon2', 1),
+(7, 0, 'CS50 has added the event Hackathon3. Go check it out!', '2012-12-06 02:31:41', 'Hackathon3', 1),
+(7, 1, 'hai ', '2012-12-06 02:35:19', 'hi', 3),
+(7, 1, 'hi', '2012-12-06 02:36:55', 'lol', 3),
+(7, 1, 'hi', '2012-12-06 02:39:06', 'gg', 3),
+(7, 1, 'hi', '2012-12-06 02:40:23', 'rawr', 1);
 
 -- --------------------------------------------------------
 
@@ -52,7 +60,7 @@ INSERT INTO  `project`.`announcements` (`id`, `text`, `time`, `title`, `privacy`
 -- Table structure for table `calendarLinks`
 --
 
-CREATE TABLE IF NOT EXISTS  `project`.`calendarLinks` (
+CREATE TABLE IF NOT EXISTS `project`.`calendarLinks` (
   `id` varchar(6) NOT NULL,
   `link` varchar(255) NOT NULL,
   UNIQUE KEY `id` (`id`)
@@ -62,8 +70,18 @@ CREATE TABLE IF NOT EXISTS  `project`.`calendarLinks` (
 -- Dumping data for table `calendarLinks`
 --
 
-INSERT INTO  `project`.`calendarLinks` (`id`, `link`) VALUES
-('4.5', 'https://www.google.com/calendar/feeds/2ah0qjho0ctekccbmtmpatunco%40group.calendar.google.com/private/full');
+INSERT INTO `project`.`calendarLinks` (`id`, `link`) VALUES
+('4.5', 'https://www.google.com/calendar/embed?src=2ah0qjho0ctekccbmtmpatunco%40group.calendar.google.com&ctz=America/New_York'),
+('7.1', '1sj0pb3ffcpnit08d2qbbnbkqc%40group.calendar.google.com'),
+('7.2', 'bs59l137lrreppqlmaicuk2k8o%40group.calendar.google.com'),
+('7.3', 'ii5ascjhbhb754kqteh4ptefcc%40group.calendar.google.com'),
+('7.4', 'djfc8dbhd2qpmhnvushi387b0k%40group.calendar.google.com'),
+('7.5', 'n29fg4kgailo54v9simkchocn4%40group.calendar.google.com'),
+('8.1', 'https://www.google.com/calendar/feeds/ket13ekoqhp1i9jttgslo6u7r4%40group.calendar.google.com/private/full'),
+('8.2', 'https://www.google.com/calendar/feeds/ldiav83dmstebmsaqv6gugucj0%40group.calendar.google.com/private/full'),
+('8.3', 'https://www.google.com/calendar/feeds/du9q282hfb4hrcgcpcclskvgkk%40group.calendar.google.com/private/full'),
+('8.4', 'https://www.google.com/calendar/feeds/4s1h1fco5ukr3rspqo3m5s8nn8%40group.calendar.google.com/private/full'),
+('8.5', 'https://www.google.com/calendar/feeds/e233mjio8gdcefjgjnenefv7ao%40group.calendar.google.com/private/full');
 
 -- --------------------------------------------------------
 
@@ -71,7 +89,7 @@ INSERT INTO  `project`.`calendarLinks` (`id`, `link`) VALUES
 -- Table structure for table `clubs`
 --
 
-CREATE TABLE IF NOT EXISTS  `project`.`clubs` (
+CREATE TABLE IF NOT EXISTS `project`.`clubs` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `abbreviation` varchar(63) NOT NULL,
@@ -81,14 +99,16 @@ CREATE TABLE IF NOT EXISTS  `project`.`clubs` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`,`abbreviation`,`email`),
   KEY `name_2` (`name`,`abbreviation`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `clubs`
 --
 
-INSERT INTO  `project`.`clubs` (`id`, `name`, `abbreviation`, `email`, `privacy`, `information`) VALUES
-(4, 'Yale', 'Y', 'harvard_rejects@yale.edu', 1, 'Oh how we wish we were Harvard.');
+INSERT INTO `project`.`clubs` (`id`, `name`, `abbreviation`, `email`, `privacy`, `information`) VALUES
+(4, 'Yale', 'Y', 'harvard_rejects@yale.edu', 0, 'Oh how we wish we were Harvard.'),
+(7, 'CS50', 'CS50', 'ramyarangan@college.harvard.edu', 1, 'This is CS50.'),
+(8, 'Test', 'T', 'mdeng@college.harvard.edu', 1, 'hi');
 
 -- --------------------------------------------------------
 
@@ -96,7 +116,7 @@ INSERT INTO  `project`.`clubs` (`id`, `name`, `abbreviation`, `email`, `privacy`
 -- Table structure for table `clubTypePairs`
 --
 
-CREATE TABLE IF NOT EXISTS  `project`.`clubTypePairs` (
+CREATE TABLE IF NOT EXISTS `project`.`clubTypePairs` (
   `clubID` int(10) unsigned NOT NULL,
   `clubTypeID` int(6) unsigned NOT NULL,
   PRIMARY KEY (`clubID`,`clubTypeID`),
@@ -107,9 +127,12 @@ CREATE TABLE IF NOT EXISTS  `project`.`clubTypePairs` (
 -- Dumping data for table `clubTypePairs`
 --
 
-INSERT INTO  `project`.`clubTypePairs` (`clubID`, `clubTypeID`) VALUES
+INSERT INTO `project`.`clubTypePairs` (`clubID`, `clubTypeID`) VALUES
 (4, 1),
-(4, 2);
+(4, 2),
+(6, 2),
+(7, 2),
+(8, 2);
 
 -- --------------------------------------------------------
 
@@ -117,7 +140,7 @@ INSERT INTO  `project`.`clubTypePairs` (`clubID`, `clubTypeID`) VALUES
 -- Table structure for table `clubTypes`
 --
 
-CREATE TABLE IF NOT EXISTS  `project`.`clubTypes` (
+CREATE TABLE IF NOT EXISTS `project`.`clubTypes` (
   `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
   `description` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
@@ -127,7 +150,7 @@ CREATE TABLE IF NOT EXISTS  `project`.`clubTypes` (
 -- Dumping data for table `clubTypes`
 --
 
-INSERT INTO  `project`.`clubTypes` (`id`, `description`) VALUES
+INSERT INTO `project`.`clubTypes` (`id`, `description`) VALUES
 (1, 'Other'),
 (2, 'Social'),
 (3, 'Cultural');
@@ -138,7 +161,7 @@ INSERT INTO  `project`.`clubTypes` (`id`, `description`) VALUES
 -- Table structure for table `events`
 --
 
-CREATE TABLE IF NOT EXISTS  `project`.`events` (
+CREATE TABLE IF NOT EXISTS `project`.`events` (
   `id` int(10) unsigned NOT NULL,
   `privacy` int(4) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -154,10 +177,38 @@ CREATE TABLE IF NOT EXISTS  `project`.`events` (
 -- Dumping data for table `events`
 --
 
-INSERT INTO  `project`.`events` (`id`, `privacy`, `name`, `startTime`, `endTime`, `information`, `location`) VALUES
-(4, 1, 'Harvard-Yale', '2012-11-30 02:20:00', '2012-11-30 02:20:00', 'The event in which Harvard beats Yale.', ''),
-(4, 5, 'test', '2012-12-05 05:40:00', '2012-12-05 05:40:00', 'test', 'test'),
-(4, 5, 'testing', '2012-12-05 05:00:00', '2012-12-05 05:00:00', 'test', 'test');
+INSERT INTO `project`.`events` (`id`, `privacy`, `name`, `startTime`, `endTime`, `information`, `location`) VALUES
+(7, 1, 'Hackathon', '2012-12-05 08:00:00', '2012-12-06 05:00:00', 'All nighter.', 'Microsoft NERD'),
+(7, 1, 'Hackathon2', '2012-12-05 08:00:00', '2012-12-06 05:00:00', 'lol.', 'Microsoft NERD'),
+(7, 1, 'Hackathon3', '2012-12-05 08:00:00', '2012-12-06 05:00:00', 'lol.', 'Microsoft NERD'),
+(4, 1, 'Harvard-Yale', '2012-11-30 02:20:00', '2012-11-30 02:20:00', 'The event in which Harvard beats Yale.', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE IF NOT EXISTS `project`.`notifications` (
+  `userID` int(11) NOT NULL,
+  `time` datetime NOT NULL,
+  `text` tinytext NOT NULL,
+  `seen` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `project`.`notifications` (`userID`, `time`, `text`, `seen`) VALUES
+(1, '2012-12-11 06:00:00', 'lalala', 0),
+(2, '2012-12-05 21:36:55', 'CS50 has added the announcement: lol!', 0),
+(1, '2012-12-05 21:36:55', 'CS50 has added the announcement: lol!', 0),
+(2, '2012-12-05 21:39:06', 'CS50 has added the announcement: gg!', 0),
+(1, '2012-12-05 21:39:06', 'CS50 has added the announcement: gg!', 0),
+(3, '2012-12-05 21:40:23', 'CS50 has added the announcement: rawr!', 0),
+(2, '2012-12-05 21:40:23', 'CS50 has added the announcement: rawr!', 0),
+(1, '2012-12-05 21:40:23', 'CS50 has added the announcement: rawr!', 0);
 
 -- --------------------------------------------------------
 
@@ -165,7 +216,7 @@ INSERT INTO  `project`.`events` (`id`, `privacy`, `name`, `startTime`, `endTime`
 -- Table structure for table `privacy`
 --
 
-CREATE TABLE IF NOT EXISTS  `project`.`privacy` (
+CREATE TABLE IF NOT EXISTS `project`.`privacy` (
   `level` int(4) unsigned NOT NULL,
   `description` varchar(255) NOT NULL,
   PRIMARY KEY (`level`)
@@ -175,12 +226,13 @@ CREATE TABLE IF NOT EXISTS  `project`.`privacy` (
 -- Dumping data for table `privacy`
 --
 
-INSERT INTO  `project`.`privacy` (`level`, `description`) VALUES
+INSERT INTO `project`.`privacy` (`level`, `description`) VALUES
 (1, 'public'),
-(2, 'all club'),
-(3, 'comp'),
-(4, 'non-comp'),
-(5, 'admin');
+(2, 'pending'),
+(3, 'all club'),
+(4, 'comp'),
+(5, 'non-comp'),
+(6, 'admin');
 
 -- --------------------------------------------------------
 
@@ -188,7 +240,7 @@ INSERT INTO  `project`.`privacy` (`level`, `description`) VALUES
 -- Table structure for table `subscriptions`
 --
 
-CREATE TABLE IF NOT EXISTS  `project`.`subscriptions` (
+CREATE TABLE IF NOT EXISTS `project`.`subscriptions` (
   `userID` int(10) unsigned NOT NULL,
   `clubID` int(10) unsigned NOT NULL,
   `level` int(4) unsigned NOT NULL,
@@ -200,8 +252,13 @@ CREATE TABLE IF NOT EXISTS  `project`.`subscriptions` (
 -- Dumping data for table `subscriptions`
 --
 
-INSERT INTO  `project`.`subscriptions` (`userID`, `clubID`, `level`) VALUES
-(1, 4, 5);
+INSERT INTO `project`.`subscriptions` (`userID`, `clubID`, `level`) VALUES
+(2, 4, 1),
+(3, 7, 1),
+(2, 7, 3),
+(1, 4, 6),
+(1, 7, 6),
+(1, 8, 6);
 
 -- --------------------------------------------------------
 
@@ -209,21 +266,24 @@ INSERT INTO  `project`.`subscriptions` (`userID`, `clubID`, `level`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS  `project`.`users` (
+CREATE TABLE IF NOT EXISTS `project`.`users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `admin` tinyint(1) NOT NULL,
+  `realname` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO  `project`.`users` (`id`, `name`, `password`, `email`, `admin`) VALUES
-(1, 'jharvard', '$1$1VCbRSmT$EaGmoKp2hobug8rciIlX8/', 'jharvard@harvard.edu', 1);
+INSERT INTO `project`.`users` (`id`, `name`, `password`, `email`, `admin`, `realname`) VALUES
+(1, 'jharvard', '$1$1VCbRSmT$EaGmoKp2hobug8rciIlX8/', 'jharvard@harvard.edu', 1, 'John Harvard'),
+(2, 'lcheng', '$1$3CPb1TBD$APZIBqsNdnYfSzWmz00jU/', 'lcheng@college.harvard.edu', 0, 'Lucy Cheng'),
+(3, 'rrangan', '$1$6vdFkN7r$m3wXsZQ2Xvo5svbGpMvqz1', 'ramyarangan@college.harvard.edu', 0, 'Ramya Rangan');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
