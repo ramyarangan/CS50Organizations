@@ -4,9 +4,13 @@
                 <div class="push"></div>
 
                 </div><!-- /.wrapper -->
-
                 <div class="footer-wrapper">
-                    Copyright &#169; 2012 CS50
+                    <img src="img/dots.jpg" width = 80%>
+                    <div class = "footer-contents">
+                        &#169; Lucy Cheng, Michelle Deng, and Ramya Rangan 
+                        </br> 
+                        CS50 Fall 2012
+                    </div>
                 </div>
 
             </div>
