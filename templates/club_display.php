@@ -7,48 +7,75 @@
         <h1>
         <?php 
             if($clubInfo["abbreviation"]!="")
-            {
                 print($clubInfo["abbreviation"]." <small>".$clubInfo["name"]."</small>");
-            }
             else
                 print($clubInfo["name"]);
             ?>
         </h1>
 
+        <div><img src="img/dots.jpg" width=80%></div>
+                
+
+
+
+            <p>
+
+<div class="btn-toolbar">
+
+
+
+
+                <button type ="button" class="btn" data-toggle="collapse" data-target="#info">
+                    <i class = "icon-info-sign"></i>
+                </button>
+            
+                <!-- Button to trigger modal -->
+                <a href="#emailModal" role="button" class="btn" data-toggle="modal">
+                    <i class="icon-envelope"></i>
+                </a>
+
+                <?php if(isset($_SESSION["id"]) && $level == 1):?>
 <form action="signUp.php" method="link">
 
-        <p style="text-align:left">
-            <button type ="button" class="btn" data-toggle="collapse" data-target="#info">
-                <i class = "icon-info-sign"></i>
-            </button>
-            
-            <!-- Button to trigger modal -->
-            <a href="#emailModal" role="button" class="btn" data-toggle="modal">
-                <i class="icon-envelope"></i>
-            </a>
-
-            <?php if(isset($_SESSION["id"]) && $level == 1):?>
-
-<?php
-    print("<input type=\"hidden\" name=\"club\" value=\"".$clubInfo["name"]."\">");
-    print("<button type=\"submit\"  class=\"btn btn-primary\" >Join</button>");
-    ?>
-            <?php elseif($level == 5):?>
-            <a href="#announcementModal" role="button" class="btn" data-toggle="modal">
-                <i class="icon-volume-up"></i>
-            </a>
-            <?php endif ?>
-
-        </p>
-        
-        <div id="info" class="collapse out"> 
-
-                <?=$clubInfo["information"]?> 
-        </div>
+                    <input type ="hidden" name="club" <?="value=\"".$clubInfo["name"]."\""?> >
+                    <button type ="submit" class ="btn btn-primary">Join</button>
 
 </form>
 
+
+                <?php elseif($level == 5):?>
+<form action="editSettings.php" method="link">
+
+                    <div class="btn-group">
+                    <a href="#announcementModal" role="button" class="btn" data-toggle="modal">
+                        <i class="icon-bullhorn"></i>
+                    </a>
+
+                    <a href="#announcementModal" role="button" class="btn" data-toggle="modal">
+                        <i class="icon-bullhorn"></i>
+                    </a>
+
+                        <input type ="hidden" name="club" <?="value=\"".$clubInfo["name"]."\""?> >
+                        <button type ="submit" class ="btn">
+                            <i class="icon-cog"></i>
+                        </button>
+
+</form>
+                                  
+                    </div>
+
+                <?php endif ?>
+
+</div>
+            </p>
+        
+            <div id="info" class="collapse out"> 
+                <?=$clubInfo["information"]?> 
+            </div>
+
+
     </div>
+
 </div>
 
 
@@ -72,9 +99,18 @@
 </div>
 </div>
 
+<?php if(!empty($alert)): ?>
+<div class = "row-fluid">
+<div class="alert span8 offset2">
+<button type="button" class="close" data-dismiss="alert">×</button>
+<?=$alert?>
+</div>
+</div>
+
 
 <div class = "row-fluid">
 
+<?php endif ?>
 
     <ul id="MainTabs" class="nav nav-tabs">
         <li><a data-target="#events" data-toggle="tab"><i class="icon-calendar"></i>&nbsp;&nbsp;Events</a></li>
@@ -86,7 +122,7 @@
             <iframe src="https://www.google.com/calendar/embed?src=2ah0qjho0ctekccbmtmpatunco%40group.calendar.google.com&ctz=America/New_York" style="border: 0" width="700" height="450" frameborder="0" scrolling="no">
             </iframe>
         </div>
-        <div class="tab-pane" id="announcements">
+        <div class="tab-pane span8 offset2" id="announcements">
             <?php   
                 
                 if ($announcements == NULL)

@@ -117,12 +117,17 @@
         height: 50px; /* same as the footer */
     }
 
+.footer-contents{
+    padding:30px;
+}
+
     .footer-wrapper {
         position: relative;
         height: 50px;
-        background-color:#ffddcc;
-        margin:0;
-        padding:0;
+        margin-top:40px;
+        line-height:15px;
+        font-size:10px;
+        font-weight:120;
 
     }
     .club-header
@@ -131,8 +136,25 @@
     font-weight: 200;
     line-height: 30px;
     color: inherit;
-    text-align:left;
+    text-align:center;
 
+}
+
+.club-header h1
+{
+    margin-bottom: -15px;
+    font-size: 70px;
+    font-weight:100;
+    line-height: 1;
+color: inherit;
+}
+
+.club-header h1 small
+{
+    margin-bottom: 0;
+    font-size: 26px;
+    font-weight: 300;
+    font-color: #999999;
 }
 
 .announcement-subject{
@@ -166,22 +188,7 @@ border: 1px solid #fbeed5;
     font-color: #999999;
 }
 
-.club-header h1
-{
-    margin-bottom: 0;
-    font-size: 50px;
-    line-height: 1;
-    letter-spacing: -1px;
-    color: inherit;
-}
 
-.club-header h1 small
-{
-    margin-bottom: 0;
-    font-size: 26px;
-    font-weight: 300;
-    font-color: #999999;
-}
 
     .page-header
     {
@@ -330,7 +337,7 @@ Clubs
                         </form>
 
                         <ul class="nav pull-right"> 
-                            <li><a href="login.php"> <img src="img/harvard_icon.gif"> Login via HUID </a></li>
+                            <li><a href="login.php"> <img src="img/harvard-logo.png" height=20px width=20px> Login via HUID </a></li>
                         </ul>
                     <?php endif; ?>
 
