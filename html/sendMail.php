@@ -14,22 +14,12 @@
           $mail->Host = "smtp.fas.harvard.edu";
 
           // set From:
-          if (!empty($_SESSION["id"]))
-          {
-              $user = query("SELECT * FROM users WHERE id=?", $_SESSION["id"]);
-              $user = $user[0];
-              $mail->SetFrom($user["email"]);
-          }
-          else
-          {
-              $mail->SetFrom($_POST["email"]);
-          }
+          $mail->SetFrom($_POST["email"], $_POST["name"]);
+
           // set To:
-          $club = query("SELECT * FROM clubs WHERE name=?",$_POST["club"]);
+          $club = query("SELECT * FROM clubs WHERE name=?", $_POST["club"]);
           $club = $club[0];
           $mail->AddAddress($club["email"]);
-          $mail->AddAddress("lcheng@college.harvard.edu");
-
 
           // set Subject:
           $mail->Subject = $_POST["subject"];
@@ -43,11 +33,13 @@
               die($mail->ErrInfo);
           }
           
-          print("Sent!");
+        redirect("allClubs.php?club=".str_replace(" ", "+", $_POST["club"])."&type=email&success=1"); 
         
     }
     else
     {
-        render_div('email_form.php',array("club" => $_GET["club"]));
+        $user = query("SELECT email, realname FROM users WHERE id=?", $_SESSION["id"]);
+        
+        render_div("email_form.php", array("club" => $_GET["club"], "name" =>$user[0]["realname"], "email" => $user[0]["email"]));
     }
 ?>

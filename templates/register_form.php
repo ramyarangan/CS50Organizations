@@ -3,6 +3,48 @@
 // password confirmation
 // includes a link back to the log in page
 ?>
+
+<div class="row-fluid">
+    <div class="club-header">
+        <h1>
+            Log in.
+        </h1>
+        <div><img src="img/dots.jpg" width=80%></div>
+    </div>
+</div>
+
+<div class = "row-fluid" style="padding:30px">
+
+<form class="form-horizontal offset2" style="text-align:left" action="register.php" method="post">
+
+    <div class="control-group">
+        <label class="control-label" for="inputName">Name</label>
+        <div class="controls">
+            <input name="realname" type="text" placeholder="First Last" id="inputName">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="inputUsername">Username</label>
+        <div class="controls">
+            <input name="username" type="text" id="inputUsername">
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="inputPassword">Password</label>
+        <div class="controls">
+            <input name="password" type="password" id="inputPassword">
+        </div>
+    </div>
+
+    <div class="control-group">
+    <label class="control-label" for="inputPassword">Confirm Password</label>
+        <div class="controls">
+            <input name="confirmation" type="password" id="inputPassword">
+        </div>
+    </div>
+
 <form action="register.php" method="post">
     <fieldset>
         <div class="control-group">

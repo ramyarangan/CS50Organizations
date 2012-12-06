@@ -11,7 +11,7 @@
     </div>
 </div>
 
-<form class="form-horizontal offset3" style="text-align:left" action="makeAnnouncement.php" method="post">
+<form class="form-horizontal offset2" style="text-align:left" action="makeAnnouncement.php" method="post">
     <input type ="hidden" name="all" value="1">
     <div class="control-group">
         <label class="control-label" for="inputClub">Organization Name</label>
@@ -26,7 +26,7 @@
 
 <?php else: ?>
 
-<form class="form-horizontal" style="text-align:left" action="makeAnnouncement.php" method="post">
+<form class="form-horizontal offset2" style="text-align:left" action="makeAnnouncement.php" method="post">
     <input type ="hidden" name="club" <?="value=\"".$clubName."\""?> >
     <input type ="hidden" name="all" value="-1">
 <?php endif?>

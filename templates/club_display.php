@@ -1,6 +1,8 @@
 
 
+
 <div class="row-fluid">
+
     <div class="club-header">
 
         <h1>
@@ -26,14 +28,17 @@
                     <i class="icon-envelope"></i>
                 </a>
 
-                <?php if(isset($_SESSION["id"]) && $level == 1):?>
+            <?php if(isset($_SESSION["id"])):?>
+    
+                <?php if($level == 1):?>
 
-        <form action="signUp.php" method="link">
-            <input type ="hidden" name="club" <?="value=\"".$clubInfo["name"]."\""?> >
-            <button type ="submit" class ="btn btn-primary">Join</button>
-        </form>
+                <form action="signUp.php" method="link">
+                    <input type ="hidden" name="club" <?="value=\"".$clubInfo["name"]."\""?> >
+                    <button type ="submit" class ="btn btn-primary">Join</button>
+                </form>
 
-
+                <?php elseif($level == 2):?>
+                    <?php $alert = "This is a closed club. Your membership request is pending review by club administrators."?>
                 <?php elseif($level == 5):?>
 
                     <div class="btn-group">
@@ -53,7 +58,9 @@
                     </div>
 
                 <?php endif ?>
-
+            <?php else: ?>
+                <?php $alert ="Log in to join and subscribe to this organization."?>
+            <?php endif ?>
         </div>
         
 
@@ -87,7 +94,7 @@
 
 <?php if(!empty($alert)): ?>
     <div class = "row-fluid">
-        <div class="alert span8 offset2">
+        <div class="alert span6 offset3">
             <button type="button" class="close" data-dismiss="alert">×</button>
             <?=$alert?>
         </div>
