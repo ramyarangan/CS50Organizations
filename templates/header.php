@@ -316,6 +316,34 @@ border: 1px solid #fbeed5;
                         </li>
                         </ul>
 
+                    <ul class="nav pull-right">
+                        <li class="dropdown">
+                
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-globe"></i>
+                                <?php
+                                    $unread = query("SELECT * FROM notifications WHERE userID=? AND seen=0",$_SESSION["id"]);
+                                    print(count($unread));
+                                ?>                                    
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                            <?php
+                                $notifications = query("SELECT * FROM notifications WHERE userID=? ORDER BY time DESC LIMIT 10",$_SESSION["id"]);
+                                foreach ($notifications as $notification)
+                                {
+                                    if($notification["seen"]==0)
+                                        print("<li><a style=\"background-color: Yellow\" href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
+                                    else
+                                        print("<li><a href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
+                                }   
+
+                            ?> 
+                            </ul>
+                        </li>
+                        </ul>
+
+
                     <!--IF NOT LOGGED IN-->
                     <?php else: ?>
 
