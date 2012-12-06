@@ -13,12 +13,14 @@
         <div class="control-group">
             Subject: <input name="subject" placeholder="Enter the subject line." type="text"/>
         </div>
+
         <div class="control-group">
-            Body: <input name="body" placeholder="Enter your message." type="text"/>
+            Body: </br>
+            <textarea rows="3" name="body" type="text"></textarea>
         </div>
+
         <div class="control-group">
             <button type="submit" class="btn">Send</button>
         </div>
     </fieldset>
 </form>
-

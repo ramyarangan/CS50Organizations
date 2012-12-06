@@ -1,56 +1,67 @@
-<?php
-// allows user to choose any of their stocks to sell all shares for
-// provides a dropdown menu with all possible stocks in portfolio
-// provides link back to home page and logout
-?>
-<form action="makeAnnouncement.php" method="post">
-    <fieldset>
-    
-        <div class="control-group">
-            Select club: <br/>
-            <select name="club">
-                <option value=''></option>
-                
-                <?php
-                    foreach ($clubsOwned as $clubID => $clubName)
-                    {
-                        print("<option value='". $clubID . "'>" . $clubName . " </option> ");          
-                    }    
-                ?>
 
+
+<?php if(empty($clubName)):?>
+
+<div class="row-fluid">
+    <div class="club-header">
+        <h1>
+            Make an announcement.
+        </h1>
+        <div><img src="img/dots.jpg" width=80%></div>
+    </div>
+</div>
+
+<form class="form-horizontal offset3" style="text-align:left" action="makeAnnouncement.php" method="post">
+    <input type ="hidden" name="all" value="1">
+    <div class="control-group">
+        <label class="control-label" for="inputClub">Organization Name</label>
+        <div class="controls">
+            <select name="club" id="inputClub">
+                <?php foreach ($clubsOwned as $clubID => $clubName)
+                    print("<option value='". $clubID . "'>" . $clubName . " </option> ");   
+                ?>
             </select>
         </div>
+    </div>
 
-        <div class="control-group">
-            <input autofocus name="name" placeholder="Announcement name" type="text"/>
+<?php else: ?>
+
+<form class="form-horizontal" style="text-align:left" action="makeAnnouncement.php" method="post">
+    <input type ="hidden" name="club" <?="value=\"".$clubName."\""?> >
+    <input type ="hidden" name="all" value="-1">
+<?php endif?>
+
+    <div class="control-group">
+        <label class="control-label" for="inputTitle">Announcement Title</label>
+        <div class="controls">
+            <input class="span4" type="text" name="name" id="inputTitle">
         </div>
-        
-        <div class="control-group">
-            Who can view this announcement? <br/>
-            <?php
-                print("<INPUT type=\"radio\" name=\"privacy\" value=\"" . $privacy["public"] . "\"> All public<BR> ");
-                print("<INPUT type=\"radio\" name=\"privacy\" value=\"" . $privacy["all club"] . "\"> All club members<BR> ");
-                print("<INPUT type=\"radio\" name=\"privacy\" value=\"" . $privacy["comp"] . "\"> All comp club members<BR> ");
-                print("<INPUT type=\"radio\" name=\"privacy\" value=\"" . $privacy["non-comp"] . "\"> All non-comp club members<BR> ");            
-                print("<INPUT type=\"radio\" name=\"privacy\" value=\"" . $privacy["admin"] . "\"> Admin only<BR> ");
-            ?>            
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="inputText">Announcement Text</label>
+        <div class="controls">
+            <textarea class="span4" name="info" rows="6"></textarea>        
         </div>
-		
-        <div class="control-group">
-            <TEXTAREA name="info" rows="10" cols="80" placeholder="Insert announcement text."></TEXTAREA>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="inputPrivacy">Privacy Level</label>
+        <div class="controls">
+            <select name="privacy" class="span2" id="inputPrivacy">
+                <option value= <?="\"".$privacy["public"]."\""?> >Public</option> 
+                <option value= <?="\"".$privacy["comp"]."\""?> >Compers</option> 
+                <option value= <?="\"".$privacy["non-comp"]."\""?> >Full Members</option> 
+                <option value= <?="\"".$privacy["admin"]."\""?> >Administrators</option> 
+            </select>
         </div>
-        
-        <div class="control-group">
-            <button type="submit" class="btn">Make announcement</button>
+    </div>
+
+
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn">Make announcement!</button>
         </div>
-        
-    </fieldset>
+    </div>
 </form>
 
-<div>
-    <a href="index.php">Home</a>
-</div>
-
-<div>
-    <a href="logout.php">Log Out</a>
-</div>
