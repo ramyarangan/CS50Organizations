@@ -53,11 +53,11 @@
 
                 <ul class="nav nav-pills">
                    
-                   <li><a href="allClubs.php"> All Clubs </a></li>
+                   <li><a href="allClubs.php"> All Organizations </a></li>
                    <li><a href="viewAnnouncements.php"> Recent Announcements </a></li>
                     <?php
                         
-                        // links to login and register page only if no user logged in currently
+                        // links to log in and register page only if no user logged in currently
                         if (empty($_SESSION["id"]))
                         {
                             print("<li><a href=\"login.php\"> Log In </a></li>");
@@ -131,23 +131,26 @@
         font-weight:120;
 
     }
-    .club-header
+    
+
+.club-header
 {
     font-size: 18px;
     font-weight: 200;
     line-height: 30px;
     color: inherit;
     text-align:center;
+    padding-bottom:20px;
 
 }
 
 .club-header h1
 {
     margin-bottom: -15px;
-    font-size: 70px;
+    font-size: 55px;
     font-weight:100;
     line-height: 1;
-color: inherit;
+    color: inherit;
 }
 
 .club-header h1 small
@@ -266,7 +269,7 @@ padding: 8px 35px 8px 14px;
 
                 <div class="container">
 
-                    <a class="brand" href="index.php">CS50 Organizations</a>
+                    <a class="brand" href="index.php"> <img src="img/harvard-logo.png" height=20px width=20px> CS50 Organizations</a>
 
                     <!--IF LOGGED IN-->
                     <?php if (isset($_SESSION["id"])): 
@@ -275,24 +278,24 @@ padding: 8px 35px 8px 14px;
                     <ul class="nav" style:>
                         <li class="dropdown pull-left">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Clubs
+                                Organizations
                                 <b class="caret"></b>
                             </a>
                         
                             <ul class="dropdown-menu">
-                                <li class="nav-header">My Clubs</li>
+                                <li class="nav-header">My Pages</li>
 
                                 <?php foreach ($myclubs as $club){
                                     print("<li><a href=\"allClubs.php?club=".str_replace(" ", "+", $club["name"])."\">".$club["name"]."</a></li>");
 
                                 }?>
 
-                                <li class="nav-header">Manage Clubs</li>
+                                <li class="nav-header">Manage</li>
                                 <li><a href="makeAnnouncement.php"> Make Announcement </a></li>
-                                <li><a href="createClub.php"> Create Club </a></li>
+                                <li><a href="createClub.php"> Create Organization </a></li>
                                 <li><a href="makeEvent.php"> Create Event </a></li>
                                 <li class="divider"></li>
-                                <li><a href="allClubs.php"> All Clubs </a></li>
+                                <li><a href="allClubs.php"> All Organizations </a></li>
                             </ul>
                         </li>
                     </ul>
@@ -351,12 +354,12 @@ padding: 8px 35px 8px 14px;
 <ul class="nav" style:>
 <li class="dropdown pull-left">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-Clubs
+Organizations
 <b class="caret"></b>
 </a>
 
 <ul class="dropdown-menu">
-    <li><a href="allClubs.php"> All Clubs </a></li>
+    <li><a href="allClubs.php"> All Organizations </a></li>
 </ul>
 </li>
 </ul>
@@ -366,7 +369,7 @@ Clubs
                         </form>
 
                         <ul class="nav pull-right"> 
-                            <li><a href="login.php"> <img src="img/harvard-logo.png" height=20px width=20px> Login via HUID </a></li>
+                            <li><a href="login.php">Log In</a></li>
                         </ul>
                     <?php endif; ?>
 

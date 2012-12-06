@@ -47,7 +47,7 @@
         }
 
         //redirect to club home
-        redirect("allClubs.php?club=".str_replace(" ", "+", $clubs[0]["name"])."&success=1"); 
+        redirect("allClubs.php?club=".str_replace(" ", "+", $clubs[0]["name"])."&type=announcement&success=1"); 
     }
     
     else
