@@ -3,7 +3,7 @@
     // configuration
     require("../includes/config.php");
     
-require_once ("../google-api-php-client/src/Google_Client.php");
+//require_once ("../google-api-php-client/src/Google_Client.php");
 
 
     if (empty($_SESSION["id"]))
