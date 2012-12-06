@@ -4,6 +4,11 @@
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by CS50 @ Harvard</p>
     </div>
 
+    Club:
+    <input type="text" name="clubType"/>
+    <input type="checkbox" name="eventsList" value="myEvents">My Events <br/>
+    <input type="checkbox" name="eventsList" value="public">Public <br/>
+
     <ul id="MainTabs" class="nav nav-tabs ">
 
         <li><a data-target="#events" data-toggle="tab" href="/calendar.php"><i class="icon-calendar"></i>&nbsp;&nbsp;Events</a></li>
@@ -15,7 +20,31 @@
         <div class="tab-pane" id="announcements">Loading announcements... </div>
     </div>
 
+
+    
     <script>
+    $(document).ready(function(){
+        $("input").bind('keypress', function(e){
+            if(e.keyCode==13){
+            var txt=$("input[name=clubType]").val();
+            $(function() {
+                $("#MainTabs").tab();
+                $("#MainTabs").bind("show", function(e) {    
+                    var contentID  = $(e.target).attr("data-target");
+                    var contentURL = $(e.target).attr("href");
+                    $(contentID).load(contentURL, {clubName:txt}, function(){
+                        $("#MainTabs").tab();
+                        });
+                });
+                $('#MainTabs a:first').tab("show");
+            });
+            }
+        });
+    });
+    </script>
+    
+    <?php
+    /*<script>
     $(function() {
         $("#MainTabs").tab();
         $("#MainTabs").bind("show", function(e) {    
@@ -27,7 +56,8 @@
         });
         $('#MainTabs a:first').tab("show");
       });
-    </script>
+    </script>*/
+    ?>
 </div>
 
 <div class="row-fluid">
