@@ -73,14 +73,14 @@ color: inherit;
 
 .announcement-subject{
     text-shadow: 0 2px 0 rgba(255, 255, 255, 0.5);
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 300;
     line-height: 24px;
     text-align:left;
 }
 
 .announcement{
-    padding:20px;
+    padding-bottom:10px;
 }
 
 .announcement-content{
@@ -88,7 +88,7 @@ padding: 8px 35px 8px 14px;
     margin-bottom: 5px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
     background-color: #fcf8e3;
-border: 1px solid #fbeed5;
+    border: 1px solid #fbeed5;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
@@ -96,7 +96,7 @@ border: 1px solid #fbeed5;
 }
 
 .announcement-info{
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 300;
     text-align:right;
     font-color: #999999;
@@ -229,6 +229,34 @@ border: 1px solid #fbeed5;
                             </ul>
                         </li>
                         </ul>
+
+                    <ul class="nav pull-right">
+                        <li class="dropdown">
+                
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-globe"></i>
+                                <?php
+                                    $unread = query("SELECT * FROM notifications WHERE userID=? AND seen=0",$_SESSION["id"]);
+                                    print(count($unread));
+                                ?>                                    
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                            <?php
+                                $notifications = query("SELECT * FROM notifications WHERE userID=? ORDER BY time DESC LIMIT 10",$_SESSION["id"]);
+                                foreach ($notifications as $notification)
+                                {
+                                    if($notification["seen"]==0)
+                                        print("<li><a style=\"background-color: Yellow\" href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
+                                    else
+                                        print("<li><a href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
+                                }   
+
+                            ?> 
+                            </ul>
+                        </li>
+                        </ul>
+
 
                     <!--IF NOT LOGGED IN-->
                     <?php else: ?>

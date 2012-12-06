@@ -50,18 +50,16 @@
             apologize("The corresponding event announcement could not be added.");
         }
         
-<<<<<<< HEAD
         $members = query("SELECT * FROM subscriptions WHERE clubID = ?", $_POST["club"]);
         
         foreach($members as $member)
         {
             if($member["level"] >= $_POST["privacy"])
-                query("INSERT INTO notifications (userID, time, text, seen) VALUES(?, NOW(), ?, 0)", $member["userID"], 
-                    $clubName . ' has added the event ' . $_POST["name"] . '. Go check it out!');
+                query("INSERT INTO notifications (userID, time, text, seen, redirect) VALUES(?, NOW(), ?, 0, ?)", $member["userID"], 
+                    $clubName . ' has added the event ' . $_POST["name"] . '!',"allClubs.php?club=".$clubName);
         }
         
         
-=======
         $maxPrivacy = query("SELECT MAX(level) FROM privacy")[0]["MAX(level)"];
         
         for($privacy = $_POST["privacy"]; $privacy <= $maxPrivacy; $privacy++)
@@ -90,7 +88,6 @@
             $createdEntry = $gc->insertEvent($newEntry, $url);
         }
 
->>>>>>> upstream/master
         //redirect to home page
         redirect("/");
         
