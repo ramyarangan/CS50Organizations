@@ -42,8 +42,8 @@
         foreach($members as $member)
         {
             if($member["level"] >= $_POST["privacy"])
-                query("INSERT INTO notifications (userID, time, text, seen) VALUES(?, NOW(), ?, 0)", $member["userID"], 
-                    $clubName . ' has added the announcement: '.$_POST["name"].'!');
+                query("INSERT INTO notifications (userID, time, text, seen, redirect) VALUES(?, NOW(), ?, 0, ?)", $member["userID"], 
+                    $clubName . ' has added the announcement: '.$_POST["name"].'!',"allClubs.php?club=".$clubName);
         }
 
         //redirect to club home

@@ -14,7 +14,9 @@
     error_reporting(E_ALL);
     
     $clientLibraryPath = '/home/jharvard/vhosts/project/ZendFramework-1.12.0/library';
-    set_include_path(get_include_path() . PATH_SEPARATOR . $clientLibraryPath);
+    $clientLibraryPath2 = '/home/jharvard/vhosts/project/google-api-php-client';
+
+    set_include_path(get_include_path() . PATH_SEPARATOR . $clientLibraryPath . PATH_SEPARATOR . $clientLibraryPath2);
 
     // requirements
     require("constants.php");
