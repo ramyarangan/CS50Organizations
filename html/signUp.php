@@ -23,39 +23,13 @@
         
         else if($club["privacy"] == 0)
         {
-<<<<<<< HEAD
-            require("PHPMailer/class.phpmailer.php");
-            $mail = new PHPMailer();
 
-            // use SMTP
-            $mail->IsSMTP();
-            $mail->Host = "smtp.fas.harvard.edu";
-
-            $mail->SetFrom("cs50organizations@gmail.com");
-
-            // set To:
-            $mail->AddAddress($club["email"]);
-
-            // set Subject:
-            $mail->Subject = "Request to Join Club";
-
-            // set body
-            $mail->Body = $user["name"]." would like to join your club.";
-
-            // send mail
-            if ($mail->Send() == false)
-            {
-                die($mail->ErrInfo);
-            }
-          
-            redirect("allClubs.php?club=".str_replace(" ", "+", $club["name"]));
-=======
             $privacy = query("SELECT * FROM privacy WHERE description=\"public\"");
             $privacy = $privacy[0]["level"];
             $result = query("INSERT INTO subscriptions (userID, clubID, level) VALUES(?, ?, ?)",$user["id"],$club["id"],
                 $privacy);            
-            print("Your request to join the club has been sent!");
->>>>>>> upstream/master
+
+                redirect("allClubs.php?club=".str_replace(" ", "+", $club["name"]));
 
         }
         
