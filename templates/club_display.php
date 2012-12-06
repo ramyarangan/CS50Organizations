@@ -7,17 +7,16 @@
         <h1>
         <?php 
             if($clubInfo["abbreviation"]!="")
-            {
                 print($clubInfo["abbreviation"]." <small>".$clubInfo["name"]."</small>");
-            }
             else
                 print($clubInfo["name"]);
             ?>
         </h1>
 
         <div><img src="img/dots.jpg" width=80%></div>
+                
 
-        <form action="signUp.php" method="link">
+
 
             <p>
 
@@ -36,23 +35,35 @@
                 </a>
 
                 <?php if(isset($_SESSION["id"]) && $level == 1):?>
+<form action="signUp.php" method="link">
 
-                <?php
-                    print("<input type=\"hidden\" name=\"club\" value=\"".$clubInfo["name"]."\">");
-                    print("<button type=\"submit\"  class=\"btn btn-primary\" >Join</button>");
-                ?>
-            
+                    <input type ="hidden" name="club" <?="value=\"".$clubInfo["name"]."\""?> >
+                    <button type ="submit" class ="btn btn-primary">Join</button>
+
+</form>
+
+
                 <?php elseif($level == 5):?>
+<form action="editSettings.php" method="link">
+
                     <div class="btn-group">
                     <a href="#announcementModal" role="button" class="btn" data-toggle="modal">
                         <i class="icon-bullhorn"></i>
                     </a>
 
                     <a href="#announcementModal" role="button" class="btn" data-toggle="modal">
-<i class="icon-bullhorn"></i>
-</a>
+                        <i class="icon-bullhorn"></i>
+                    </a>
 
+                        <input type ="hidden" name="club" <?="value=\"".$clubInfo["name"]."\""?> >
+                        <button type ="submit" class ="btn">
+                            <i class="icon-cog"></i>
+                        </button>
+
+</form>
+                                  
                     </div>
+
                 <?php endif ?>
 
 </div>
@@ -62,7 +73,6 @@
                 <?=$clubInfo["information"]?> 
             </div>
 
-        </form>
 
     </div>
 
@@ -89,9 +99,18 @@
 </div>
 </div>
 
+<?php if(!empty($alert)): ?>
+<div class = "row-fluid">
+<div class="alert span8 offset2">
+<button type="button" class="close" data-dismiss="alert">×</button>
+<?=$alert?>
+</div>
+</div>
+
 
 <div class = "row-fluid">
 
+<?php endif ?>
 
     <ul id="MainTabs" class="nav nav-tabs">
         <li><a data-target="#events" data-toggle="tab"><i class="icon-calendar"></i>&nbsp;&nbsp;Events</a></li>
