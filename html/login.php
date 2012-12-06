@@ -33,7 +33,7 @@
                 
                 //print("Logged in.");
                 // redirect to portfolio
-                redirect("/");
+                redirect($_POST["go"]);
             }
             // else apologize
             else
@@ -52,7 +52,10 @@
     else
     {
         // else render form
-        render("login_form.php", ["title" => "Log In"]);
+        if(empty($_GET["go"]))
+            render("login_form.php", array("title" => "Log In", "go" => "index.php"));
+        else
+            render("login_form.php", array("title" => "Log In", "go" => $_GET["go"]));
     }
 
 ?>

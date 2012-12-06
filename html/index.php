@@ -4,5 +4,5 @@
     require("../includes/config.php"); 
 
 
-        render("home.php", ["title" => "Home"]);
+        render("home.php", array("title" => "Home"));
 ?>

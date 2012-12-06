@@ -1,7 +1,7 @@
 <form action="sendMail.php" method="post">
     <fieldset>
         <?php
-        print("<input type=\"hidden\" name=\"club\"");
+        print("<input type=\"hidden\" name=\"club\" value=\"".$club."\"");
         if (empty($_SESSION["id"]))
         {
             print("<div class=\"control-group\"> Email: 

@@ -20,8 +20,11 @@
     require("constants.php");
     require("functions.php");
 
+
     // enable sessions
     session_start();
+    
+    require("calendarSetup.php");
 
     // require authentication for most pages
     /**if (!preg_match("{(?:login|logout|register|main|index)\.php$}", $_SERVER["PHP_SELF"]))
