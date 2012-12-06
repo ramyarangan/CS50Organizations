@@ -8,33 +8,44 @@
     {
         print("You must be logged in.");
     }
+    
     else
     {   
         $club = query("SELECT * FROM clubs WHERE name=?",$_GET["club"]);
         $club = $club[0];
         $user = query("SELECT * FROM users WHERE id=?",$_SESSION["id"])[0];
         $temp = query("SELECT * FROM subscriptions WHERE userID=? AND clubID=?",$user["id"],$club["id"]);
+        
         if(!empty($temp))
         {
             print("You are already signed up!");
         }
+        
         else if($club["privacy"] == 0)
         {
+<<<<<<< HEAD
             $privacy = query("SELECT * FROM privacy WHERE description=\"pending\"");
+=======
+
+            $privacy = query("SELECT * FROM privacy WHERE description=\"public\"");
+>>>>>>> upstream/master
             $privacy = $privacy[0]["level"];
             $result = query("INSERT INTO subscriptions (userID, clubID, level) VALUES(?, ?, ?)",$user["id"],$club["id"],
                 $privacy);            
-            print("Your request to join the club has been sent!");
+
+                redirect("allClubs.php?club=".str_replace(" ", "+", $club["name"]));
 
         }
+        
         else
         {    
+
             $privacy = query("SELECT level FROM privacy WHERE description=\"all club\"");
             $privacy = $privacy[0]["level"];
             $result = query("INSERT INTO subscriptions (userID, clubID, level) VALUES(?, ?, ?)",$user["id"],$club["id"],
                 $privacy);
             
-            print("You are now signed up!");
+            redirect("allClubs.php?club=".str_replace(" ", "+", $club["name"]));
         }
     }    
 ?>

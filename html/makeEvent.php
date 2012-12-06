@@ -21,20 +21,14 @@
             OR die(mysql_error());
 
         //add seconds component to the time
-        $startTime = mysql_real_escape_string($_POST["startDatetime"]);
-        $endTime = mysql_real_escape_string($_POST["endDatetime"]);
-        
-        print($_POST["club"] . "\n");
-        print($_POST["privacy"] . "\n");
-        print($_POST["name"] . "\n");
-        print($_POST["info"] . "\n");
-        print($startTime);
+        $startDatetime = mysql_real_escape_string($_POST["startDatetime"]);
+        $endDatetime = mysql_real_escape_string($_POST["endDatetime"]);
         
         // insert new event into database
         $result = query("INSERT INTO events (id, privacy, name, location, startTime, endTime, information) 
                 VALUES(?, ?, ?, ?, STR_TO_DATE(?, '%m/%d/%Y %H:%i'), STR_TO_DATE(?, '%m/%d/%Y %H:%i'), ?)",
                 $_POST["club"], $_POST["privacy"], $_POST["name"], $_POST["location"],
-                $startTime, $endTime, $_POST["info"]);
+                $startDatetime, $endDatetime, $_POST["info"]);
         
         // if event not added, notify user      
         if($result === false)
@@ -56,6 +50,7 @@
             apologize("The corresponding event announcement could not be added.");
         }
         
+<<<<<<< HEAD
         $members = query("SELECT * FROM subscriptions WHERE clubID = ?", $_POST["club"]);
         
         foreach($members as $member)
@@ -66,6 +61,36 @@
         }
         
         
+=======
+        $maxPrivacy = query("SELECT MAX(level) FROM privacy")[0]["MAX(level)"];
+        
+        for($privacy = $_POST["privacy"]; $privacy <= $maxPrivacy; $privacy++)
+        {
+            $gc = new Zend_Gdata_Calendar($_SESSION["client"]);
+            
+            $newEntry = $gc->newEventEntry();
+            $newEntry->title = $gc->newTitle($_POST["name"]);
+            $newEntry->where  = array($gc->newWhere($_POST["location"]));
+
+            $newEntry->content = $gc->newContent($_POST["info"]);
+            $newEntry->content->type = 'text';
+
+            $when = $gc->newWhen();
+            $calStartDate = date('c', strtotime($startDatetime));
+            $calEndDate = date('c', strtotime($endDatetime));;
+            $when-> startTime = $calStartDate;
+            $when-> endTime = $calEndDate;
+            
+
+           $newEntry->when = array($when);
+            
+            $url  = query("SELECT link FROM calendarLinks WHERE id = ?", 
+                    $_POST["club"] . "." . $_POST["privacy"])[0]["link"];
+
+            $createdEntry = $gc->insertEvent($newEntry, $url);
+        }
+
+>>>>>>> upstream/master
         //redirect to home page
         redirect("/");
         
