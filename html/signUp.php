@@ -23,8 +23,12 @@
         
         else if($club["privacy"] == 0)
         {
+<<<<<<< HEAD
+            $privacy = query("SELECT * FROM privacy WHERE description=\"pending\"");
+=======
 
             $privacy = query("SELECT * FROM privacy WHERE description=\"public\"");
+>>>>>>> upstream/master
             $privacy = $privacy[0]["level"];
             $result = query("INSERT INTO subscriptions (userID, clubID, level) VALUES(?, ?, ?)",$user["id"],$club["id"],
                 $privacy);            
