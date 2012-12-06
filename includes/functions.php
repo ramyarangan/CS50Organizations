@@ -87,7 +87,7 @@
         if ($statement === false)
         {
             // trigger (big, orange) error
-            trigger_error($handle->errorInfo(), E_USER_ERROR);
+            trigger_error($handle->errorInfo()[2], E_USER_ERROR);
             exit;
         }
 
