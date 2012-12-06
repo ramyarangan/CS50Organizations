@@ -7,6 +7,10 @@
    {
         $myclubs = query("SELECT * FROM subscriptions JOIN clubs WHERE userID = ? AND subscriptions.ClubID = clubs.id", $_SESSION["id"]);
         print("<div>");
+
+        print("
+        <input type=\"radio\" name=\"eventsList\" id=\"chooseFromClubs\" value=\"choose\"> 
+                    Choose from your clubs <br/>");
         print("<div id=\"myClubs\">");
         foreach($myclubs as $club)
         {
@@ -14,11 +18,9 @@
                     . $club["name"] . "<br/>");
         }
         print("</div>");
-        print("
-        <input type=\"radio\" name=\"eventsList\" id=\"chooseFromClubs\" value=\"choose\"> 
-                    Choose from your clubs <br/>
-        <input type=\"radio\" name=\"eventsList\" value=\"myEvents\">All My Clubs <br/>
+        print("<input type=\"radio\" name=\"eventsList\" value=\"myEvents\">All My Clubs <br/>
         <input type=\"radio\" name=\"eventsList\" value=\"public\">All Public Events <br/>
+        <button id=\"submitCalOption\"> Submit! </button>
         </div>");
    }
   ?>
@@ -57,13 +59,17 @@
                 
          $('#MainTabs a:first').tab("show");
                         
-        $("input").keypress(function(e){
-            if(e.keyCode==13){
-            var txt=$("input[name=eventsList]").val();
-            $("#events").load("/calendar.php", {clubNames:txt}, function(){
-                 $("#MainTabs").tab();
-                 });
-            }
+        $("#submitCalOption").click(function(){
+            var txt=$("input[name=eventsList]:checked").val();
+            if(txt== "choose")
+            {
+                alert("hi");
+                $("#events").load("/calendar.php", {clubNames:txt}, function(){
+                    $("#MainTabs").tab();});
+            }        
+            else
+                $("#events").load("/calendar.php", {clubNames:txt}, function(){
+                    $("#MainTabs").tab();});                
         });
 
     });
