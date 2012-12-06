@@ -1,0 +1,27 @@
+<?php
+
+    // configuration
+    require("../includes/config.php");
+
+    // if form was submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST")
+    {
+        
+        $members = query("SELECT * FROM subscriptions WHERE clubID = ? AND level > 2", $_POST["clubID"]);
+
+        foreach($members as $member)
+        {
+            if($_POST[$member["userID"]] != $member["level"])
+                query("UPDATE subscriptions SET level = ? WHERE userID = ?", $_POST[$member["userID"]], $member["userID"]);
+        }
+                
+        // redirect to home
+        $club = query("SELECT name FROM clubs WHERE id = ?", $_POST["clubID"]);
+        
+        redirect("editMembers.php?club=".str_replace(" ", "+", $club[0]["name"])."&success=1"); 
+    }
+    else
+    {
+        apologize("How did you get here...");
+    }
+?>
