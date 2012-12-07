@@ -51,7 +51,7 @@
 
         $clubs = $_POST["myClubs"];
         
-        print_r($clubs);
+        //print_r($clubs);
         
         foreach($clubs as $clubName)
         {
