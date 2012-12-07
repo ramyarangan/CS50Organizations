@@ -3,7 +3,9 @@
 <html>
 
     <head>
-
+    
+        <link rel="SHORTCUT ICON" href="harvard-logo.ico" >
+    
         <link href="css/bootstrap.css" rel="stylesheet"/>
         <link href="css/bootstrap-responsive.css" rel="stylesheet"/>
         <link rel="stylesheet" href="css/jquery-ui.css" />
