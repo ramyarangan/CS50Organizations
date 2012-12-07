@@ -80,7 +80,7 @@
             $when-> endTime = $calEndDate;
             
 
-           $newEntry->when = array($when);
+            $newEntry->when = array($when);
             
             $url  = query("SELECT link FROM calendarLinks WHERE id = ?", 
                     $_POST["club"] . "." . $_POST["privacy"])[0]["link"];

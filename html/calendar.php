@@ -39,8 +39,7 @@
                      $_SESSION["id"], $clubID)[0]["level"]; 
             $temp = query("SELECT link FROM calendarLinks WHERE id = ?", 
                         $clubID . "." . $privacy)[0]["link"];           
-            $end = strrpos($temp, "group.calendar.google.com");
-            $temp = substr($temp,38,$end + 25);
+            $url = substr($url,37,strlen($url) -50);
             //print($temp . " ");
             $url = $url . $temp;
             $url = $url . "&amp;src=";
@@ -63,8 +62,7 @@
                      $_SESSION["id"], $clubID)[0]["level"]; 
             $temp = query("SELECT link FROM calendarLinks WHERE id = ?", 
                         $clubID . "." . $privacy)[0]["link"];           
-            $end = strrpos($temp, "group.calendar.google.com");
-            $temp = substr($temp,38,$end + 25);
+            $url = substr($url,37,strlen($url) -50);
             $url = $url . $temp;
             $url = $url . "&amp;src=";
         }
@@ -84,12 +82,11 @@
         //print($clubId . "." . $privacy);
         $url = query("SELECT link FROM calendarLinks WHERE id = ?", $clubId . "." . $privacy)[0]["link"];
         // this is the part after src: in the gcal url
-        $end = strrpos($url, "group.calendar.google.com");
-        $url = substr($url,38,$end + 25);
+        $url = substr($url,37,strlen($url) -50);
     }    
     
     $url = "https://www.google.com/calendar/embed?src=" . $url;
-    //print($url);
+    print($url);
     
     // else render form
     render_div("calendar_display.php", array("url" => $url));
