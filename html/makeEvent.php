@@ -112,7 +112,8 @@
         
         foreach($rows as $row)
         {
-            $privacy[$row["description"]] = $row["level"];
+            if($row["description"]!= "pending")
+                $privacy[$row["description"]] = $row["level"];
         }
         
         // render form
