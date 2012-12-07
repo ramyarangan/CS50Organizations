@@ -3,7 +3,8 @@
         <h1>Organizations</h1>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by CS50 @ Harvard</p>
     </div>
-  <?php if (isset($_SESSION["id"]))
+  <?php
+  /* if (isset($_SESSION["id"]))
    {
         $myclubs = query("SELECT * FROM subscriptions JOIN clubs WHERE userID = ? AND subscriptions.ClubID = clubs.id", $_SESSION["id"]);
         print("<div>");
@@ -20,10 +21,12 @@
         print("</div>");
         print("<input type=\"radio\" name=\"eventsList\" value=\"myEvents\">All My Clubs <br/>
         <input type=\"radio\" name=\"eventsList\" value=\"public\">All Public Events <br/>
-        <button id=\"submitCalOption\"> Submit! </button>
+        <button id=\"submitCalOption\"> Go </button>
         </div>");
    }
-  ?>
+
+    <div id="displayOption">
+    </div>
     <script>
          $("#myClubs").hide();
          $("input[name=eventsList]").click(function(){
@@ -32,11 +35,11 @@
               }
               else $("#myClubs").hide();
          });
-    </script>
-
+    </script>*/
+  ?>
     <ul id="MainTabs" class="nav nav-tabs ">
 
-        <li><a data-target="#events" data-toggle="tab" href="/calendar.php"><i class="icon-calendar"></i>&nbsp;&nbsp;Events</a></li>
+        <li><a data-target="#events" data-toggle="tab" href="/toggleCalendar.php"><i class="icon-calendar"></i>&nbsp;&nbsp;Events</a></li>
         <li><a data-target="#announcements" data-toggle="tab" href="/announcements.php"><i class="icon-exclamation-sign"></i>&nbsp;&nbsp;Announcements</a></li>
     </ul>
 
@@ -52,25 +55,37 @@
             $("#MainTabs").bind("show", function(e) {    
                 var contentID  = $(e.target).attr("data-target");
                 var contentURL = $(e.target).attr("href");
-                $(contentID).load(contentURL, {clubNames:"default"}, function(){
+                //$("#displayOption").text("Displaying public events...");
+                $(contentID).load(contentURL, function(){
                    $("#MainTabs").tab();
                 });
             });
                 
          $('#MainTabs a:first').tab("show");
-                        
+         /*               
         $("#submitCalOption").click(function(){
             var txt=$("input[name=eventsList]:checked").val();
+            if(!txt)
+                $("#displayOption").text("Please select an option. Displaying public events...");
             if(txt== "choose")
             {
-                alert("hi");
-                $("#events").load("/calendar.php", {clubNames:txt}, function(){
-                    $("#MainTabs").tab();});
+                if($("input[name=myClubs]:checked").map(
+                        function(){return this.value;}).size() == 0)
+                    $("#displayOption").text("Please select some clubs! Displaying all your events...");
+                else
+                {
+                    myClubs = $("input[name=myClubs]:checked").map(
+                                    function(){return this.value;});
+                    $("#displayOption").text("Displaying options for " + myClubs.get());
+                    $("#events").load("/calendar.php", {clubNames:txt, myClubs: myClubs}, 
+                        function(){
+                            $("#MainTabs").tab();});
+                }
             }        
             else
                 $("#events").load("/calendar.php", {clubNames:txt}, function(){
                     $("#MainTabs").tab();});                
-        });
+        });*/
 
     });
     </script>
