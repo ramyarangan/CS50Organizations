@@ -80,6 +80,7 @@
             // I only set the title, other options like color are available.
             $appCal -> title = $gdataCal-> newTitle($abbreviation.$i); 
 
+
             //This is the right URL to post to for new calendars...
             //Notice that the user's info is nowhere in there
             $own_cal = "http://www.google.com/calendar/feeds/default/owncalendars/full";
@@ -96,39 +97,25 @@
                 //Anything else and you have to manipulate it to get it right. 
                 $appCalUrl = $calendar->content->src;
             }
+               
    
-   
-//extract data from the post
-extract($_POST);
+            extract($_POST);
 
-//set POST variables
-$url = "https://www.google.com/calendar/feeds/g1qge2cfjjm0l4hh92qh7gkti8@group.calendar.google.com/acl/full";
-$fields = array(
-            "scope" => "lightinthesky12@gmail.com",
-            "scopeType"=> "user",
-            "role" => "editor"
-        );
+            //set POST variables
 
-//url-ify the data for the POST
-foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
-rtrim($fields_string, '&');
-print($fields_string);
+            $calurl = substr($appCalUrl,38,strlen($appCalUrl)-51);
+       
+            $url = "http://www.google.com/calendar/feeds/".$calurl."/acl/full";
+            $post_fields =  "<entry xmlns='http://www.w3.org/2005/Atom' xmlns:gAcl='http://schemas.google.com/acl/2007'>
+            <category scheme='http://schemas.google.com/g/2005#kind'
+            term='http://schemas.google.com/acl/2007#accessRule'/>
+            <gAcl:scope type='default'></gAcl:scope>
+            <gAcl:role value='http://schemas.google.com/gCal/2005#read'></gAcl:role>
+            </entry>";
+ 
+            $gdataCal = new Zend_Gdata_Calendar($client);
 
-//open connection
-$ch = curl_init();
-
-//set the url, number of POST vars, POST data
-curl_setopt($ch,CURLOPT_URL, $url);
-curl_setopt($ch,CURLOPT_POST, count($fields));
-curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
-
-//execute post
-$result = curl_exec($ch);
-
-print($result);
-//close connection
-curl_close($ch);
-
+            $gdataCal->post($post_fields, $url);
 
             query("INSERT INTO calendarLinks (id, link) 
                     VALUES(?, ?)", $clubID.".".$i, $appCalUrl);
