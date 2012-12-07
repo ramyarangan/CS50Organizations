@@ -40,8 +40,8 @@
         $clubName = $clubs[0]["name"];
         
         //add notification of new event
-        $result = query("INSERT INTO announcements (id, text, title, privacy) VALUES(?, ?, ?, ?)",
-                    $_POST["club"], $clubName . ' has added the event ' . $_POST["name"] . '. Go check it out!', 
+        $result = query("INSERT INTO announcements (id, userID, text, title, privacy) VALUES(?, ?, ?, ?, ?)",
+                    $_POST["club"], $_SESSION["id"], $clubName . ' has added the event ' . $_POST["name"] . '. Go check it out!', 
                     $_POST["name"], $_POST["privacy"]);
                    
         
@@ -80,10 +80,10 @@
             $when-> endTime = $calEndDate;
             
 
-           $newEntry->when = array($when);
+            $newEntry->when = array($when);
             
             $url  = query("SELECT link FROM calendarLinks WHERE id = ?", 
-                    $_POST["club"] . "." . $_POST["privacy"])[0]["link"];
+                    $_POST["club"] . "." . $privacy)[0]["link"];
 
             $createdEntry = $gc->insertEvent($newEntry, $url);
         }
@@ -112,7 +112,8 @@
         
         foreach($rows as $row)
         {
-            $privacy[$row["description"]] = $row["level"];
+            if($row["description"]!= "pending")
+                $privacy[$row["description"]] = $row["level"];
         }
         
         // render form
