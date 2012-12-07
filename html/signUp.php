@@ -28,9 +28,8 @@
             $privacy = $privacy[0]["level"];
             $result = query("INSERT INTO subscriptions (userID, clubID, level) VALUES(?, ?, ?)",$user["id"],$club["id"],
                 $privacy);            
-
+            
                 redirect("allClubs.php?club=".str_replace(" ", "+", $club["name"]));
-
         }
         
         else
