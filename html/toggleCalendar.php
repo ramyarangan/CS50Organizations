@@ -64,6 +64,11 @@
                     data['myClubs[]'].push($(this).val());
                 });
                 
+                var string = ""
+                $("input[type=checkbox]:checked").each(function() {
+                    string = string + ($(this).val()) + " ";
+                });
+                
                 //alert(data['myClubs[]']);
                 if(data['myClubs[]'].length == 0)
                 {
@@ -72,8 +77,6 @@
                 }
                 else
                 {
-                    var string =  $("input[name=myClubs]:checked").map(
-                        function(){return this.value;}).get().join(", ");
                     $("#displayOption").text("Displaying events for: " + string);
                     $("#eventsArea").load("calendar.php", {eventsOption:txt, myClubs: data['myClubs[]']});
                 }

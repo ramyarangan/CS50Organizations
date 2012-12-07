@@ -7,6 +7,7 @@
     
     if(isset($_POST["eventsOption"]))
     {    
+     $url = $url . "vkd9mihk989ohsv6lhr1i89m0o@group.calendar.google.com&amp;src=";
     //display all public events
     if($_POST["eventsOption"]==="public")
     {
@@ -20,8 +21,7 @@
                         $clubID["id"] . "." . $public)[0]["link"];
 
             // this is the part after src: in the gcal url
-            $end = strrpos($temp, "group.calendar.google.com");
-            $temp = substr($temp,38,$end + 25);
+            $temp = substr($temp,38,strlen($temp) -51);
             $url = $url . $temp;
             $url = $url . "&amp;src=";
         }
@@ -39,12 +39,13 @@
                      $_SESSION["id"], $clubID)[0]["level"]; 
             $temp = query("SELECT link FROM calendarLinks WHERE id = ?", 
                         $clubID . "." . $privacy)[0]["link"];           
-            $url = substr($url,37,strlen($url) -50);
+            $temp = substr($temp,38,strlen($temp) -51);
             //print($temp . " ");
             $url = $url . $temp;
             $url = $url . "&amp;src=";
         }
         $url = substr($url, 0, strlen($url)-9);
+
     }
     
     //display events if given an array of club names
@@ -62,11 +63,12 @@
                      $_SESSION["id"], $clubID)[0]["level"]; 
             $temp = query("SELECT link FROM calendarLinks WHERE id = ?", 
                         $clubID . "." . $privacy)[0]["link"];           
-            $url = substr($url,37,strlen($url) -50);
+            $temp = substr($temp,38,strlen($temp) -51);
             $url = $url . $temp;
             $url = $url . "&amp;src=";
         }
         $url = substr($url, 0, strlen($url)-9);
+
     }
     }
     
@@ -82,11 +84,11 @@
         //print($clubId . "." . $privacy);
         $url = query("SELECT link FROM calendarLinks WHERE id = ?", $clubId . "." . $privacy)[0]["link"];
         // this is the part after src: in the gcal url
-        $url = substr($url,37,strlen($url) -50);
+        $url = substr($url,38, strlen($url) -51);
     }    
     
     $url = "https://www.google.com/calendar/embed?src=" . $url;
-    print($url);
+    //print($url);
     
     // else render form
     render_div("calendar_display.php", array("url" => $url));

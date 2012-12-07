@@ -39,7 +39,7 @@
 
                 <?php elseif($level == 2):?>
                     <?php $alert = "This is a closed club. Your membership request is pending review by club administrators."?>
-                <?php elseif($level == 5):?>
+                <?php elseif($level == 6):?>
 
                     <div class="btn-group">
                     <a href="#announcementModal" role="button" class="btn" data-toggle="modal" id="editMembersBtn" rel="tooltip" title="Make Announcement">

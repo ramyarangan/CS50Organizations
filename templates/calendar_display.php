@@ -2,7 +2,7 @@
 <?php //print($clubName)?>
 </div>
 
-<iframe src="<?php print($url)?>" style="border: 0" width="700" height="350" frameborder="0" scrolling="no">
+<iframe src="<?php print($url)?>" showTitle=0 style="border: 0" width="700" height="350" frameborder="0" scrolling="no">
 </iframe>
 
 <?php 
