@@ -99,10 +99,10 @@
 <script>
 
 $(document).ready(function(){
-     $("#submit").click(function(){
+
+     //$("#submit").click(function(){
            $(".error").html("");
-               hasError = false;
-    
+        hasError = false;
                         var first = $("#inputFirst").val();
                         var last = $("#inputLast").val();
                         var username = $("#inputUsername").val();
@@ -113,21 +113,153 @@ $(document).ready(function(){
                         var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
                         
                         //error checks!
+                        checkFirstName = false;
+                        $("#inputFirst").change(function(){
+                            checkFirstName = true;
+                        })
+                        checkLastName = false;
+                        $("#inputLast").change(function(){
+                            checkLastName = true;
+                        })
                         
+                        $("#inputFirst").change(function(){
+
+                            if(checkFirstName && checkLastName)
+                            {   
+                            first = $("#inputFirst").val();
+                            last = $("#inputLast").val();
+                            if (first == "" || last == "") 
+                            {
+                                $("#nameText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter valid first and last names.");
+
+                            }
+                            else
+                            {
+                                $("#nameText").html("");
+
+                            }
+                            }
+                          });
+                        
+                       $("#inputLast").change(function(){
+                            if(checkFirstName && checkLastName)
+                            {
+                            first = $("#inputFirst").val();
+                            last = $("#inputLast").val();
+                            if (first == "" || last == "") 
+                            {
+                                $("#nameText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter valid first and last names.");
+
+                            }
+                            else
+                            {
+                                $("#nameText").html("");
+
+                            }
+                            }
+                          });
+                        
+                        $("#inputUsername").change(function(){
+                            curNameError = false;
+                            username = $("#inputUsername").val();
+                            if (username == "") 
+                            {
+                                $("#usernameText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please choose a username.");
+                                curNameError = true;
+                            }
+                            userEmailExists(username, email);
+                            if(!curNameError)
+                            {
+                                $("#usernameText").html("");
+                            }
+                        });
+                        
+                        $("#inputPW").change(function(){
+                            password = $("#inputPW").val();
+                            if (password == "") 
+                            {
+                                $("#pwText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please choose a password.");
+
+                            }
+
+                            else if (password.length < 8)
+                            {
+                                $("#pwText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Your password must be at least 8 characters long.");
+
+                            }
+                            
+                            else 
+                            {
+                                $("#pwText").html("");
+
+                            }
+                        });
+                        
+                        $("#inputConf").change(function(){
+                            conf = $("#inputConf").val();
+                            if (password != conf)
+                            {
+                                $("#confText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Your passwords do not match.");
+
+                            }
+                            else
+                            {
+                                $("#confText").html("");
+
+                            }
+                        });
+                        
+                        $("#inputEmail").change(function(){ 
+                            email = $("#inputEmail").val();    
+                            curEmailError = false;            
+                        if (email == "") 
+                        {
+                            $("#emailText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter your email address.");
+                            curEmailError = true;
+                        }
+                        else if(!emailReg.test(email))
+                        {
+                            $("#emailText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter a valid email address.");
+                            curEmailError = true;
+                        }
+                        
+                        userEmailExists(username, email);
+                        if(curEmailError == false)
+                        {
+                            $("#emailText").html("");
+                        }
+                        });
+
+
+                  
+                  });
+                  
+     $("#submit").click(function(){
+        hasError = false;
+                        var first = $("#inputFirst").val();
+                        var last = $("#inputLast").val();
+                        var username = $("#inputUsername").val();
+                        var password = $("#inputPW").val();
+                        var conf = $("#inputConf").val();
+                        var email = $("#inputEmail").val();
+                    
+                        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                        
+                        //error checks!
+
                         if (first == "" || last == "") 
                         {
                             $("#nameText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter valid first and last names.");
                             hasError = true;
                         }
 
-                        if (username == "") 
-                        {
-                        $("#usernameText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please choose a username.");
-                        hasError = true;
-                        }
-                        
-                        userEmailExists(username, email);
-                        
+
+                            if (username == "") 
+                            {
+                                $("#usernameText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please choose a username.");
+                                hasError = true;
+                            }
+                            userEmailExists(username, email);
                         
                         
                         if (password == "") 
@@ -160,8 +292,6 @@ $(document).ready(function(){
                             $("#emailText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter a valid email address.");
                             hasError = true;
                         }
-                      
-
                         if (hasError == false) 
                         {
                             $(this).hide();
@@ -178,10 +308,8 @@ $(document).ready(function(){
                             });   */
                         }
                         return false;
-                        });
-                  
-                  });
-
+                        //});
+    });
 function userEmailExists(username, email)
 {
     $.ajax({
@@ -194,15 +322,15 @@ function userEmailExists(username, email)
            if (response.name > 0)
            {
                  $("#usernameText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Sorry! That username is already taken.");
+                curNameError = true;
                 hasError = true;
            }
-           
            if (response.email > 0)
            {
            $("#emailText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> There is already an account registered under that email.");
+                curEmailError = true;
                 hasError = true;
            }
-
         }
     });
 }
