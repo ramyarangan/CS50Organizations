@@ -141,12 +141,18 @@
 <div class = "span8" style = "margin-left:20px; height:500px">
 
     <h3>calendar of events</h3>
-
+    <div id="clubEventsCal">
     <iframe src="https://www.google.com/calendar/embed?src=2ah0qjho0ctekccbmtmpatunco%40group.calendar.google.com&ctz=America/New_York" style="border: 0" width="600" height="450" frameborder="2" scrolling="no">
     </iframe>
+    </div>
 </div>
 
+
 </div>
+
+<script>
+    $("#clubEventsCal").load("calendar.php", {clubName:"<?php echo $clubInfo['name']?>"});
+</script>
 
 <script>
     $(document).ready(function(){
@@ -155,6 +161,5 @@
         $('#announceBtn').tooltip('trigger':'hover');
         $('#editMembersBtn').tooltip('trigger':'hover');
         $('#editSettingsBtn').tooltip('trigger':'hover');
-
     }
 </script>

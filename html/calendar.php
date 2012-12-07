@@ -3,7 +3,10 @@
     // configuration
     require("../includes/config.php");
 
-    $url = "";    
+    $url = "";
+    
+    if(isset($_POST["eventsOption"]))
+    {    
     //display all public events
     if($_POST["eventsOption"]==="public")
     {
@@ -67,6 +70,7 @@
         }
         $url = substr($url, 0, strlen($url)-9);
     }
+    }
     
     //display events if given a single club name
     if(isset($_POST["clubName"]))
@@ -77,7 +81,7 @@
 
         $privacy = query("SELECT level FROM subscriptions WHERE userID = ? AND clubID = ?", 
                      $_SESSION["id"], $clubId)[0]["level"];
-
+        //print($clubId . "." . $privacy);
         $url = query("SELECT link FROM calendarLinks WHERE id = ?", $clubId . "." . $privacy)[0]["link"];
         // this is the part after src: in the gcal url
         $end = strrpos($url, "group.calendar.google.com");

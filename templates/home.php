@@ -62,30 +62,6 @@
             });
                 
          $('#MainTabs a:first').tab("show");
-         /*               
-        $("#submitCalOption").click(function(){
-            var txt=$("input[name=eventsList]:checked").val();
-            if(!txt)
-                $("#displayOption").text("Please select an option. Displaying public events...");
-            if(txt== "choose")
-            {
-                if($("input[name=myClubs]:checked").map(
-                        function(){return this.value;}).size() == 0)
-                    $("#displayOption").text("Please select some clubs! Displaying all your events...");
-                else
-                {
-                    myClubs = $("input[name=myClubs]:checked").map(
-                                    function(){return this.value;});
-                    $("#displayOption").text("Displaying options for " + myClubs.get());
-                    $("#events").load("/calendar.php", {clubNames:txt, myClubs: myClubs}, 
-                        function(){
-                            $("#MainTabs").tab();});
-                }
-            }        
-            else
-                $("#events").load("/calendar.php", {clubNames:txt}, function(){
-                    $("#MainTabs").tab();});                
-        });*/
 
     });
     </script>
