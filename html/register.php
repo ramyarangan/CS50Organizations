@@ -24,6 +24,33 @@
         // remember that the user is logged in by storing user's ID in session
         $_SESSION["id"] = $id;
         
+        
+        require("PHPMailer/class.phpmailer.php");
+        $mail = new PHPMailer();
+
+        // use SMTP
+        $mail->IsSMTP();
+        $mail->Host = "smtp.fas.harvard.edu";
+
+        // set From:
+        $mail->SetFrom("cs50organizations@gmail.com", "CS50 Organizations");
+
+          // set To:
+        $mail->AddAddress($_POST["email"]);
+
+          // set Subject:
+        $mail->Subject = "Welcome to CS50 Organizations!";
+
+          // set body
+        $mail->Body = "Hi ".$_POST["first"]." ".$_POST["last"]."!";
+
+          // send mail
+          if ($mail->Send() == false)
+          {
+              die($mail->ErrInfo);
+          }
+
+
         // redirect to portfolio
         redirect("/"); 
     }
