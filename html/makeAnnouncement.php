@@ -131,10 +131,11 @@
         {
             // create list of clubs that the currently logged in user owns
             $privacy = query("SELECT * FROM privacy WHERE description = 'admin'");
-            $privacy = $privacy[0]["level"]; 
+            $privacy = $privacy[0]["level"];
+             
             $rows = query("SELECT * FROM subscriptions WHERE userID = ? AND level = ?", $_SESSION["id"], $privacy);
             $clubsOwned = array();
-
+            //print($privacy. " ". $rows[0]["clubID"]);
             foreach($rows as $row)
             {
                 $club = query("SELECT * FROM clubs WHERE id = ?", $row["clubID"]);

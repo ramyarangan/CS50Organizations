@@ -15,11 +15,15 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
         // validate submission
-        $fields = array("name","info", "email", "privacy", "categories");
+        $fields = array("name","info", "email", "privacy");
         checkForm($fields);
         
-        $abbreviation = strtoupper($_POST["abbreviation"]);
-        
+        $abbreviation = "";
+        if(isset($_POST["abbreviation"]) && ($_POST["abbreviation"]!= ""))
+            $abbreviation = strtoupper($_POST["abbreviation"]);
+        else
+            $abbreviation = strtoupper($_POST["name"]);
+                    
         $privacy = false;
         if($_POST["privacy"]=== "open")
         {
@@ -40,6 +44,8 @@
         $rows = query("SELECT * FROM clubs WHERE name = ?", $_POST["name"]);
         $clubID = $rows[0]["id"];
         // add appropriate club types for this club to the clubTypePairs database
+        if(isset($_POST["categories"]))
+        {
         foreach($_POST["categories"] as $categoryID)
         {
             $result = query("INSERT INTO clubTypePairs (clubID, clubTypeID) VALUES(?, ?)", 
@@ -49,7 +55,7 @@
                 apologize("The club's categories could not be stored.");
             }
         }
-        
+        }
         // mark user as an administrator        
         $rows = query("UPDATE users SET admin = ? WHERE id = ?", true, $_SESSION["id"]);
         
