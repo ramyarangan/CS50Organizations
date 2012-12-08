@@ -19,6 +19,6 @@ $mail->Password   = "crimsongroups"; // Password
 $mail->Subject = "Testing";     // Subject (which isn't required)  
 $mail->Body = "Testing";        // Body of our message  
 // Send To  
-$mail->AddAddress("4085823798@txt.att.net" ); // Where to send it  
+$mail->AddAddress("4088261634@vtext.com" ); // Where to send it  
 var_dump( $mail->send() );      // Send! 
 ?>

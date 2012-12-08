@@ -107,7 +107,7 @@
 
 <div class = "span4">
     <h3>announcements</h3>
-<div style="height:500px; overflow:auto; padding-right:10px">
+<div style="height:400px; overflow:auto; padding-right:10px">
 <?php   
     
     if ($announcements == NULL)
@@ -144,11 +144,11 @@
 </div>
 </div>
 
-<div class = "span8" style = "margin-left:20px; height:500px">
+<div class = "span8" style = "margin-left:20px; height:400px">
 
     <h3>calendar of events</h3>
     <div id="clubEventsCal">
-    <iframe src="https://www.google.com/calendar/embed?src=2ah0qjho0ctekccbmtmpatunco%40group.calendar.google.com&ctz=America/New_York" style="border: 0" width="600" height="450" frameborder="2" scrolling="no">
+    <iframe src="https://www.google.com/calendar/embed?src=2ah0qjho0ctekccbmtmpatunco%40group.calendar.google.com&ctz=America/New_York" style="border: 0" width="500" height="400" frameborder="2" scrolling="no">
     </iframe>
     </div>
 </div>
