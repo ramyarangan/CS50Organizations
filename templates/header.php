@@ -298,6 +298,36 @@ padding: 8px 35px 8px 14px;
                 });
             });
         </script>
+        <script>
+            $(document).ready(function(){
+                $("#notificationbar > li > a").focusout(function() {
+                    $("#notificationbar > li > ul > li").css("background-color", '');
+                      
+                     
+                });
+                $("#notificationbar > li > a").click(function() {
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url: 'clearNotifications.php',
+                        data: {},
+                        dataType:'json',
+                        async: false,
+                        success: function(response){
+                        if(response.change > 0)
+                        {
+                            $("#notificationbar > li > a").html("<i class=\"icon-globe\"></i> 0 <b class=\"caret\"></b>");
+                            $("#notificationbar > li > ul > li").css("background-color", "Yellow");
+                        }
+
+                        }
+
+                     });
+                });
+
+            });
+        </script>
+
     </head>
 
     <body>
@@ -350,18 +380,14 @@ padding: 8px 35px 8px 14px;
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="login.php"> Connect via Facebook </a></li>
-                                <li><a href="login.php"> Connect via Google </a></li>
-                                <li class="divider"></li>
-                                <li><a href="logout.php"> Account Settings </a></li>
+                                <li><a href="accountSettings.php"> Account Settings </a></li>
                                 <li><a href="logout.php"> Log Out </a></li>
                             </ul>
                         </li>
                         </ul>
 
-                    <ul class="nav pull-right">
-                        <li class="dropdown">
-                
+                     <ul class="nav pull-right" id="notificationbar">
+                        <li class="dropdown" >
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="icon-globe"></i>
                                 <?php
@@ -375,14 +401,13 @@ padding: 8px 35px 8px 14px;
                                 $notifications = query("SELECT * FROM notifications WHERE userID=? ORDER BY time DESC LIMIT 10",$_SESSION["id"]);
                                 foreach ($notifications as $notification)
                                 {
-                                    if($notification["seen"]==0)
-                                        print("<li><a style=\"background-color: Yellow\" href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
-                                    else
-                                        print("<li><a href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
+                                    print("<li><a href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
                                 }   
 
                             ?> 
                             </ul>
+                            
+                            
                         </li>
                         </ul>
 
