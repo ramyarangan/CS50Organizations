@@ -290,8 +290,14 @@ padding: 8px 35px 8px 14px;
 
                     <ul class="nav pull-right">
                         <li class="dropdown">
+
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <?php
+                                    $user= query("SELECT * FROM users WHERE id = ?", $_SESSION["id"])[0]["realname"];
+                                    print($user);
+                                ?>
                                 <i class="icon-user"></i>
+
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
