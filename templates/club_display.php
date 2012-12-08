@@ -28,7 +28,12 @@
                     <i class="icon-envelope"></i>
                 </a>
 
+
+
             <?php if(isset($_SESSION["id"])):?>
+                <a href="#subscribeModal" id="subscribeBtn" rel="tooltip" title="Subscribe" role="button" class="btn" data-toggle="modal">
+                    <i class="icon-signal"></i>
+                </a>
     
                 <?php if($level == 1):?>
 
@@ -91,6 +96,17 @@
 <p>Loading announcement form...</p>
 </div>
 </div>
+
+<div class="modal fade hide" id="subscribeModal" tabindex="-1" style="text-align:left" role="dialog" aria-labelledby="subscribeModalLabel" aria-hidden="true" data-remote= <?="\"/subscribe.php?type=".$subscription[0]["subscription"]."&club=".str_replace(" ", "+", $clubInfo["name"])."\""?> >
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="subscribeModalLabel">Subscribe to email and text notifications.</h3>
+    </div>
+    <div class="modal-body">
+        <p>Loading subscription form...</p>
+    </div>
+</div>
+
 
 <?php if(!empty($alert)): ?>
     <div class = "row-fluid">
@@ -164,6 +180,7 @@
     $(document).ready(function(){
         $('#infoBtn').tooltip('trigger':'hover');
         $('#emailBtn').tooltip('trigger':'hover');
+        $('#subscribeBtn').tooltip('trigger':'hover');
         $('#announceBtn').tooltip('trigger':'hover');
         $('#editMembersBtn').tooltip('trigger':'hover');
         $('#editSettingsBtn').tooltip('trigger':'hover');

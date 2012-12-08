@@ -17,15 +17,15 @@
         $array = [];
         foreach($clubs as $club)
         {
-            array_push($array,$club["name"]);
+            array_push($array,$club["name"]." (club)");
         }
         foreach($events as $event)
         {
-            array_push($array,$event["name"]);
+            array_push($array,$event["name"]." (event)");
         }
         foreach($announcements as $announcement)
         {
-            array_push($array,$announcement["title"]);
+            array_push($array,$announcement["title"]." (announcement)");
         }
 
     ?>
@@ -216,7 +216,7 @@ padding: 8px 35px 8px 14px;
         <script>
             $(document).ready(function(){
                 $("#notificationbar > li > a").focusout(function() {
-                    $("#notificationbar > li > ul > li").css("background-color", '');
+                    $("#notificationbar > li > ul > li > a").css("background-color", "");
                       
                      
                 });
@@ -232,7 +232,6 @@ padding: 8px 35px 8px 14px;
                         if(response.change > 0)
                         {
                             $("#notificationbar > li > a").html("<i class=\"icon-globe\"></i> 0 <b class=\"caret\"></b>");
-                            $("#notificationbar > li > ul > li").css("background-color", "Yellow");
                         }
 
                         }
@@ -285,7 +284,7 @@ padding: 8px 35px 8px 14px;
                     </ul>
 
                     <form class="navbar-search pull-left" action="search.php" method="get">
-                        <input type="text" id="tags" name="search"/>
+                        <input type="text" id="tags" name="search" placeholder="Search"/>
                     </form>
 
 
@@ -323,7 +322,10 @@ padding: 8px 35px 8px 14px;
                                 $notifications = query("SELECT * FROM notifications WHERE userID=? ORDER BY time DESC LIMIT 10",$_SESSION["id"]);
                                 foreach ($notifications as $notification)
                                 {
-                                    print("<li><a href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
+                                    if($notification["seen"]==1)
+                                        print("<li><a href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
+                                    else
+                                        print("<li><a style=\"background-color: Yellow;\" href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
                                 }   
 
                             ?> 

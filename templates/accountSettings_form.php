@@ -360,7 +360,7 @@ function checkPassword(oldpassword)
         dataType:'json',
         async: false,
         success: function(response){
-           if (response.success == 0)
+           if (response.check == 0)
            {
                 $("#oldpwText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Sorry! That password is incorrect.");
                 curoldPWError = true;
