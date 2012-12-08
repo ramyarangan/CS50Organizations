@@ -36,6 +36,9 @@
                         case "email":
                             $alert = "Your message was successfully sent!";
                             break;
+                        case "subscribe":
+                            $alert = "You have successfully subscribed to notifications!";
+                            break;
                         case "announcement":
                             $alert = "Your announcement has been saved. Check it out below!";
                             break;
@@ -44,8 +47,9 @@
             }
         }
         $announcements = query("SELECT * FROM announcements WHERE id=? AND privacy <= ? ORDER BY time DESC", $club["id"], $privacy);
+        $subscription = query("SELECT * FROM subscriptions WHERE userID=? AND clubID=?", $_SESSION["id"], $club["id"]);
         
-        render("club_display.php", array("title" => $club["name"]." ".$club["abbreviation"] , "clubInfo" => $club, "announcements" => $announcements, "level" => $privacy, "alert" => $alert));
+        render("club_display.php", array("title" => $club["name"]." ".$club["abbreviation"] , "clubInfo" => $club, "announcements" => $announcements, "level" => $privacy, "alert" => $alert, "subscription" => $subscription));
 
         
     }
