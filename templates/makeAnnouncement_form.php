@@ -26,7 +26,7 @@
 
 <?php else: ?>
 
-<form class="form-horizontal" style="text-align:left" action="makeAnnouncement.php" method="post">
+<form id="announceForm" class="form-horizontal" style="text-align:left" action="makeAnnouncement.php" method="post">
     <input type ="hidden" name="club" <?="value=\"".$clubName."\""?> >
     <input type ="hidden" name="all" value="-1">
 <?php endif?>
@@ -83,7 +83,7 @@
         
     <div class="control-group">
         <div class="controls">
-            <button type="submit" class="btn">Make announcement!</button>
+            <button type="submit" id="submit" class="btn">Make announcement!</button>
         </div>
     </div>
 </form>
