@@ -11,6 +11,5 @@
         $resultEmail = query("SELECT * FROM users WHERE email = ?", $_POST["email"]);
         
         echo json_encode(array("name" => count($resultName), "email" => count($resultEmail)));
-        //echo count($result);
     }
 ?>
