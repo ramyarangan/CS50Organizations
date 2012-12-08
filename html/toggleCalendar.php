@@ -89,7 +89,6 @@
                     $("#displayOption").text("Displaying all your club events...");
                 $("#eventsArea").load("calendar.php", {eventsOption:txt});
             }
-                          
         });
 
     </script>

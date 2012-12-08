@@ -1,93 +1,3 @@
-<?php /*<!DOCTYPE html>
-
-<html>
-
-    <head>
-    
-        <link rel="SHORTCUT ICON" href="harvard-logo.ico" >
-    
-        <link href="css/bootstrap.css" rel="stylesheet"/>
-        <link href="css/bootstrap-responsive.css" rel="stylesheet"/>
-        <link rel="stylesheet" href="css/jquery-ui.css" />
-        <link href="css/jquery-ui-timepicker-addon.css" rel="stylesheet"/>
-        <link href="css/styles.css" rel="stylesheet"/>
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
-        
-        <?php if (isset($title)): ?>
-            <title><?= htmlspecialchars($title) ?></title>
-        <?php else: ?>
-            <title></title>
-        <?php endif ?>
-
-   
-        <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-        <script type="text/javascript" src="js/jquery-1.8.2.js"></script>
-        <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
-        <script type="text/javascript" src="js/jquery-ui-sliderAccess.js"></script>
-        <script src="js/bootstrap.js"></script>
-        <script src="js/scripts.js"></script>
-
-        <script>
-            $(document).ready(function(){
-                $(".datetime").hover(function(){
-                    $(this).datetimepicker({controlType: 'select', timeFormat: 'hh:mm tt', stepMinute: 5});
-                });
-            });
-        </script>
-        <script> function myTest(){alert ("hi")}</script>
-    </head>
-
-    <body>
-
-        <div class="container-fluid">
-
-            <div id="top">
-
-            </div>
-
-            <div id="middle">
-                <?php
-                    // include links to main pages on home page
-                ?>
-            <div>
-
-                <ul class="nav nav-pills">
-                   
-                   <li><a href="allClubs.php"> All Organizations </a></li>
-                   <li><a href="viewAnnouncements.php"> Recent Announcements </a></li>
-                    <?php
-                        
-                        // links to log in and register page only if no user logged in currently
-                        if (empty($_SESSION["id"]))
-                        {
-                            print("<li><a href=\"login.php\"> Log In </a></li>");
-                            print("<li><a href=\"register.php\"> Register </a></li>");
-                        }
-                        
-                        //links that apply only when someone is currently logged in
-                        else
-                        {
-
-                            print("<li><a href=\"createClub.php\">Register New Club</a></li>");
-                            
-                            $rows = query("SELECT * FROM users WHERE id = ?", $_SESSION["id"]);
-                            if($rows[0]["admin"])
-                            {
-                                print("<li><a href=\"makeEvent.php\">Make an Event</a></li>");
-                                print("<li><a href=\"makeAnnouncement.php\">Make an Announcement</a></li>");
-                            }
-                            
-                            print("<li><a href=\"logout.php\"> Log Out </a></li>");
-                        }
-                    ?>
-                </ul>
-
-            </div>
-
-*/
-?>
 <!DOCTYPE html>
 
 
@@ -106,7 +16,7 @@
     }
 
     .proper-content {
-        padding-top: 40px; /* >= navbar height */
+    //    padding-top: 40px; /* >= navbar height */
     }
 
     .wrapper {
@@ -196,12 +106,12 @@ padding: 8px 35px 8px 14px;
 
 
 
-    .page-header
+    .home-header
     {
         text-align:center;
     }
 
-    .page-header h1
+    .home-header h1
     {
         font-size: 100px;
         font-weight: 500;
@@ -209,7 +119,7 @@ padding: 8px 35px 8px 14px;
         color: #333333;
     }
 
-    .page-header p
+    .home-header p
     {
         font-size: 20px;
         font-weight: 200;
@@ -233,26 +143,29 @@ padding: 8px 35px 8px 14px;
 
     </style>
 
+<link rel="SHORTCUT ICON" href="img/favicon.ico" type="image/x-icon">
         <link href="css/bootstrap.css" rel="stylesheet"/>
         <link href="css/bootstrap-responsive.css" rel="stylesheet"/>
         <link href="css/jquery-ui.css" rel="stylesheet"/>
         <link href="css/jquery-ui-timepicker-addon.css" rel="stylesheet"/>
         <link rel="stylesheet" href="css/styles.css" />
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
-        
+
         <?php if (isset($title)): ?>
             <title><?= htmlspecialchars($title) ?></title>
         <?php else: ?>
             <title></title>
         <?php endif ?>
 
-   
+
         <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
         <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>     
         <script type="text/javascript" src="js/jquery-1.8.2.js"></script>
         <script type="text/javascript" src="js/jquery-ui.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
         <script type="text/javascript" src="js/jquery-ui-sliderAccess.js"></script>
+<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+
         <script src="js/bootstrap.js"></script>
         <script src="js/scripts.js"></script>
         <script>
@@ -277,7 +190,8 @@ padding: 8px 35px 8px 14px;
                     <?php if (isset($_SESSION["id"])): 
                         $myclubs = query("SELECT * FROM subscriptions JOIN clubs WHERE userID = ? AND subscriptions.ClubID = clubs.id", $_SESSION["id"]);?>
 
-                    <ul class="nav" style:>
+
+                    <ul class="nav">
                         <li class="dropdown pull-left">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 Organizations
@@ -387,5 +301,11 @@ Organizations
                 <div class="wrapper">
                     <div class="proper-content">
      
+</br>
+</br>
 
+</br>
+</br>
+</br>
+</br>
 
