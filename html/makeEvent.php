@@ -38,6 +38,7 @@
         
         $clubs  = query("SELECT * FROM clubs WHERE id = ?", $_POST["club"]);
         $clubName = $clubs[0]["name"];
+        $theclub = $clubs[0];
         
         $userName = query("SELECT * FROM users WHERE id = ?", $_SESSION["id"])[0]["realname"];
         //add notification of new event
@@ -56,8 +57,65 @@
         foreach($members as $member)
         {
             if($member["level"] >= $_POST["privacy"])
+            {
                 query("INSERT INTO notifications (userID, time, text, seen, redirect) VALUES(?, NOW(), ?, 0, ?)", $member["userID"], 
-                    $clubName . ' has added the event ' . $_POST["name"] . '!',"allClubs.php?club=".$clubName);
+                    $clubName . ' has added the event: ' . $_POST["name"] . '!',"allClubs.php?club=".$clubName);
+                            require("PHPMailer/class.phpmailer.php");
+                if($member["subscription"] == 1 || $member["subscription"] == 3)
+                {    
+                    $mail = new PHPMailer();
+
+                    // use SMTP
+                    $mail->IsSMTP();
+                    $mail->Host = "smtp.fas.harvard.edu";
+
+                    // set From:
+                    $mail->SetFrom($theclub["email"], $theclub["name"]);
+
+                    // set To:
+                    $user = query("SELECT * FROM users WHERE id=?",$member["userID"])[0];
+                    $mail->AddAddress($user["email"]);
+
+                    // set Subject:
+                    $mail->Subject = "New Event";
+
+                    // set body
+                    $mail->Body = $clubName." has added a new event: ".$_POST["name"]."!";
+
+                    // send mail
+                    if ($mail->Send() == false)
+                    {
+                      die($mail->ErrInfo);
+                    }
+                }
+                if($member["subscription"] == 2 || $member["subscription"] == 3)
+                {  
+                    $mail = new PHPMailer();
+                    $mail->IsSMTP();                // Sets up a SMTP connection  
+                    $mail->SMTPDebug  = 2;          // This will print debugging info  
+                    $mail->SMTPAuth = true;         // Connection with the SMTP does require authorization  
+                    $mail->SMTPSecure = "tls";      // Connect using a TLS connection  
+                    $mail->Host = "smtp.gmail.com";  
+                    $mail->Port = 587;  
+                    $mail->Encoding = '7bit';       // SMS uses 7-bit encoding  
+                    // Authentication  
+                    $mail->Username   = "cs50organizations@gmail.com"; // Login  
+                    $mail->Password   = "crimsongroups"; // Password  
+                    // Compose  
+                    $mail->Subject = "New Event";
+                    $mail->Body = $clubName." added a new event: ".$_POST["name"]."!";
+                    // Send To  
+                    $user = query("SELECT * FROM users WHERE id=?",$member["userID"])[0];
+                    $mail->AddAddress($user["number"] ); // Where to send it  
+                    // send mail
+                    if ($mail->Send() == false)
+                    {
+                      die($mail->ErrInfo);
+                    }
+
+                }
+
+            } 
         }
         
         
