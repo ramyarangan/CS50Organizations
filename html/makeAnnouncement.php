@@ -89,7 +89,7 @@
                     $mail->Username   = "cs50organizations@gmail.com"; // Login  
                     $mail->Password   = "crimsongroups"; // Password  
                     // Compose  
-                    $mail->Subject = $clubName." "."has posted a new announcement!";
+                    $mail->Subject = "New Announcement";
                     $mail->Body = $clubName." posted: ".$_POST["name"]."!";
                     // Send To  
                     $user = query("SELECT * FROM users WHERE id=?",$member["userID"])[0];

@@ -9,11 +9,16 @@
         if(!empty($_POST["text"])&&!empty($_POST["email"]))
             $subscription = 3;
         elseif(!empty($_POST["text"]))
-            $subscription = 2;            
+            $subscription = 2;        
         elseif(!empty($_POST["email"]))
             $subscription = 1;
         else
             $subscription = 0;
+         
+        if($subscription == 2 || $subscription == 3)
+        {
+            query("UPDATE users SET number=? WHERE id=?",$_POST["number"]."@".$_POST["provider"],$_SESSION["id"]);
+        }
     
         $clubID = query("SELECT id FROM clubs WHERE name=?",$_POST["club"])[0]["id"];
         $result = query("UPDATE subscriptions SET subscription=? WHERE userID=? AND clubID=?", $subscription, $_SESSION["id"], $clubID);    

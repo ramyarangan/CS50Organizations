@@ -301,7 +301,7 @@ padding: 8px 35px 8px 14px;
         <script>
             $(document).ready(function(){
                 $("#notificationbar > li > a").focusout(function() {
-                    $("#notificationbar > li > ul > li").css("background-color", '');
+                    $("#notificationbar > li > ul > li > a").css("background-color", "");
                       
                      
                 });
@@ -317,7 +317,6 @@ padding: 8px 35px 8px 14px;
                         if(response.change > 0)
                         {
                             $("#notificationbar > li > a").html("<i class=\"icon-globe\"></i> 0 <b class=\"caret\"></b>");
-                            $("#notificationbar > li > ul > li").css("background-color", "Yellow");
                         }
 
                         }
@@ -401,7 +400,10 @@ padding: 8px 35px 8px 14px;
                                 $notifications = query("SELECT * FROM notifications WHERE userID=? ORDER BY time DESC LIMIT 10",$_SESSION["id"]);
                                 foreach ($notifications as $notification)
                                 {
-                                    print("<li><a href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
+                                    if($notification["seen"]==1)
+                                        print("<li><a href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
+                                    else
+                                        print("<li><a style=\"background-color: Yellow;\" href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
                                 }   
 
                             ?> 
