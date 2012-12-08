@@ -5,6 +5,44 @@
 
     <head>
 
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css" />
+    
+    <?php
+        $clubs = query("SELECT * FROM clubs");
+        $events = query("SELECT * FROM events");
+        $announcements = query("SELECT * FROM announcements");
+        $array = [];
+        foreach($clubs as $club)
+        {
+            array_push($array,$club["name"]);
+        }
+        foreach($events as $event)
+        {
+            array_push($array,$event["name"]);
+        }
+        foreach($announcements as $announcement)
+        {
+            array_push($array,$announcement["title"]);
+        }
+
+    ?>
+    
+    
+    <script type="text/javascript">
+    $(function() {
+             
+        var availableTags = <?php print json_encode($array); ?>;
+        
+        $( "#tags" ).autocomplete({
+            source: availableTags
+        });
+    });
+    </script>
+    
+    
     <style type="text/css">
 
     html, body, .container, .content {
@@ -175,6 +213,36 @@ padding: 8px 35px 8px 14px;
                 });
             });
         </script>
+        <script>
+            $(document).ready(function(){
+                $("#notificationbar > li > a").focusout(function() {
+                    $("#notificationbar > li > ul > li").css("background-color", '');
+                      
+                     
+                });
+                $("#notificationbar > li > a").click(function() {
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url: 'clearNotifications.php',
+                        data: {},
+                        dataType:'json',
+                        async: false,
+                        success: function(response){
+                        if(response.change > 0)
+                        {
+                            $("#notificationbar > li > a").html("<i class=\"icon-globe\"></i> 0 <b class=\"caret\"></b>");
+                            $("#notificationbar > li > ul > li").css("background-color", "Yellow");
+                        }
+
+                        }
+
+                     });
+                });
+
+            });
+        </script>
+
     </head>
 
     <body>
@@ -216,9 +284,10 @@ padding: 8px 35px 8px 14px;
                         </li>
                     </ul>
 
-                    <form class="navbar-search pull-left">
-                        <input type="text" class="search-query" placeholder="Search clubs and events">
+                    <form class="navbar-search pull-left" action="search.php" method="get">
+                        <input type="text" id="tags" name="search"/>
                     </form>
+
 
                     <ul class="nav pull-right">
                         <li class="dropdown">
@@ -227,18 +296,14 @@ padding: 8px 35px 8px 14px;
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="login.php"> Connect via Facebook </a></li>
-                                <li><a href="login.php"> Connect via Google </a></li>
-                                <li class="divider"></li>
-                                <li><a href="logout.php"> Account Settings </a></li>
+                                <li><a href="accountSettings.php"> Account Settings </a></li>
                                 <li><a href="logout.php"> Log Out </a></li>
                             </ul>
                         </li>
                         </ul>
 
-                    <ul class="nav pull-right">
-                        <li class="dropdown">
-                
+                     <ul class="nav pull-right" id="notificationbar">
+                        <li class="dropdown" >
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="icon-globe"></i>
                                 <?php
@@ -252,14 +317,13 @@ padding: 8px 35px 8px 14px;
                                 $notifications = query("SELECT * FROM notifications WHERE userID=? ORDER BY time DESC LIMIT 10",$_SESSION["id"]);
                                 foreach ($notifications as $notification)
                                 {
-                                    if($notification["seen"]==0)
-                                        print("<li><a style=\"background-color: Yellow\" href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
-                                    else
-                                        print("<li><a href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
+                                    print("<li><a href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
                                 }   
 
                             ?> 
                             </ul>
+                            
+                            
                         </li>
                         </ul>
 
@@ -293,6 +357,8 @@ Organizations
                 </div>                
             </div>
         </div>	
+        
+        
 </body>
         <div class="container">
 

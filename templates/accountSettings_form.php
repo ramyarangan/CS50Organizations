@@ -7,7 +7,7 @@
 <div class="row-fluid">
     <div class="club-header">
         <h1>
-            Register.
+            Change Account Settings.
         </h1>
         <div><img src="img/dots.jpg" width=80%></div>
     </div>
@@ -15,14 +15,17 @@
 
 <div class = "row-fluid" style="padding:30px">
 
-<form id="regForm" action="register.php" method="post" class="form-horizontal offset2" style="text-align:left">
+<form id="accSettingsForm" action="accountSettings.php" method="post" class="form-horizontal offset2" style="text-align:left">
 
     <div class="control-group">
         <label class="control-label" for="inputFirst"><strong>Name</strong></label>
         <div class="controls row-fluid" id="inputName">
-        <div class="span2 row"><input class="span12" id="inputFirst" name="first" placeholder="First" type="text"/></div>
-
-<div class="span2 row"><input class="span12" id="inputLast" name="last" placeholder="Last" type="text"/> </div>
+        <?php
+            print("<div class=\"span2 row\"><input class=\"span12\" id=\"inputFirst\" name=\"first\" value=\"".$first."\" type=\"text\"/></div>");
+        ?>
+        <?php
+            print("<div class=\"span2 row\"><input class=\"span12\" id=\"inputLast\" name=\"last\" value=\"".$last."\" type=\"text\"/></div>");
+        ?>
         </div>
     </div>
 
@@ -32,12 +35,6 @@
     </div>
 </div>
 
-    <div class="control-group">
-        <label class="control-label" for="inputUsername"><strong>Username</strong></label>
-        <div class="controls row-fluid">
-            <div class="span4 row"><input class="span12" id="inputUsername" name="username" type="text"/></div>
-        </div>
-    </div>
 
 <div class="control-group" style="margin-top:-18px; margin-bottom:-15px;"> 
 <div class="controls row-fluid">
@@ -46,7 +43,20 @@
 </div>
 
     <div class="control-group">
-        <label class="control-label" for="inputPW"><strong>Password</strong></label>
+        <label class="control-label" for="inputoldPW"><strong>Old Password</strong></label>
+        <div class="controls row-fluid">
+            <div class="span4 row"><input class="span12" id="inputoldPW" name="oldPassword" type="password"/></div>
+        </div>
+    </div>
+<div class="control-group" style="margin-top:-18px; margin-bottom:-15px;"> 
+<div class="controls row-fluid">
+<div class="span10 row error" id="oldpwText"></div>
+</div>
+</div>
+
+
+    <div class="control-group">
+        <label class="control-label" for="inputPW"><strong>New Password</strong></label>
         <div class="controls row-fluid">
             <div class="span4 row"><input class="span12" id="inputPW" name="password" type="password"/></div>
         </div>
@@ -74,7 +84,10 @@
     <div class="control-group">
         <label class="control-label" for="inputEmail"><strong>Email</strong></label>
         <div class="controls row-fluid">
-            <div class="span4 row"><input class="span12" id="inputEmail" name="email" placeholder="e.g. user@college.harvard.edu" type="email"/></div>
+        <?php
+            print("<div class=\"span4 row\"><input class=\"span12\" id=\"inputEmail\" name=\"email\" value=\"".$email."\" type=\"email\"/></div>");
+        ?>
+
         </div>
     </div>
 
@@ -86,15 +99,12 @@
 
     <div class="control-group">
         <div class="controls">
-            <button id="submit" type="submit" class="btn">Register</button>
+            <button id="submit" type="submit" class="btn">Submit</button>
         </div>
     </div>
 </form>
 </div>
 
-<div>
-    Already have an account? Then simply <a href="login.php">log in</a>.</br>
-</div>
 
 <script>
 
@@ -105,7 +115,7 @@ $(document).ready(function(){
 
                         var first = $("#inputFirst").val();
                         var last = $("#inputLast").val();
-                        var username = $("#inputUsername").val();
+                        var oldpassword = $("#inputoldPW").val();
                         var password = $("#inputPW").val();
                         var conf = $("#inputConf").val();
                         var email = $("#inputEmail").val();
@@ -113,7 +123,8 @@ $(document).ready(function(){
                         var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
                         
                         //error checks!
-                        checkFirstName = false;
+                        checkFirstName = false; 
+
                         $("#inputFirst").change(function(){
                             checkFirstName = true;
                         })
@@ -174,15 +185,24 @@ $(document).ready(function(){
                             }
                         });
                         
-                        $("#inputPW").change(function(){
-                            password = $("#inputPW").val();
-                            if (password == "") 
+                        $("#inputoldPW").change(function(){
+                            oldpassword = $("#inputoldPW").val();
+                            if (oldpassword == "") 
                             {
-                                $("#pwText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please choose a password.");
+                                $("#oldpwText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter your old password.");
 
                             }
 
-                            else if (password.length < 8)
+                            else 
+                            {
+                                $("#pwText").html("");
+
+                            }
+                        });
+
+                        $("#inputPW").change(function(){
+                            password = $("#inputPW").val();
+                            if (password.length < 8 && password.length > 0)
                             {
                                 $("#pwText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Your password must be at least 8 characters long.");
 
@@ -222,14 +242,25 @@ $(document).ready(function(){
                             $("#emailText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter a valid email address.");
                             curEmailError = true;
                         }
-                        
-                        userEmailExists(email);
                         if(curEmailError == false)
                         {
                             $("#emailText").html("");
                         }
                         });
 
+                        $("#inputoldPW").change(function(){ 
+                            oldpassword = $("#inputoldPW").val();    
+                            curoldPWError = false;            
+                        if (oldpassword == "") 
+                        {
+                            $("#oldpwText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter your old password.");
+                            curoldPWError = true;
+                        }
+                        if(curoldPWError == false)
+                        {
+                            $("#oldpwText").html("");
+                        }
+                        });
 
                   
                   });
@@ -239,14 +270,17 @@ $(document).ready(function(){
                         var first = $("#inputFirst").val();
                         var last = $("#inputLast").val();
                         var username = $("#inputUsername").val();
+                        var oldpassword = $("#inputoldPW").val();
                         var password = $("#inputPW").val();
                         var conf = $("#inputConf").val();
                         var email = $("#inputEmail").val();
                     
                         var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-                        
+                    
                         //error checks!
+                        checkPassword(oldpassword);
 
+                        userEmailExists(email);
                         if (first == "" || last == "") 
                         {
                             $("#nameText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter valid first and last names.");
@@ -260,16 +294,8 @@ $(document).ready(function(){
                                 hasError = true;
                             }
                             userExists(username);
-                            userEmailExists(email);
                         
-                        if (password == "") 
-                        {
-                            $("#pwText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please choose a password.");
-                            hasError = true;
-                        }
-                        
-
-                        else if (password.length < 8)
+                        if (password.length < 8 && password.length > 0)
                         {
                             $("#pwText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Your password must be at least 8 characters long.");
                             hasError = true;
@@ -287,15 +313,11 @@ $(document).ready(function(){
                             hasError = true;
                         
                         }
-                        else if(!emailReg.test(email))
-                        {
-                            $("#emailText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter a valid email address.");
-                            hasError = true;
-                        }
+
                         if (hasError == false) 
                         {
                             $(this).hide();
-                            $("#regForm").submit();
+                            $("#accSettingsForm").submit();
                          /*                   
                             $.ajax({
                                type: "POST",
@@ -329,16 +351,34 @@ function userExists(username)
         }
     });
 }
+function checkPassword(oldpassword)
+{
+    $.ajax({
+        type: 'POST',
+        url: 'checkPassword.php',
+        data: {oldpassword: oldpassword},
+        dataType:'json',
+        async: false,
+        success: function(response){
+           if (response.success == 0)
+           {
+                $("#oldpwText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Sorry! That password is incorrect.");
+                curoldPWError = true;
+                hasError = true;
+           }
+       }
+    });
+}
+
 function userEmailExists(email)
 {
     $.ajax({
         type: 'POST',
-        url: 'checkUsername.php',
-        data: { username: "", email: email},
+        url: 'checkEmail.php',
+        data: {email: email},
         dataType:'json',
         async: false,
         success: function(response){
-
            if (response.email > 0)
            {
                 $("#emailText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> There is already an account registered under that email.");

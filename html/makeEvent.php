@@ -39,9 +39,10 @@
         $clubs  = query("SELECT * FROM clubs WHERE id = ?", $_POST["club"]);
         $clubName = $clubs[0]["name"];
         
+        $userName = query("SELECT * FROM users WHERE id = ?", $_SESSION["id"])[0]["realname"];
         //add notification of new event
         $result = query("INSERT INTO announcements (id, userID, text, title, privacy) VALUES(?, ?, ?, ?, ?)",
-                    $_POST["club"], $_SESSION["id"], $clubName . ' has added the event ' . $_POST["name"] . '. Go check it out!', 
+                    $_POST["club"], 0, $userName . ' has added the event ' . $_POST["name"] . '. Go check it out!', 
                     $_POST["name"], $_POST["privacy"]);
                    
         
@@ -60,8 +61,9 @@
         }
         
         
-        $maxPrivacy = query("SELECT MAX(level) FROM privacy")[0]["MAX(level)"];
+        //$maxPrivacy = query("SELECT MAX(level) FROM privacy")[0]["MAX(level)"];
         
+        $maxPrivacy = $_POST["privacy"];
         for($privacy = $_POST["privacy"]; $privacy <= $maxPrivacy; $privacy++)
         {
             $gc = new Zend_Gdata_Calendar($_SESSION["client"]);

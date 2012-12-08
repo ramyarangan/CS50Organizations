@@ -4,6 +4,7 @@
     require("../includes/config.php");
 
     $url = "";
+    $public = query("SELECT level FROM privacy WHERE description = \"public\"")[0]["level"];
     
     if(isset($_POST["eventsOption"]))
     {    
@@ -12,7 +13,7 @@
     if($_POST["eventsOption"]==="public")
     {
         $allClubIDs = query("SELECT id FROM clubs");
-        $public = query("SELECT level FROM privacy WHERE description = \"public\"")[0]["level"];
+
 
         foreach($allClubIDs as $clubID)
         {
@@ -78,9 +79,14 @@
         $clubName = $_POST["clubName"];
         
         $clubId = query("SELECT id FROM clubs WHERE name = ?", $clubName)[0]["id"];
-
+        
         $privacy = query("SELECT level FROM subscriptions WHERE userID = ? AND clubID = ?", 
-                     $_SESSION["id"], $clubId)[0]["level"];
+                     $_SESSION["id"], $clubId);
+        if($privacy== false)
+            $privacy = $public;
+        else 
+            $privacy = $privacy[0]["level"];
+        
         //print($clubId . "." . $privacy);
         $url = query("SELECT link FROM calendarLinks WHERE id = ?", $clubId . "." . $privacy)[0]["link"];
         // this is the part after src: in the gcal url

@@ -4,5 +4,5 @@
     require("../includes/config.php"); 
 
 
-        render("testsearchpage2.php", array("title" => "derp."));
+        render("testsearchpage4.php", array("title" => "derp."));
 ?>

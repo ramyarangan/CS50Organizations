@@ -126,9 +126,15 @@
             print("</div>"); 
             
             print("<div class = \"announcement-info\">");
-            $poster = query("SELECT * FROM users WHERE id=?", $announcement["userID"]);
-            $poster = $poster[0];
-            print("posted ".$announcement["time"]." by ".$poster["realname"]);
+            $poster = "";
+            if($announcement["userID"]==0)
+                $poster = "CS50 Organizations";
+            else
+            {
+                $poster = query("SELECT * FROM users WHERE id=?", $announcement["userID"]);
+                $poster = $poster[0]["realname"];
+            }
+            print("posted ".$announcement["time"]." by ".$poster);
             print("</div>");
             print("</div>");
 

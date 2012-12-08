@@ -84,7 +84,7 @@
             else
             {
                 if(txt=="public") 
-                    $("#displayOption").text("Displaying pubic events...");
+                    $("#displayOption").text("Displaying public events...");
                 if(txt=="myEvents")
                     $("#displayOption").text("Displaying all your club events...");
                 $("#eventsArea").load("calendar.php", {eventsOption:txt});
