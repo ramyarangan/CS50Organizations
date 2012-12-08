@@ -71,6 +71,7 @@
     <img src="img/dots.jpg" width=80%>
 </div>
 
+<div id="divPrint"> </div> 
 <div id="eventsAnnouncements" class="row-fluid" style="height:500px; margin-bottom:40px">
 
     <div id="toggle" class ="span3" style="text-align:right; padding-top:20px; padding-left:30px">
@@ -220,20 +221,21 @@ function loadCal(){
     }
     else
     {
+
         $('#eventsArea').hide();
         
         var privacies = $("#privacyFilter").val();
-        
+
         $.ajax({
                url: "calendar2.php",
                type: "POST",
                dataType: "html",
                data: {privacies: privacies, clubs: myClubs},
                success: function(response) {
+
                // $("#filter").after(response);
                // $("#filter").after("</br>theoretical url: ");
                $('#eventsArea').show();
-               
                // print iframe
                $("#eventsArea").html("<iframe src=\""+response+"\"+id=\"calendar\" showTitle=0 style=\"border:0\" width=\"600\" height=\"400\" frameborder=\"0\" scrolling=\"no\">");   
                }
