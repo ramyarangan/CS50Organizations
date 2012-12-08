@@ -102,7 +102,7 @@ $(document).ready(function(){
 
      //$("#submit").click(function(){
            $(".error").html("");
-        hasError = false;
+
                         var first = $("#inputFirst").val();
                         var last = $("#inputLast").val();
                         var username = $("#inputUsername").val();
@@ -167,7 +167,7 @@ $(document).ready(function(){
                                 $("#usernameText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please choose a username.");
                                 curNameError = true;
                             }
-                            userEmailExists(username, email);
+                            userExists(username);
                             if(!curNameError)
                             {
                                 $("#usernameText").html("");
@@ -223,7 +223,7 @@ $(document).ready(function(){
                             curEmailError = true;
                         }
                         
-                        userEmailExists(username, email);
+                        userEmailExists(email);
                         if(curEmailError == false)
                         {
                             $("#emailText").html("");
@@ -233,7 +233,7 @@ $(document).ready(function(){
 
                   
                   });
-                  
+
      $("#submit").click(function(){
         hasError = false;
                         var first = $("#inputFirst").val();
@@ -259,8 +259,8 @@ $(document).ready(function(){
                                 $("#usernameText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please choose a username.");
                                 hasError = true;
                             }
-                            userEmailExists(username, email);
-                        
+                            userExists(username);
+                            userEmailExists(email);
                         
                         if (password == "") 
                         {
@@ -310,13 +310,14 @@ $(document).ready(function(){
                         return false;
                         //});
     });
-function userEmailExists(username, email)
+function userExists(username)
 {
     $.ajax({
         type: 'POST',
         url: 'checkUsername.php',
-        data: { username: username, email: email},
+        data: { username: username, email: ""},
         dataType:'json',
+        async: false,
         success: function(response){
 
            if (response.name > 0)
@@ -325,9 +326,22 @@ function userEmailExists(username, email)
                 curNameError = true;
                 hasError = true;
            }
+        }
+    });
+}
+function userEmailExists(email)
+{
+    $.ajax({
+        type: 'POST',
+        url: 'checkUsername.php',
+        data: { username: "", email: email},
+        dataType:'json',
+        async: false,
+        success: function(response){
+
            if (response.email > 0)
            {
-           $("#emailText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> There is already an account registered under that email.");
+                $("#emailText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> There is already an account registered under that email.");
                 curEmailError = true;
                 hasError = true;
            }
