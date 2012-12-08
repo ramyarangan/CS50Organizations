@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<form class="form-horizontal offset1" style="text-align:left" action="createClub.php" method="post">
+<form id="clubForm" class="form-horizontal offset1" style="text-align:left" action="createClub.php" method="post">
 
     <div class="control-group">
         <label class="control-label" for="inputName">Organization Name</label>
@@ -22,6 +22,12 @@
         </div>
     </div>
 
+        <div class="control-group" style="margin-top:-18px; margin-bottom:-15px;"> 
+        <div class="controls row-fluid">
+        <div class="span10 row error" id="nameText"></div>
+        </div>
+        </div>
+
     <div class="control-group">
         <label class="control-label" for="inputAbbr">Abbreviation</label>
         <div class="controls">
@@ -29,6 +35,12 @@
         </div>
     </div>
 
+        <div class="control-group" style="margin-top:-18px; margin-bottom:-15px;"> 
+        <div class="controls row-fluid">
+        <div class="span10 row error" id="abbrText"></div>
+        </div>
+        </div>
+        
     <div class="control-group">
         <label class="control-label" for="inputEmail">Official Email</label>
         <div class="controls">
@@ -36,6 +48,12 @@
         </div>
     </div>
 
+        <div class="control-group" style="margin-top:-18px; margin-bottom:-15px;"> 
+        <div class="controls row-fluid">
+        <div class="span10 row error" id="emailText"></div>
+        </div>
+        </div>
+        
     <div class="control-group">
         <label class="control-label" for="inputMembership">Membership</label>
         <div class="controls">
@@ -50,6 +68,12 @@
         </div>
     </div>
 
+        <div class="control-group" style="margin-top:-18px; margin-bottom:-15px;"> 
+        <div class="controls row-fluid">
+        <div class="span10 row error" id="privacyText"></div>
+        </div>
+        </div>
+        
     <div class="control-group">
         <label class="control-label" for="inputMembership">Attributes</label>
         <div class="controls">
@@ -67,6 +91,12 @@
         </div>
     </div>
 
+        <div class="control-group" style="margin-top:-18px; margin-bottom:-15px;"> 
+        <div class="controls row-fluid">
+        <div class="span10 row error" id="attrText"></div>
+        </div>
+        </div>
+        
     <div class="control-group">
         <label class="control-label" for="inputInfo">Description</label>
         <div class="controls">
@@ -74,11 +104,248 @@
         </div>
     </div>
 
+        <div class="control-group" style="margin-top:-18px; margin-bottom:-15px;"> 
+        <div class="controls row-fluid">
+        <div class="span10 row error" id="infoText"></div>
+        </div>
+        </div>
+        
     <div class="control-group">
         <div class="controls">
-            <button type="submit" class="btn">Create organization!</button>
+            <button type="submit" id="submit" class="btn">Create organization!</button>
         </div>
     </div>
 
 </form>
 
+<script>
+
+$(document).ready(function(){
+
+     //$("#submit").click(function(){
+           $(".error").html("");
+
+
+                        var name = $("#inputName").val();
+                        var abbr = $("#inputAbbr").val();
+                        var info = $("#inputInfo").val();
+                        
+                        var email = $("#inputEmail").val();
+                    
+                        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                        
+                        //error checks!
+
+                        $("#inputName").change(function(){
+                            curNameError = false;
+                            name = $("#inputName").val();
+                            if (name == "" ) 
+                            {
+                                $("#nameText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter a club name.");
+                                curNameError = true;
+                            }
+                            clubExists(name);
+                            if(!curNameError)
+                            {
+                                $("#nameText").html("");
+
+                            }
+                            
+                          });
+
+                        $("#inputAbbr").change(function(){
+                            curAbbrError = false;
+                            abbr = $("#inputAbbr").val();
+                            /*if (abbr == "" ) 
+                            {
+                                $("#abbrText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter a club abbreviation.");
+                                curAbbrError = true;
+                            }*/
+                            abbrExists(abbr);
+                            if(!curAbbrError)
+                            {
+                                $("#abbrText").html("");
+
+                            }
+                            
+                          });                      
+                        
+                        $("#inputInfo").change(function(){
+                            info = $("#inputInfo").val();
+                            if (info == "") 
+                            {
+                                $("#infoText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter a description.");
+
+                            }
+
+                            
+                            else 
+                            {
+                                $("#infoText").html("");
+
+                            }
+                        });
+                        
+                        
+                        $("#inputEmail").change(function(){ 
+                            email = $("#inputEmail").val();    
+                            curEmailError = false;            
+                            if (email == "") 
+                            {
+                                $("#emailText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter your email address.");
+                                curEmailError = true;
+                            }
+                            else if(!emailReg.test(email))
+                            {
+                                $("#emailText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter a valid email address.");
+                                curEmailError = true;
+                            }
+                            
+                            emailExists(email);
+                            if(curEmailError == false)
+                            {
+                                $("#emailText").html("");
+                            }
+                        });
+
+
+                 
+
+     $("#submit").click(function(){
+        hasError = false;
+
+                        var name = $("#inputName").val();
+                        var abbr = $("#inputAbbr").val();
+                        var info = $("#inputInfo").val();
+                        
+                        var email = $("#inputEmail").val();
+                    
+                        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                        
+                        //error checks!
+
+
+                            if (name == "" ) 
+                            {
+                                $("#nameText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter a club name.");
+                                hasError = true;
+                            }
+                            clubExists(name);
+   
+
+                        
+                            /*if (abbr == "" ) 
+                            {
+                                $("#abbrText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter a club abbreviation.");
+                                hasError = true;
+                            }*/
+                            abbrExists(abbr);
+
+
+                            if (info == "") 
+                            {
+                                $("#infoText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter a description.");
+                                hasError = true;
+                            }
+
+
+                        
+                        
+                                   
+                            if (email == "") 
+                            {
+                                $("#emailText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter your email address.");
+                                hasError = true;
+                            }
+                            else if(!emailReg.test(email))
+                            {
+                                $("#emailText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter a valid email address.");
+                                hasError = true;
+                            }
+                            
+                            emailExists(email);
+                            
+
+
+                        if (hasError == false) 
+                        {
+                            $(this).hide();
+                            $("#clubForm").submit();
+                         /*                   
+                            $.ajax({
+                               type: "POST",
+                               url: "register.php",
+                               data: $("#regForm").serialize(), // serializes the form's elements.
+                               success: function(data)
+                               {
+                                    $(data); // show response from the php script.
+                               }
+                            });   */
+                        }
+                        return false;
+                        //});
+    });
+});
+function clubExists(club)
+{
+
+    $.ajax({
+        type: 'POST',
+        url: 'checkClub.php',
+        data: { club: club, abbreviation: "", email: ""},
+        dataType:'json',
+        async: false,
+        success: function(response){
+
+           if (response.name > 0)
+           {
+                if(!curNameError)
+                 $("#nameText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Sorry! That club already has an administrator.");
+                curNameError = true;
+                hasError = true;
+           }
+        }
+    });
+}
+function abbrExists(abbreviation)
+{
+    $.ajax({
+        type: 'POST',
+        url: 'checkClub.php',
+        data: { club: "", abbreviation: abbreviation, email: ""},
+        dataType:'json',
+        async: false,
+        success: function(response){
+
+           if (response.abbr > 0)
+           {
+                if(!curAbbrError)
+                $("#abbrText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> There is already a club registered under that abbreviation.");
+                curAbbrError = true;
+                hasError = true;
+           }
+        }
+    });
+}
+function emailExists(email)
+{
+    $.ajax({
+        type: 'POST',
+        url: 'checkClub.php',
+        data: { club: "", abbreviation: "", email: email},
+        dataType:'json',
+        async: false,
+        success: function(response){
+
+           if (response.email > 0)
+           {
+                if(!curEmailError)
+                $("#emailText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> There is already a club registered under that email.");
+                curEmailError = true;
+                hasError = true;
+           }
+        }
+    });
+}
+
+</script>

@@ -330,8 +330,8 @@ padding: 8px 35px 8px 14px;
 
                                 <li class="nav-header">Manage</li>
                                 <li><a href="makeAnnouncement.php"> Make Announcement </a></li>
-                                <li><a href="createClub.php"> Create Organization </a></li>
                                 <li><a href="makeEvent.php"> Create Event </a></li>
+                                <li><a href="createClub.php"> Create Organization </a></li>
                                 <li class="divider"></li>
                                 <li><a href="allClubs.php"> All Organizations </a></li>
                             </ul>
