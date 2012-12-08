@@ -9,6 +9,8 @@
     if (!empty($_GET["club"]))
     {
         $club = query("SELECT * FROM clubs WHERE name=?", $_GET["club"]);
+        if(empty($club))
+            redirect("allClubs.php");
         $club = $club[0];
         $privacy = 1;
         
