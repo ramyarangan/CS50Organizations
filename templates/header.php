@@ -17,15 +17,15 @@
         $array = [];
         foreach($clubs as $club)
         {
-            array_push($array,$club["name"]);
+            array_push($array,$club["name"]." (club)");
         }
         foreach($events as $event)
         {
-            array_push($array,$event["name"]);
+            array_push($array,$event["name"]." (event)");
         }
         foreach($announcements as $announcement)
         {
-            array_push($array,$announcement["title"]);
+            array_push($array,$announcement["title"]." (announcement)");
         }
 
     ?>
@@ -284,7 +284,7 @@ padding: 8px 35px 8px 14px;
                     </ul>
 
                     <form class="navbar-search pull-left" action="search.php" method="get">
-                        <input type="text" id="tags" name="search"/>
+                        <input type="text" id="tags" name="search" placeholder="Search"/>
                     </form>
 
 
