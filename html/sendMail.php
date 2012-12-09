@@ -38,8 +38,17 @@
     }
     else
     {
-        $user = query("SELECT email, realname FROM users WHERE id=?", $_SESSION["id"]);
-        
-        render_div("email_form.php", array("club" => $_GET["club"], "name" =>$user[0]["realname"], "email" => $user[0]["email"]));
+        if(isset($_SESSION["id"]))
+        {
+            $user = query("SELECT email, realname FROM users WHERE id=?", $_SESSION["id"]);
+            $name = $user[0]["realname"];
+            $email = $user[0]["email"];
+        }
+        else
+        {
+            $name = "";
+            $email = "";
+        }
+        render_div("email_form.php", array("club" => $_GET["club"], "name" =>$name, "email" => $email));
     }
 ?>
