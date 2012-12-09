@@ -3,22 +3,20 @@
 
 <div class="row-fluid">
 
-    <div class="club-header">
+<div class="club-header">
+    <?php if (strtoupper($clubInfo["name"]) != $clubInfo["abbreviation"]):?>
+        <h1> <?=$clubInfo["abbreviation"]?> </h1>
+        <h2> <?=$clubInfo["name"]?> </h2>
+    <?php else: ?>
+        <h1> <?=$clubInfo["name"]?> </h1>  
+    <?php endif ?>
 
-        <h1>
-        <?php 
-            if($clubInfo["abbreviation"]!="")
-                print($clubInfo["abbreviation"]." <small>".$clubInfo["name"]."</small>");
-            else
-                print($clubInfo["name"]);
-            ?>
-        </h1>
+</div>
 
-        <div><img src="img/dots.jpg" width=80%></div>
-        
 
-        <div class="btn-toolbar">
-
+   <div class="btn-toolbar">
+    <form action="signUp.php" method="link">
+            <div><img src="img/dots.jpg" width=80%></div>
             <button id="infoBtn" rel="tooltip" title="Club Info" type ="button" class="btn" data-toggle="collapse" data-target="#info">
                 <i class = "icon-info-sign"></i>
             </button>
@@ -36,17 +34,13 @@
                 </a>
     
                 <?php if($level == 1):?>
-
-                <form action="signUp.php" method="link">
                     <input type ="hidden" name="club" <?="value=\"".$clubInfo["name"]."\""?> >
-                    <button type ="submit" class ="btn btn-primary">Join</button>
-                </form>
-
+                    <button style="margin-left:40px" type ="submit" class ="btn btn-primary">Join</button>
                 <?php elseif($level == 2):?>
                     <?php $alert = "This is a closed club. Your membership request is pending review by club administrators."?>
                 <?php elseif($level == 5):?>
 
-                    <div class="btn-group">
+                    <div class="btn-group"  style="margin-left:40px">
                     <a href="#announcementModal" role="button" class="btn" data-toggle="modal" id="editMembersBtn" rel="tooltip" title="Make Announcement">
                         <i class="icon-bullhorn"></i>
                     </a>
@@ -61,19 +55,19 @@
 
                                   
                     </div>
-
                 <?php endif ?>
-            <?php else: ?>
-                <?php $alert ="Log in to join and subscribe to this organization."?>
             <?php endif ?>
-        </div>
+        <div><img src="img/dots.jpg" width=80%></div>
+        </form>
+
+    </div>
         
 
         <div id="info" class="collapse out"> 
             <?=$clubInfo["information"]?> 
         </div>
 
-    </div>
+  
 </div>
 
 
@@ -109,48 +103,47 @@
 
 
 <?php if(!empty($alert)): ?>
-    <div class = "row-fluid">
-        <div class="alert span6 offset3">
+<div class="row">
+        <div class="alert alert-info span6 offset3">
             <button type="button" class="close" data-dismiss="alert">×</button>
             <?=$alert?>
         </div>
-    </div>
+</div>
 <?php endif?>
 
-<div><img src="img/dots.jpg" width=80%></div>
 
-<div class = "row-fluid" style="padding-top:30px">
+<div class = "row" style="padding-top:30px">
 
 <div class = "span4">
-    <h3>announcements</h3>
+    <div class="section-title">announcements</div>
+
 <div style="height:400px; overflow:auto; padding-right:10px">
 <?php   
-    
-    if ($announcements == NULL)
-    print("There are no announcements.");
+    if (count($alerts)==0)
+        print("There are no announcements.");
     
     else{
-        foreach ($announcements as $announcement)
+        foreach ($alerts as $alert)
         {                    
             print("<div class = \"announcement\">");
             print("<div class = \"announcement-subject\">");
-            print($announcement["title"]);
+            print($alert["title"]);
             print("</div>");  
             
             print("<div class = \"announcement-content\">");
-            print($announcement["text"]);
+            print($alert["text"]);
             print("</div>"); 
             
             print("<div class = \"announcement-info\">");
             $poster = "";
-            if($announcement["userID"]==0)
+            if($alert["userID"]==0)
                 $poster = "CS50 Organizations";
             else
             {
-                $poster = query("SELECT * FROM users WHERE id=?", $announcement["userID"]);
+                $poster = query("SELECT * FROM users WHERE id=?", $alert["userID"]);
                 $poster = $poster[0]["realname"];
             }
-            print("posted ".$announcement["time"]." by ".$poster);
+            print("posted ".$alert["time"]." by ".$poster);
             print("</div>");
             print("</div>");
 
@@ -161,20 +154,15 @@
 </div>
 
 <div class = "span8" style = "margin-left:20px; height:400px">
-
-    <h3>calendar of events</h3>
+    <div class="section-title">calendar of events</div>
     <div id="clubEventsCal">
-    <iframe src="https://www.google.com/calendar/embed?src=2ah0qjho0ctekccbmtmpatunco%40group.calendar.google.com&ctz=America/New_York" style="border: 0" width="500" height="400" frameborder="2" scrolling="no">
+        <iframe src= <?= "\"".$calUrl."\""?> style="border: 0" width="550" height="400" frameborder="2" scrolling="no">
     </iframe>
     </div>
 </div>
 
 
 </div>
-
-<script>
-    $("#clubEventsCal").load("calendar.php", {clubName:"<?php echo $clubInfo['name']?>"});
-</script>
 
 <script>
     $(document).ready(function(){
@@ -184,5 +172,5 @@
         $('#announceBtn').tooltip('trigger':'hover');
         $('#editMembersBtn').tooltip('trigger':'hover');
         $('#editSettingsBtn').tooltip('trigger':'hover');
-    }
+                      
 </script>

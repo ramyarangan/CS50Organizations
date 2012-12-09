@@ -13,7 +13,7 @@
     else
     {
         $alert = NULL;
-        if($_GET["success"]==1) $alert = "You should soon receive an email with your recovery code."; 
-        render("recover_post_form.php", array("title"=>"Recover Password", "alert" => $alert));
+        if($_GET["success"]==1) $alert = "Check your email for your recovery code."; 
+        render("recover_post_form.php", array("title"=>"CS50 Organizations: Reset Password", "alert" => $alert));
     }
 ?>

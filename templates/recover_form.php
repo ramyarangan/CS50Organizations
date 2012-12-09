@@ -5,10 +5,8 @@
 ?>
 
 <div class="row-fluid">
-    <div class="club-header">
-        <h1>
-            Recover Password
-        </h1>
+    <div class="reg-header">
+        <h1>Recover account.</h1>
         <div><img src="img/dots.jpg" width=80%></div>
     </div>
 </div>
@@ -33,17 +31,15 @@
 
     <div class="control-group">
         <div class="controls">
-            <button id="submit" type="submit" class="btn">Recover password.</button>
+            <button id="submit" type="submit" class="btn">Recover.</button>
         </div>
     </div>
 </form>
 </div>
 
 <div>
-    An email will be sent to you with instructions shortly.
-</div>
-<div>
-    Already have an account? Then simply <a href="login.php">log in</a>.</br>
+    Enter your email address above to recover your account.</br>
+    Remember your information? Then simply <a href="login.php">log in</a>.</br>
 </div>
 
 <script>

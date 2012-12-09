@@ -3,13 +3,12 @@
 <?php if(empty($clubName)):?>
 
 <div class="row-fluid">
-    <div class="club-header">
-        <h1>
-            Make an announcement.
-        </h1>
+    <div class="reg-header">
+        <h1>Make an announcement.</h1>
         <div><img src="img/dots.jpg" width=80%></div>
     </div>
 </div>
+
 
 <form id="announceForm" class="form-horizontal offset2" style="text-align:left" action="makeAnnouncement.php" method="post">
     <input type ="hidden" name="all" value="1">
