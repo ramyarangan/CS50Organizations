@@ -28,7 +28,6 @@
           $club = query("SELECT * FROM clubs WHERE name=?",$_POST["club"]);
           $club = $club[0];
           $mail->AddAddress($club["email"]);
-          $mail->AddAddress("lcheng@college.harvard.edu");
 
 
           // set Subject:

@@ -1,5 +1,10 @@
 <?php
 
+/**
+  Displays club pages using the club name passed through GET. 
+  If no club name is passed, displays all clubs, grouped by 
+  type.
+**/
     // configuration
     require("../includes/config.php"); 
 
@@ -23,7 +28,7 @@
             if(!empty($subscription))
             {
                 $privacy = $subscription[0]["level"];
-                if ($privacy == 1)
+                if ($privacy == 2)
                     $alert = "This is a closed club. Your membership is pending admin approval.";
             }
             
@@ -46,11 +51,39 @@
                 }
             }
         }
-        $announcements = query("SELECT * FROM announcements WHERE id=? AND privacy <= ? ORDER BY time DESC", $club["id"], $privacy);
+        else
+            $alert = "<a href=\"login.php\">Sign in</a> or <a href=\"register.php\">register</a> to view additional events and announcements and to subscribe to this club's feed.";
+        
+        //get url
+        
+        $url = "vkd9mihk989ohsv6lhr1i89m0o@group.calendar.google.com&amp;src=";
+        for($i = 1; $i <= $privacy; $i++)
+        {
+            $temp = query("SELECT link FROM calendarLinks WHERE id = ?", 
+                          $club["id"] . "." . $i);
+            $temp = $temp[0]["link"]; 
+            $temp = substr($temp,38, strlen($temp) -51);
+            $url = $url . $temp;
+            $url = $url . "&amp;src=";
+        }
+        //remove extra from last loop
+        $url = substr($url, 0, strlen($url)-9);
+        $url = "https://www.google.com/calendar/embed?src=".$url;
+
+        $announcements = query("SELECT * FROM announcements WHERE id = ? AND privacy <= ? ORDER BY time DESC", $club["id"], $privacy);
+        
+        /*if (count($announcements)== 0)
+        {
+            apologize("wtf".$club["id"]);
+        }*/
+        
         if(isset($_SESSION["id"]))
             $subscription = query("SELECT * FROM subscriptions WHERE userID=? AND clubID=?", $_SESSION["id"], $club["id"]);
-        else $subscription = array(0 => array("subscription" => "0"));
-        render("club_display.php", array("title" => $club["name"]." ".$club["abbreviation"] , "clubInfo" => $club, "announcements" => $announcements, "level" => $privacy, "alert" => $alert, "subscription" => $subscription));
+        else 
+            $subscription = array(0 => array("subscription" => "0"));
+        
+       // print($url);
+        render("club_display.php", array("title" => "CS50 Organizations: ".$club["name"], "clubInfo" => $club, "alerts" => $announcements, "level" => $privacy, "alert" => $alert, "subscription" => $subscription, "calUrl" => $url));
 
         
     }

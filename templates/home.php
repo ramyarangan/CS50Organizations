@@ -4,12 +4,10 @@
 
 </div>
 
-<div style="margin-bottom:5px">
-<img src="img/dots.jpg" width=80%>
-</div>
 
 <div class="row">
-<form class="form-inline span12" style="text-align:center" onsubmit="return false">
+<img src="img/dots.jpg" width=80%>
+<form class="form-inline span12" style="text-align:center; margin-bottom:-2px" onsubmit="return false">
 
 <label><strong>Filter &nbsp;</strong></label>
 
@@ -52,6 +50,8 @@
 </a>
 
 </form>
+<img src="img/dots.jpg" width=80%>
+
 </div>
 
 

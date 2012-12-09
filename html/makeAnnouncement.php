@@ -152,7 +152,7 @@
                 $privacy[$row["description"]] = $row["level"];
             }
             
-            render("makeAnnouncement_form.php", array("title" => "Make New Announcement", 
+            render("makeAnnouncement_form.php", array("title" => "CS50 Organizations: Make Announcement", 
                 "clubsOwned" => $clubsOwned, "privacy" => $privacy));
         }
         

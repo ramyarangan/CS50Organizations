@@ -1,4 +1,8 @@
 <?php
+
+/**
+  Displays the calendar.
+**/
     
     // configuration
     require("../includes/config.php");

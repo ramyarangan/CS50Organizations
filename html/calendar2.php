@@ -1,4 +1,9 @@
 <?php
+
+/**
+  Displays the calendar for the front page. Allows users to
+  choose what is displayed.
+**/
     
     // configuration
     require("../includes/config.php");

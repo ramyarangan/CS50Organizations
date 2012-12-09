@@ -83,33 +83,36 @@
     }
     
 
-.club-header
-{
-    font-size: 18px;
-    font-weight: 200;
-    line-height: 30px;
-    color: inherit;
-    text-align:center;
-    padding-bottom:20px;
-
-}
 
 .club-header h1
 {
-    margin-bottom: -15px;
+    font-size: 80px;
+    font-weight:700;
+    line-height: 1;
+    color: inherit;
+}
+
+.club-header h2
+{
+    margin-top: -15px;
+    font-size: 26px;
+    font-weight: 100;
+    color: #777777;
+}
+
+.reg-header
+{
+    margin-bottom: 20px;
+}
+.reg-header h1
+{
+    margin-bottom: 0px;
     font-size: 55px;
     font-weight:100;
     line-height: 1;
     color: inherit;
 }
 
-.club-header h1 small
-{
-    margin-bottom: 0;
-    font-size: 26px;
-    font-weight: 300;
-    font-color: #999999;
-}
 
 .announcement-subject{
     text-shadow: 0 2px 0 rgba(255, 255, 255, 0.5);
@@ -125,13 +128,14 @@
     font-size: 18px;
     font-weight: 300;
     line-height: 24px;
+    text-transform:uppercase;
+    letter-spacing: 2px;
     
 }
 .accordion-heading a {
     color: black;
-    text-transform:uppercase;
-    letter-spacing: 2px;
 }
+
 .accordion-heading a:hover{
     text-decoration:none;
     font-weight:400;
@@ -148,18 +152,33 @@
     padding-bottom:10px;
 }
 
+.alert-info a{
+    color:#006699; 
+    font-weight:500;
+}
+
 .announcement-content{
 padding: 8px 35px 8px 14px;
     margin-bottom: 5px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-    background-color: #fcf8e3;
-    border: 1px solid #fbeed5;
+    background-color: #d9edf7;
+    border: 1px solid #bce8f1;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
     text-align:left;
 }
 
+.section-title {
+    padding-bottom: 20px;
+    text-shadow: 0 2px 0 rgba(255, 255, 255, 0.5);
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 24px;
+    text-transform:uppercase;
+    letter-spacing: 2px;
+    
+}
 .announcement-info{
     font-size: 11px;
     font-weight: 300;
@@ -313,7 +332,7 @@ padding: 8px 35px 8px 14px;
                         </li>
                     </ul>
 
-                    <form class="navbar-search pull-left" action="search.php" method="get">
+                    <form class="navbar-search pull-left" action="search2.php" method="get">
                         <input type="text" id="tags" name="search" placeholder="Search"/>
                     </form>
 

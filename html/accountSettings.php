@@ -1,5 +1,10 @@
 <?php
 
+/**
+  Allows users to change their account settings, such as password,
+  email, phone number, service provider, as well as club subscriptions.
+**/
+
     // configuration
     require("../includes/config.php");
 

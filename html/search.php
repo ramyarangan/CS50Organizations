@@ -4,6 +4,7 @@
     require("../includes/config.php"); 
 
     // if form was submitted
+    
     if (!empty($_GET["search"]))
     {
         $isClub= strrpos($_GET["search"]," (club)");

@@ -1,5 +1,9 @@
 <?php
 
+/**
+
+**/
+
     // configuration
     require("../includes/config.php"); 
     $privacy = 1;

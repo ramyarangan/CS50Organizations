@@ -181,6 +181,6 @@
         }
         
         // render form
-        render("makeEvent_form.php", array("title" => "Make New Event", "clubsOwned" => $clubsOwned, "privacy" => $privacy));
+        render("makeEvent_form.php", array("title" => "CS50 Organizations: Create Event", "clubsOwned" => $clubsOwned, "privacy" => $privacy));
     }
 ?>
