@@ -91,7 +91,7 @@ $(document).ready(function(){
 
      //$("#submit").click(function(){
         $(".error").html("");
-        hasError = false;
+        //hasError = false;
                         var username = $("#inputUsername").val();
                         var password = $("#inputPW").val();
                         var conf = $("#inputConf").val();
@@ -110,7 +110,6 @@ $(document).ready(function(){
                             }
                             if(checkCode1 && checkCode2)
                             {
-                                alert("hi1");
                                 codeCorrect(code, username);
                             }
                             if(!curCodeError)
@@ -241,12 +240,13 @@ function codeCorrect(code, username)
         type: 'POST',
         url: 'checkRecoveryCode.php',
         data: { username: username, code: code},
-        async: false,
         dataType:'json',
+        async: false,
         success: function(response){
 
-           if (curCodeError== false && response.check <= 0)
+           if (response.check <= 0)
            {
+                if(curCodeError== false)
                  $("#codeText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Sorry! That code is invalid!");
                 curCodeError = true;
                 hasError = true;
@@ -261,15 +261,17 @@ function userEmailExists(username)
         type: 'POST',
         url: 'checkUsername.php',
         data: { username: username, email: ""},
-        async: false,
         dataType:'json', 
+        async: false,
         success: function(response){
-           if (curNameError== false && response.name <= 0)
+           if ( response.name <= 0)
            {
+                 if(curNameError== false)
                  $("#usernameText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Sorry! That username does not exist!");
                 curNameError = true;
                 hasError = true;
            }
+
         }
     });
 }

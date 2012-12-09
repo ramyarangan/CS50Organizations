@@ -20,7 +20,7 @@
         {
             $privacy = $subscription[0]["level"];
             
-            if ($privacy == 5)
+            if ($privacy == 6)
             {
                 
                 $members = query("SELECT * FROM subscriptions JOIN users ON users.id = subscriptions.userID WHERE clubID=? AND level > 2 ORDER BY level, realname", $club["id"]);

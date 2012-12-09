@@ -1,4 +1,5 @@
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div .ui-widget-header .ui-timepicker-rtl {position: absolute; z-index: 20}
 .ui-timepicker-div dl { text-align: left; }
 .ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
 .ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }

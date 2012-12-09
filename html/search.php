@@ -6,27 +6,37 @@
     // if form was submitted
     if (!empty($_GET["search"]))
     {
-        $clubs = query("SELECT * FROM clubs WHERE name= ?",$_GET["search"]);
-        $announcements = query("SELECT * FROM announcements WHERE title = ?", $_GET["search"]);
-        $events = query("SELECT * FROM events WHERE name = ?", $_GET["search"]);
-
-        if(count($clubs)+count($announcements)+count($events)==1)
+        $isClub= strrpos($_GET["search"]," (club)");
+        $isEvent = strrpos($_GET["search"]," (event)");
+        $isAnn = strrpos($_GET["search"]," (announcement)");
+        
+        if($isClub != false)
         {
+            $search = substr($_GET["search"],0,$isClub);            
+            $clubs = query("SELECT * FROM clubs WHERE name= ?",$search);
             if(!empty($clubs))
                 redirect("allClubs.php?club=".$clubs[0]["name"]);
-            if(!empty($announcements))
-            {
-                redirect("allClubs.php?club=".query("SELECT * FROM clubs WHERE id=?",$announcements[0]["id"])[0]["name"]);
-            }
-            if(!empty($events))
-            {
-                redirect("allClubs.php?club=".query("SELECT * FROM clubs WHERE id=?",$events[0]["id"])[0]["name"]);
-            }                
         }
-        
-        $clubs = query("SELECT * FROM clubs WHERE name LIKE ?","%".$_GET["search"]."%");
-        $announcements = query("SELECT * FROM announcements WHERE title LIKE ?", "%".$_GET["search"]."%");
-        $events = query("SELECT * FROM events WHERE name LIKE ?", "%".$_GET["search"]."%");
+        else if($isEvent != false)
+        {
+            $search = substr($_GET["search"],0,$isEvent);            
+            $events = query("SELECT * FROM events WHERE name= ?",$search);
+            if(!empty($events))
+                redirect("allClubs.php?club=".query("SELECT * FROM clubs WHERE id=?",$events[0]["id"])[0]["name"]);
+        }
+        else if($isAnn != false)
+        {
+            $search = substr($_GET["search"],0,$isAnn);            
+            $announcements = query("SELECT * FROM announcements WHERE title= ?",$search);
+            if(!empty($announcements))
+                redirect("allClubs.php?club=".query("SELECT * FROM clubs WHERE id=?",$announcements[0]["id"])[0]["name"]);
+        }              
+          
+        $search = $_GET["search"];
+
+        $clubs = query("SELECT * FROM clubs WHERE name LIKE ?","%".$search."%");
+        $announcements = query("SELECT * FROM announcements WHERE title LIKE ?", "%".$search."%");
+        $events = query("SELECT * FROM events WHERE name LIKE ?", "%".$search."%");
 
 
         if(empty($clubs)&&empty($announcements)&&empty($events))

@@ -17,15 +17,15 @@
         $array = [];
         foreach($clubs as $club)
         {
-            array_push($array,$club["name"]);
+            array_push($array,$club["name"]." (club)");
         }
         foreach($events as $event)
         {
-            array_push($array,$event["name"]);
+            array_push($array,$event["name"]." (event)");
         }
         foreach($announcements as $announcement)
         {
-            array_push($array,$announcement["title"]);
+            array_push($array,$announcement["title"]." (announcement)");
         }
 
     ?>
@@ -241,7 +241,7 @@ padding: 8px 35px 8px 14px;
         <script>
             $(document).ready(function(){
                 $("#notificationbar > li > a").focusout(function() {
-                    $("#notificationbar > li > ul > li").css("background-color", '');
+                    $("#notificationbar > li > ul > li > a").css("background-color", "");
                       
                      
                 });
@@ -257,7 +257,6 @@ padding: 8px 35px 8px 14px;
                         if(response.change > 0)
                         {
                             $("#notificationbar > li > a").html("<i class=\"icon-globe\"></i> 0 <b class=\"caret\"></b>");
-                            $("#notificationbar > li > ul > li").css("background-color", "Yellow");
                         }
 
                         }
@@ -301,8 +300,8 @@ padding: 8px 35px 8px 14px;
 
                                 <li class="nav-header">Manage</li>
                                 <li><a href="makeAnnouncement.php"> Make Announcement </a></li>
-                                <li><a href="createClub.php"> Create Organization </a></li>
                                 <li><a href="makeEvent.php"> Create Event </a></li>
+                                <li><a href="createClub.php"> Create Organization </a></li>
                                 <li class="divider"></li>
                                 <li><a href="allClubs.php"> All Organizations </a></li>
                             </ul>
@@ -310,14 +309,20 @@ padding: 8px 35px 8px 14px;
                     </ul>
 
                     <form class="navbar-search pull-left" action="search.php" method="get">
-                        <input type="text" id="tags" name="search"/>
+                        <input type="text" id="tags" name="search" placeholder="Search"/>
                     </form>
 
 
                     <ul class="nav pull-right">
                         <li class="dropdown">
+
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <?php
+                                    $user= query("SELECT * FROM users WHERE id = ?", $_SESSION["id"])[0]["realname"];
+                                    print($user);
+                                ?>
                                 <i class="icon-user"></i>
+
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
@@ -342,7 +347,10 @@ padding: 8px 35px 8px 14px;
                                 $notifications = query("SELECT * FROM notifications WHERE userID=? ORDER BY time DESC LIMIT 10",$_SESSION["id"]);
                                 foreach ($notifications as $notification)
                                 {
-                                    print("<li><a href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
+                                    if($notification["seen"]==1)
+                                        print("<li><a href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
+                                    else
+                                        print("<li><a style=\"background-color: Yellow;\" href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
                                 }   
 
                             ?> 

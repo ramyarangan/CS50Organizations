@@ -80,9 +80,11 @@
         
         $clubId = query("SELECT id FROM clubs WHERE name = ?", $clubName)[0]["id"];
         
-        $privacy = query("SELECT level FROM subscriptions WHERE userID = ? AND clubID = ?", 
+        if(!isset($_SESSION["id"])) $privacy = $public;
+        else
+            $privacy = query("SELECT level FROM subscriptions WHERE userID = ? AND clubID = ?", 
                      $_SESSION["id"], $clubId);
-        if($privacy== false)
+        if($privacy== false || $privacy== $public)
             $privacy = $public;
         else 
             $privacy = $privacy[0]["level"];
