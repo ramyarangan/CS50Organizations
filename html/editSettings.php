@@ -57,13 +57,13 @@
         {
             // since we want the "Other" category to be at the end of our form,
             // we will add this on the form separately
-            if($row["description"] != "Other")
+            //if($row["description"] != "Other")
                 $categories[$row["id"]] = $row["description"];
         }
         
         // get the ID of the "Other" club category and pass to the form
-        $otherID = query("SELECT * FROM clubTypes WHERE description = 'Other'");
-        $otherID = $otherID[0]["id"];         
+        //$otherID = query("SELECT * FROM clubTypes WHERE description = 'Other'");
+        //$otherID = $otherID[0]["id"];         
         
 
         // else render form
@@ -76,6 +76,6 @@
         }
   
         render("editSettings_form.php", array("title" => "Edit Settings",
-        "club" => $club, "categories" => $categories, "otherID" => $otherID, "types" => $types));
+        "club" => $club, "categories" => $categories, "types" => $types));
     }
 ?>
