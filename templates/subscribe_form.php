@@ -18,7 +18,7 @@
         <?php else: ?>        
             <input type="checkbox" id="text" name="text" value= "1">Text<br>
         <?php endif ?>
-        <input type="text" id="number" name="number" value= <?=$number?>><br>
+        <input type="text" id="number" name="number" placeholder="##########" value= <?=$number?>><br>
         <div class="span10 row error" id="numberText"></div>
 
         <select name="provider" id="provider">
