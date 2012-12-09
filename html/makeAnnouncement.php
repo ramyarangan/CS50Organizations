@@ -60,7 +60,8 @@
                     $mail->SetFrom($theclub["email"], $theclub["name"]);
 
                     // set To:
-                    $user = query("SELECT * FROM users WHERE id=?",$member["userID"])[0];
+                    $user = query("SELECT * FROM users WHERE id=?",$member["userID"]);
+                    $user = $user[0];
                     $mail->AddAddress($user["email"]);
 
                     // set Subject:
@@ -92,7 +93,8 @@
                     $mail->Subject = "New Announcement";
                     $mail->Body = $clubName." posted: ".$_POST["name"]."!";
                     // Send To  
-                    $user = query("SELECT * FROM users WHERE id=?",$member["userID"])[0];
+                    $user = query("SELECT * FROM users WHERE id=?",$member["userID"]);
+                    $user = $user[0];
                     $mail->AddAddress($user["number"] ); // Where to send it  
                     // send mail
                     if ($mail->Send() == false)

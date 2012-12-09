@@ -28,7 +28,9 @@
     }
     foreach ($announcements as $key => $announcement)
     {
-        $clubs[$key] = query("SELECT * FROM clubs WHERE id=?", $announcement["id"])[0];
+        $temp = query("SELECT * FROM clubs WHERE id=?", $announcement["id"]);
+        $temp = $temp[0];
+        $clubs[$key] = $temp;
     }
     render("announcements_page.php", array("title" => "Recent Announcements", "announcements" => $announcements,"clubs" => $clubs));
 

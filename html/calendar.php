@@ -4,7 +4,8 @@
     require("../includes/config.php");
 
     $url = "";
-    $public = query("SELECT level FROM privacy WHERE description = \"public\"")[0]["level"];
+    $public = query("SELECT level FROM privacy WHERE description = \"public\"");
+    $public = $public[0]["level"];
     
     if(isset($_POST["eventsOption"]))
     {    
@@ -19,7 +20,8 @@
         {
 
             $temp = query("SELECT link FROM calendarLinks WHERE id = ?", 
-                        $clubID["id"] . "." . $public)[0]["link"];
+                        $clubID["id"] . "." . $public);
+            $temp = $temp[0]["link"];
 
             // this is the part after src: in the gcal url
             $temp = substr($temp,38,strlen($temp) -51);
@@ -37,9 +39,11 @@
         {
             $clubID = $club["id"];
             $privacy = query("SELECT level FROM subscriptions WHERE userID = ? AND clubID = ?", 
-                     $_SESSION["id"], $clubID)[0]["level"]; 
+                     $_SESSION["id"], $clubID);
+            $privacy = $privacy[0]["level"]; 
             $temp = query("SELECT link FROM calendarLinks WHERE id = ?", 
-                        $clubID . "." . $privacy)[0]["link"];           
+                        $clubID . "." . $privacy);
+            $temp = $temp[0]["link"];           
             $temp = substr($temp,38,strlen($temp) -51);
             //print($temp . " ");
             $url = $url . $temp;
@@ -59,11 +63,14 @@
         
         foreach($clubs as $clubName)
         {
-            $clubID = query("SELECT id FROM clubs WHERE name = ?", $clubName)[0]["id"];        
+            $clubID = query("SELECT id FROM clubs WHERE name = ?", $clubName);
+            $clubID = $clubID[0]["id"];        
             $privacy = query("SELECT level FROM subscriptions WHERE userID = ? AND clubID = ?", 
-                     $_SESSION["id"], $clubID)[0]["level"]; 
+                     $_SESSION["id"], $clubID);
+            $privacy = $privacy[0]["level"]; 
             $temp = query("SELECT link FROM calendarLinks WHERE id = ?", 
-                        $clubID . "." . $privacy)[0]["link"];           
+                        $clubID . "." . $privacy);
+            $temp = $temp[0]["link"];           
             $temp = substr($temp,38,strlen($temp) -51);
             $url = $url . $temp;
             $url = $url . "&amp;src=";
@@ -78,7 +85,8 @@
     {
         $clubName = $_POST["clubName"];
         
-        $clubId = query("SELECT id FROM clubs WHERE name = ?", $clubName)[0]["id"];
+        $clubId = query("SELECT id FROM clubs WHERE name = ?", $clubName);
+        $clubId = $clubId[0]["id"];
         
         if(!isset($_SESSION["id"])) $privacy = $public;
         else
@@ -90,7 +98,8 @@
             $privacy = $privacy[0]["level"];
         
         //print($clubId . "." . $privacy);
-        $url = query("SELECT link FROM calendarLinks WHERE id = ?", $clubId . "." . $privacy)[0]["link"];
+        $url = query("SELECT link FROM calendarLinks WHERE id = ?", $clubId . "." . $privacy);
+        $url = $url[0]["link"];
         // this is the part after src: in the gcal url
         $url = substr($url,38, strlen($url) -51);
     }    

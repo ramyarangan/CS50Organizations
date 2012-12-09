@@ -7,7 +7,8 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
 
-        $user = query("SELECT * FROM users WHERE id=?",$_SESSION["id"])[0];
+        $user = query("SELECT * FROM users WHERE id=?",$_SESSION["id"]);
+        $user = $user[0];
                   
         $resultEmail = query("SELECT * FROM users WHERE email = ?", $_POST["email"]);
         

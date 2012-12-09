@@ -22,14 +22,22 @@
             $search = substr($_GET["search"],0,$isEvent);            
             $events = query("SELECT * FROM events WHERE name= ?",$search);
             if(!empty($events))
-                redirect("allClubs.php?club=".query("SELECT * FROM clubs WHERE id=?",$events[0]["id"])[0]["name"]);
+            {
+                $tempName = query("SELECT * FROM clubs WHERE id=?",$events[0]["id"]);
+                $tempName = $tempName[0]["name"];
+                redirect("allClubs.php?club=".$tempName);
+            }
         }
         else if($isAnn != false)
         {
             $search = substr($_GET["search"],0,$isAnn);            
             $announcements = query("SELECT * FROM announcements WHERE title= ?",$search);
             if(!empty($announcements))
-                redirect("allClubs.php?club=".query("SELECT * FROM clubs WHERE id=?",$announcements[0]["id"])[0]["name"]);
+            {
+                $tempName = query("SELECT * FROM clubs WHERE id=?",$announcements[0]["id"]);
+                $tempName = $tempName[0]["name"];
+                redirect("allClubs.php?club=".$tempName);
+            }
         }              
           
         $search = $_GET["search"];
@@ -60,7 +68,9 @@
 
             foreach($announcements as $announcement)
             {
-                print("<a href=\"allClubs.php?club=".query("SELECT * FROM clubs WHERE id=?",$announcement["id"])[0]["name"]
+                $tempName = query("SELECT * FROM clubs WHERE id=?",$announcement["id"]);
+                $tempName = $tempName[0]["name"];
+                print("<a href=\"allClubs.php?club=".$tempName
                 ."\">".$announcement["title"]."</a>");
                 print("</br>");
             }
@@ -71,7 +81,9 @@
 
             foreach($events as $event)
             {
-                print("<a href=\"allClubs.php?club=".query("SELECT * FROM clubs WHERE id=?",$event["id"])[0]["name"]
+                $tempName = query("SELECT * FROM clubs WHERE id=?",$event["id"]);
+                $tempName = $tempName[0]["name"];
+                print("<a href=\"allClubs.php?club=".$tempName
                 ."\">".$event["name"]."</a>");
                 print("</br>");
             }
