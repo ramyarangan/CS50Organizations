@@ -7,7 +7,7 @@
 
     // configuration
     require("../includes/config.php");
-
+    require("PHPMailer/class.phpmailer.php");
     if (empty($_SESSION["id"]))
     {
         redirect("login.php?go=makeEvent.php");
@@ -66,7 +66,7 @@
             {
                 query("INSERT INTO notifications (userID, time, text, seen, redirect) VALUES(?, NOW(), ?, 0, ?)", $member["userID"], 
                     $clubName . ' has added the event: ' . $_POST["name"] . '!',"allClubs.php?club=".$clubName);
-                            require("PHPMailer/class.phpmailer.php");
+                            
                 if($member["subscription"] == 1 || $member["subscription"] == 3)
                 {    
                     $mail = new PHPMailer();

@@ -14,7 +14,7 @@
 
 <div class = "row-fluid" style="padding:30px">
 
-<form id="editSettingsForm" action="editSettings.php" method="post" class="form-horizontal offset2" style="text-align:left">
+<form id="editSettingsForm" action="editSettings.php" method="post" class="form-horizontal offset1" style="text-align:left">
 
     <input type ="hidden" name="name" <?="value=\"".$club["name"]."\""?> >
 
@@ -94,7 +94,7 @@
     <div class="control-group">
         <label class="control-label" for="inputInfo">Description</label>
         <div class="controls">
-            <textarea class="span4" id="inputInfo" name="info" rows="3"><?=$club["information"]?></textarea>        
+            <textarea class="span8" id="inputInfo" name="info" rows="3"><?=$club["information"]?></textarea>        
         </div>
     </div>
 
@@ -235,7 +235,7 @@ function emailExists(name, email)
 {
     $.ajax({
         type: 'POST',
-        url: 'checkClub.php',
+        url: 'checkClubSettings.php',
         data: { club: name, abbreviation: "", email: email},
         dataType:'json',
         async: false,

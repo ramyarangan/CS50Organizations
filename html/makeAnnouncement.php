@@ -141,6 +141,7 @@
             $privacy = $privacy[0]["level"];
              
             $rows = query("SELECT * FROM subscriptions WHERE userID = ? AND level = ?", $_SESSION["id"], $privacy);
+            
             $clubsOwned = array();
             //print($privacy. " ". $rows[0]["clubID"]);
             foreach($rows as $row)

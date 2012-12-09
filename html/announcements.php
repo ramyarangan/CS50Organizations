@@ -71,13 +71,16 @@
                 
                 $poster = "";
                 if($announcement["userID"]==0)
-                    $poster = "CS50 Organizations";
+                    $poster = "CS50 Organizations Bot";
                 else
                 {
                     $poster = query("SELECT * FROM users WHERE id=?", $announcement["userID"]);
                     $poster = $poster[0]["realname"];
                 }
-                print("posted ".$announcement["time"]." by ".$poster);
+                
+                $clubName = query("SELECT name FROM clubs WHERE id = ?",$announcement["id"])[0]["name"];
+                
+                print("posted ".$announcement["time"]." by ".$poster. " for ".$clubName);
 
                 print("</div>");
                 print("</div>");

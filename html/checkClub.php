@@ -1,4 +1,11 @@
+
+
 <?php
+/*
+ * checkClub.php
+ * 
+ * Helper php script for forms to validate via AJAX query whether a club already exists.
+ */
 
     // configuration
     require("../includes/config.php");
@@ -9,8 +16,6 @@
         $resultName = query("SELECT * FROM clubs WHERE name = ?", $_POST["club"]);
         $resultAbbr = query("SELECT * FROM clubs WHERE abbreviation = ?", $_POST["abbreviation"]);
         $resultEmail = query("SELECT * FROM clubs WHERE email = ?", $_POST["email"]);
-//        if(!empty($_POST["club"]) && $resultEmail["name"]==$_POST["club"])
-//            echo json_encode(array("email" => 0));
         
         echo json_encode(array("name" => count($resultName), "abbr" => count($resultAbbr),
                  "email" => count($resultEmail)));
