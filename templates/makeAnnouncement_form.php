@@ -52,7 +52,7 @@
     <div class="control-group">
         <label class="control-label" for="info">Announcement Text</label>
         <div class="controls">
-            <textarea class="span4" name="info" rows="6"></textarea>        
+            <textarea class="span4" name="info" id="inputInfo" rows="6"></textarea>        
         </div>
     </div>
 
@@ -95,8 +95,7 @@ $(document).ready(function(){
            $(".error").html("");
 
                         var title = $("#inputTitle").val();
-                        var info = $("#info").val();
-
+                        var info = $("#inputInfo").val();
 
                         //error checks!
 
@@ -119,8 +118,8 @@ $(document).ready(function(){
 
             
                         
-                        $("#info").change(function(){
-                            info = $("#info").val();
+                        $("#inputInfo").change(function(){
+                            info = $("#inputInfo").val();
                             if (info == "") 
                             {
                                 $("#infoText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please input your announcement.");
@@ -139,7 +138,7 @@ $(document).ready(function(){
  
                         var title = $("#inputTitle").val();
 
-                        var info = $("#info").val();
+                        var info = $("#inputInfo").val();
     
 
                         //error checks!

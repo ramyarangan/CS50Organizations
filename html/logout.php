@@ -1,5 +1,9 @@
 <?php
 
+/**
+  Logs out the current user and redirects to home.
+**/
+    
     // configuration
     require("../includes/config.php"); 
 

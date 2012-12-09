@@ -1,5 +1,11 @@
 <?php
 
+/**
+  Login page. Compares entered password to the 
+  user's password. Sets session id if successful.
+**/
+
+
 // configuration
 require("../includes/config.php"); 
 
@@ -56,9 +62,9 @@ if (!isset($_SESSION["id"]))
     {
         // else render form
         if(empty($_GET["go"]))
-            render("login_form.php", array("title" => "Log In", "go" => "index.php"));
+            render("login_form.php", array("title" => "CS50 Organizations: Log In", "go" => "index.php"));
         else
-            render("login_form.php", array("title" => "Log In", "go" => $_GET["go"]));
+            render("login_form.php", array("title" => "CS50 Organizations: Log In", "go" => $_GET["go"]));
     }
 }
 

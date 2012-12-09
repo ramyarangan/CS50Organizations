@@ -1,5 +1,9 @@
 <?php
 
+/**
+  a page where the user can send us (the creators) an email.
+**/
+
     // configuration
     require("../includes/config.php"); 
 
@@ -47,6 +51,6 @@
             $name = "";
             $email = "";
         }
-        render_div("email_form.php", array("name" =>$name, "email" => $email));
+        render_div("email_form.php", array("title"=> "CS50 Organizations: Contact Us", "name" =>$name, "email" => $email));
     }
 ?>

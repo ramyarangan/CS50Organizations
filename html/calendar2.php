@@ -1,4 +1,9 @@
 <?php
+
+/**
+  Displays the calendar for the front page. Allows users to
+  choose what is displayed.
+**/
     
     // configuration
     require("../includes/config.php");
@@ -39,7 +44,8 @@
                 {
                     
                         $temp = query("SELECT link FROM calendarLinks WHERE id = ?", 
-                                      $clubID . "." . $privacies[$i])[0]["link"]; 
+                                      $clubID . "." . $privacies[$i]);
+                        $temp = $temp[0]["link"]; 
                         $temp = substr($temp,38, strlen($temp) -51);
                         $url = $url . $temp;
                         $url = $url . "&amp;src=";

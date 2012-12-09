@@ -67,9 +67,10 @@
         
 
         // else render form
-        $club = query("SELECT * FROM clubs WHERE name=?",$_GET["club"])[0];
+        $club = query("SELECT * FROM clubs WHERE name=?",$_GET["club"]);
+        $club = $club[0];
         $clubTypes = query("SELECT * FROM clubTypePairs WHERE clubID=?", $club["id"]);
-        $types = [];
+        $types = array();
         foreach($clubTypes as $clubType)
         {
             array_push($types, $clubType["clubTypeID"]);
