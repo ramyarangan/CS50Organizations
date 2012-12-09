@@ -1,5 +1,10 @@
 <?php
 
+/**
+  Allows an admin to make an announcement for the 
+  club. Adds announcement to the database. 
+**/
+    
     // configuration
     require("../includes/config.php");
 
@@ -125,7 +130,7 @@
                 $privacy[$row["description"]] = $row["level"];
             }
             
-            render_div("makeAnnouncement_form.php", array("title" => "Make New Announcement", 
+            render_div("makeAnnouncement_form.php", array("title" => "CS50 Organizations: Make Announcement", 
                 "clubName" => $_GET["club"], "privacy" => $privacy));
         }
 

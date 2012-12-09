@@ -1,5 +1,10 @@
 <?php
 
+/**
+  Lets the user sign up for a club. Adds 
+  to the subscription database.
+**/
+
     // configuration
     require("../includes/config.php"); 
 

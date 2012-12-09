@@ -1,5 +1,10 @@
 <?php
 
+/**
+  Allows an admin to make a new event for a club and
+  adds the event to the database. 
+**/
+
     // configuration
     require("../includes/config.php");
 

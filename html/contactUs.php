@@ -1,7 +1,7 @@
 <?php
 
 /**
-  a page where the user can send us an email.
+  a page where the user can send us (the creators) an email.
 **/
 
     // configuration

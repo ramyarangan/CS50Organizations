@@ -74,7 +74,7 @@
         if(!empty($number))
             $number = substr($number, 0, 10);
 
-        render("accountSettings_form.php", array("title" => "Account Settings",
+        render("accountSettings_form.php", array("title" => "CS50 Organizations: Account Settings",
         "username" => $user["name"], "email" => $user["email"], "clubs" => $clubs, "subscriptions" => $subscriptions, "number" => $number));
     }
 ?>

@@ -1,5 +1,12 @@
 <?php
 
+/**
+  Lets the user subscribe to email and text notifications.
+  If text is selected, asks the user for phone number and
+  phone provider so texts can be sent. 
+**/
+
+
     // configuration
     require("../includes/config.php"); 
 
