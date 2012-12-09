@@ -35,7 +35,7 @@
         else
         {    
 
-            $privacy = query("SELECT level FROM privacy WHERE description=\"all club\"");
+            $privacy = query("SELECT level FROM privacy WHERE description=\"all-club\"");
             $privacy = $privacy[0]["level"];
             $result = query("INSERT INTO subscriptions (userID, clubID, level) VALUES(?, ?, ?)",$user["id"],$club["id"],
                 $privacy);

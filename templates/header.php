@@ -350,7 +350,7 @@ padding: 8px 35px 8px 14px;
                                     if($notification["seen"]==1)
                                         print("<li><a href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
                                     else
-                                        print("<li><a style=\"background-color: Yellow;\" href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
+                                        print("<li><a style=\"background-color: #d9edf7;\" href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
                                 }   
 
                             ?> 
@@ -377,9 +377,9 @@ Organizations
 </li>
 </ul>
 
-                        <form class="navbar-search pull-left">
-                            <input type="text" class="search-query" placeholder="Search site">
-                        </form>
+                    <form class="navbar-search pull-left" action="search.php" method="get">
+                        <input type="text" id="tags" name="search" placeholder="Search"/>
+                    </form>
 
                         <ul class="nav pull-right"> 
                             <li><a href="login.php">Log In</a></li>
