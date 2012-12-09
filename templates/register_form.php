@@ -5,13 +5,12 @@
 ?>
 
 <div class="row-fluid">
-    <div class="club-header">
-        <h1>
-            Register.
-        </h1>
-        <div><img src="img/dots.jpg" width=80%></div>
-    </div>
+<div class="reg-header">
+<h1>Register.</h1>
+<div><img src="img/dots.jpg" width=80%></div>
 </div>
+</div>
+
 
 <div class = "row-fluid" style="padding:30px">
 

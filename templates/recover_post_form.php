@@ -1,24 +1,23 @@
 <div>
 <div class="row-fluid">
-    <div class="club-header">
-        <h1>
-            Recover Password
-        </h1>
+        <div class="reg-header">
+        <h1>Reset password.</h1>
         <div><img src="img/dots.jpg" width=80%></div>
     </div>
 </div>
 
+
 <?php if(!empty($alert)): ?>
-    <div class = "row-fluid">
-        <div class="alert span6 offset3">
+<div class="row">
+        <div class="alert alert-info span6 offset3">
             <button type="button" class="close" data-dismiss="alert">×</button>
             <?=$alert?>
         </div>
-    </div>
+</div>
 <?php endif?>
 
-<div class = "row-fluid" style="padding:30px">
 
+<div class = "row-fluid" style="padding:30px">
 <form id="recForm" action="recover_post.php" method="post" class="form-horizontal offset2" style="text-align:left">
     
     <div class="control-group">
@@ -77,7 +76,7 @@
 
     <div class="control-group">
         <div class="controls">
-            <button id="submit" type="submit" class="btn">Recover password.</button>
+            <button id="submit" type="submit" class="btn">Save</button>
         </div>
     </div>
 </form>

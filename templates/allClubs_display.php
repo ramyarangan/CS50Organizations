@@ -1,19 +1,16 @@
 
 <div class="row-fluid">
-    <div class="club-header" id="head">
-        <h1>
-            All organizations.
-        </h1>
+    <div class="reg-header">
+        <h1>All organizations.</h1>
         <div><img src="img/dots.jpg" width=80%></div>
     </div>
 </div>
-
 
 <div class = "row-fluid">
 
     <div class="alert alert-info span8 offset2">
         Below are links to the main pages of all registered organizations. They're sorted by attributes, so some may appear under multiple sections. </br> Can't find your group? Search using the toolbar above. If it doesn't exist,
-<a href="createClub.php" style="color:#006699; font-weight:500" >create</a> it yourself!
+<a href="createClub.php">create</a> it yourself!
     </div>
 
 

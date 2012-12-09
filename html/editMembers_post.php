@@ -7,12 +7,19 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
         
-        $members = query("SELECT * FROM subscriptions WHERE clubID = ? AND level > 2", $_POST["clubID"]);
+        $members = query("SELECT * FROM subscriptions WHERE clubID = ? AND level >= 2", $_POST["clubID"]);
 
         foreach($members as $member)
         {
-            if($_POST[$member["userID"]] != $member["level"])
+            if ($_POST[$member["userID"]] == 0)
+            {
+                query("DELETE FROM subscriptions WHERE userID = ?", $member["userID"]);
+            }
+            
+            else if ($_POST[$member["userID"]] != $member["level"])
+            {
                 query("UPDATE subscriptions SET level = ? WHERE userID = ?", $_POST[$member["userID"]], $member["userID"]);
+            }
         }
                 
         // redirect to home

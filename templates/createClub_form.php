@@ -5,13 +5,12 @@
 ?>
 
 <div class="row-fluid">
-    <div class="club-header">
-        <h1>
-            Create an organization.
-        </h1>
+    <div class="reg-header">
+        <h1>Create an organization.</h1>
         <div><img src="img/dots.jpg" width=80%></div>
     </div>
 </div>
+
 
 <form id="clubForm" class="form-horizontal offset1" style="text-align:left" action="createClub.php" method="post">
 
