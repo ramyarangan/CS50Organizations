@@ -21,12 +21,12 @@
                 $privacies = array(1, 2, 3, 4, 5, 6);
             }
             
+
             if(isset($_SESSION["id"]))
                 $myLevel = query("SELECT level FROM subscriptions WHERE userID = ? AND clubID = ?", $_SESSION["id"], $clubID);
                 
             if ((!isset($_SESSION["id"])) || empty($myLevel))
                 $maxPrivacy = 1;            
-
             
             if (empty($myLevel))
             {
@@ -69,6 +69,11 @@
                 print("</div>"); 
                 
                 print("<div class = \"announcement-info\">");
+<<<<<<< HEAD
+                $poster = query("SELECT * FROM users WHERE id=?", $announcement["userID"]);
+                $poster = $poster[0];
+                print("posted ".$announcement["time"]." by ".$poster["realname"]);
+=======
                 $poster = "";
                 if($announcement["userID"]==0)
                     $poster = "CS50 Organizations";
@@ -78,6 +83,7 @@
                     $poster = $poster[0]["realname"];
                 }
                 print("posted ".$announcement["time"]." by ".$poster);
+>>>>>>> upstream/master
                 print("</div>");
                 print("</div>");
                 
@@ -88,4 +94,7 @@
                            
     ?>
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> upstream/master

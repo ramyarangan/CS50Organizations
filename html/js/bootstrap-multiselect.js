@@ -77,29 +77,49 @@
 		
 		// Build the dropdown.
 		$('option', select).each(function() {
-		    if ($(this).val()=="divider")
+		    if ($(this).hasClass("divider"))
 		    {
 		    	$(ul).append('<li class="divider"></li>');
 		    }
 		    else if ($(this).hasClass("title"))
 		    {
 		        $(ul).append('<li class=\"nav-header\">'+$(this).val()+'</li>');
-		    }
+		    }/*
+		    else if ($(this).hasClass("check-all"))
+		    {
+		        if ($(this).is(':selected')) {
+				    $(this).attr('selected', true);
+			    }
+			    
+		        $(ul).append('<li><a href="#"><label class="checkbox"><input type="checkbox" class="all" value="' + $(this).val() + '"> &nbsp;&nbsp;&nbsp; ' + $(this).text() + '</label></a></li>');
+		        
+		        var selected = $(this).attr('selected') || false,
+			    	checkbox = $('li input[value="' + $(this).val() + '"]', ul);
+		    
+		        checkbox.attr('checked', selected);
+		        
+		        if (selected) {
+		            $('#head').after("hi");
+				    checkbox.parents('li').addClass('active');
+				    (checkbox.parents('li')).siblings().addClass('active');
+				    checkbox.parents('li').siblings('li').children('li input.reg').attr('checked', selected);
+			    }
+		    }*/
 		    else
 		    {
-			if ($(this).is(':selected')) {
-				$(this).attr('selected', true);
-			}
+			    if ($(this).is(':selected')) {
+				    $(this).attr('selected', true);
+			    }
 			
-			$(ul).append('<li><a href="#"><label class="checkbox"><input type="checkbox" value="' + $(this).val() + '"> &nbsp;&nbsp;&nbsp;' + $(this).text() + '</label></a></li>');
-			var selected = $(this).attr('selected') || false,
-				checkbox = $('li input[value="' + $(this).val() + '"]', ul);
+			    $(ul).append('<li><a href="#"><label class="checkbox"><input type="checkbox" class="reg" value="' + $(this).val() + '"> &nbsp;&nbsp;&nbsp;' + $(this).text() + '</label></a></li>');
+			    var selected = $(this).attr('selected') || false,
+			    	checkbox = $('li input[value="' + $(this).val() + '"]', ul);
 				
-			checkbox.attr('checked', selected);
+		    	checkbox.attr('checked', selected);
 			
-			if (selected) {
-				checkbox.parents('li').addClass('active');
-			}
+			    if (selected) {
+				    checkbox.parents('li').addClass('active');
+			    }
 			}
 		});
 		
@@ -110,7 +130,21 @@
 		
 		// Bind the change event on the dropdown elements.
 		$('li input[type="checkbox"]', ul).on('change', function(event) {
+		
+		
+		
 			var checked = $(this).attr('checked') || false;
+			/*
+			if ($(this).hasClass("all"))
+			{
+			    $(this).parents('li').addClass('active');
+                $(this).parents('li').siblings().addClass('active');
+                
+                $('option[value="' + $(this).val() + '"]', select).attr('selected', checked);
+			    $('option[value="' + $(this).val() + '"]', select).siblings().attr('selected', checked);
+			}
+			
+			else{*/
 			
 			if (checked) {
 				$(this).parents('li').addClass('active');
@@ -120,6 +154,7 @@
 			}
 			
 			$('option[value="' + $(this).val() + '"]', select).attr('selected', checked);
+			
 			
 			$(button).html(options.text($('option:selected', select)) + ' <b class="caret"></b>');
 		});

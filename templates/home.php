@@ -22,7 +22,7 @@
         <option value= <?="\"".$club["id"]."\""?>> <?=$club["name"]?> </option>
     <?php endforeach ?>
 
-    <option value="divider"></option>
+    <option class="divider"></option>
 
 <?php endif ?>
 
@@ -67,7 +67,7 @@
 </div>
 
 
-<div style="margin-top:-20px; margin-bottom:20px">
+<div style="margin-top:-40px; margin-bottom:20px">
     <img src="img/dots.jpg" width=80%>
 </div>
 

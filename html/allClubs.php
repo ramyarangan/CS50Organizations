@@ -56,8 +56,18 @@
     }
     else
     {
-        $clubs = query("SELECT * FROM clubs");
-        render("clubs_page.php", array("title" => "All Clubs", "clubs" => $clubs));
+        $clubTypes = query("SELECT * FROM clubTypes ORDER BY description");
+        
+        $sortedClubs = array(); 
+        
+        foreach($clubTypes as $type)
+        {
+            $sortedClubs[] = array("type" => $type["description"], "clubs" => query("SELECT * FROM clubs JOIN clubTypePairs ON clubs.id = clubTypePairs.clubID WHERE clubTypeID = ? ORDER BY name", $type["id"]));
+        }
+        
+        $allClubs = query("SELECT * FROM clubs ORDER BY name");
+        
+        render("allClubs_display.php", array("title" => "All Clubs", "allClubs" => $allClubs, "sortedClubs" => $sortedClubs, "clubTypes" => $clubTypes));
     }
 ?>
 

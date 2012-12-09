@@ -119,6 +119,31 @@
     text-align:left;
 }
 
+.accordion-heading {
+    border-bottom: 0;
+    text-shadow: 0 2px 0 rgba(255, 255, 255, 0.5);
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 24px;
+    
+}
+.accordion-heading a {
+    color: black;
+    text-transform:uppercase;
+    letter-spacing: 2px;
+}
+.accordion-heading a:hover{
+    text-decoration:none;
+    font-weight:400;
+}
+
+.accordion-inner a{
+    color: #3a87ad;
+}
+.accordion-inner a:hover{
+    text-decoration:none;
+}
+
 .announcement{
     padding-bottom:10px;
 }
@@ -366,20 +391,11 @@ Organizations
             </div>
         </div>	
         
-        
-</body>
-        <div class="container">
+    <div class="container">
 
             <div class="content" style="padding-top:40px">
 
                 <div class="wrapper">
-                    <div class="proper-content">
+                    <div class="proper-content" style="padding-top:40px">
      
-</br>
-</br>
-
-</br>
-</br>
-</br>
-</br>
 

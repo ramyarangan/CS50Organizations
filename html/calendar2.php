@@ -26,6 +26,7 @@
             foreach($clubIDs as $clubID)
             {
                
+
                 if(isset($_SESSION["id"]))
                     $myLevel = query("SELECT level FROM subscriptions WHERE userID = ? AND clubID = ?", $_SESSION["id"], $clubID);
                 
@@ -58,4 +59,7 @@
     } 
 ?>
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> upstream/master
