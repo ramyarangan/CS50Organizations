@@ -1,5 +1,10 @@
 <?php
 
+/**
+  Updates the subscriptions of the users once
+  the admin submits the edit members form.
+**/
+
     // configuration
     require("../includes/config.php");
 

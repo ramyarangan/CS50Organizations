@@ -1,5 +1,10 @@
 <?php
 
+/**
+  checks if a user with the same username 
+  or email already exists. 
+**/
+
     // configuration
     require("../includes/config.php");
 

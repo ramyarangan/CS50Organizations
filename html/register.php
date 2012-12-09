@@ -1,5 +1,9 @@
 <?php
 
+/**
+  Allows a user to register. Includes dynamic error checking.
+**/
+
     // configuration
     require("../includes/config.php");
 
@@ -57,6 +61,6 @@
     else
     {
         // else render form
-        render("register_form.php", array("title" => "Register"));
+        render("register_form.php", array("title" => "CS50: Register"));
     }
 ?>

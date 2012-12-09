@@ -1,5 +1,10 @@
 <?php
 
+/**
+  A page where the announcements are displayed in 
+  order of time so that the most recent are on top.
+**/
+
     // configuration
     require("../includes/config.php"); 
     $privacy = 1;
@@ -28,8 +33,10 @@
     }
     foreach ($announcements as $key => $announcement)
     {
-        $clubs[$key] = query("SELECT * FROM clubs WHERE id=?", $announcement["id"])[0];
+        $temp = query("SELECT * FROM clubs WHERE id=?", $announcement["id"]);
+        $temp = $temp[0];
+        $clubs[$key] = $temp;
     }
-    render("announcements_page.php", array("title" => "Recent Announcements", "announcements" => $announcements,"clubs" => $clubs));
+    render("announcements_page.php", array("title" => "CS50 Organizations: Recent Announcements", "announcements" => $announcements,"clubs" => $clubs));
 
 ?>

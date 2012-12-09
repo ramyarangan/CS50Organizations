@@ -1,5 +1,10 @@
 <?php
 
+/**
+  checks if the recovery code for changing passwords
+  for the user is correct.
+**/
+
     // configuration
     require("../includes/config.php");
 

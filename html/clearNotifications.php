@@ -1,5 +1,11 @@
 <?php
 
+/**
+  clears the number of new notifications
+  when the user has clicked on the notification
+  icon.
+**/
+
     // configuration
     require("../includes/config.php");
 

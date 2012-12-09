@@ -1,5 +1,9 @@
 <?php
 
+/**
+  checks if the entered password is correct.
+**/
+
     // configuration
     require("../includes/config.php");
 

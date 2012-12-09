@@ -1,5 +1,10 @@
 <?php
 
+/**
+  Lets the user sign up for a club. Adds 
+  to the subscription database.
+**/
+
     // configuration
     require("../includes/config.php"); 
 
@@ -13,7 +18,8 @@
     {   
         $club = query("SELECT * FROM clubs WHERE name=?",$_GET["club"]);
         $club = $club[0];
-        $user = query("SELECT * FROM users WHERE id=?",$_SESSION["id"])[0];
+        $user = query("SELECT * FROM users WHERE id=?",$_SESSION["id"]);
+        $user = $user[0];
         $temp = query("SELECT * FROM subscriptions WHERE userID=? AND clubID=?",$user["id"],$club["id"]);
         
         if(!empty($temp))

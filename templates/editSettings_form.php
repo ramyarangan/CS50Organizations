@@ -235,7 +235,7 @@ function emailExists(name, email)
 {
     $.ajax({
         type: 'POST',
-        url: 'checkClub.php',
+        url: 'checkClubSettings.php',
         data: { club: name, abbreviation: "", email: email},
         dataType:'json',
         async: false,
