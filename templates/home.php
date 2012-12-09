@@ -4,6 +4,27 @@
 
 </div>
 
+<style>
+.thumbnail{
+height:270px;
+}
+
+.thumbnail h3{
+    font-weight:200;
+    letter-spacing:0px;
+    margin-bottom:-10px;
+}
+
+.thumbnail small{
+color:#999999;
+}
+
+.thumbnail p{
+    margin-top:20px;
+}
+
+
+</style>
 
 <div class="row">
 <img src="img/dots.jpg" width=80%>
@@ -42,7 +63,7 @@
 </select>
 <?php endif ?>
 
-<button id="submit" class="btn" ><i class="icon-refresh"></i></button>
+<button id="submit" class="btn btn-primary"><i class="icon-refresh icon-white"></i></button>
 
 
 <a style="margin-left:40px" href="#infoModal" id="emailBtn" rel="tooltip" title="Help" role="button" class="btn" data-toggle="modal">
@@ -58,28 +79,23 @@
 <div class="modal fade hide" id="infoModal" tabindex="-1" style="text-align:left" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true" >
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-<h3 id="infoModalLabel">How to search.</h3>
+<h3 id="infoModalLabel">Search filter guide.</h3>
 </div>
 <div class="modal-body">
-<p>This multi-selector allows you to toggle between different display settings, helping you view 
- the events and announcements that are important to you. To narrow your results, choose between 
- clubs by clicking on the left dropdown. The second dropdown lets you further filter results by 
- choosing the privacy level of events you’d like to view. Choose “public” for events that are 
- visible to all users on the site, “pending” for events visible to those with pending club 
- membership, “all-club” for events visible to all club members, “comp” for events that apply 
- only to compers, “non-comp” for events that apply to club members that are done with the comping 
- process, and “admin” for events only available to club administrators. With these controls, you
- can see the events you want, as long as you’re actually authorized to see them!</p>
+
+<p> Announcements and events can be filtered by two options:
+    <ol> 
+        <li><strong>Clubs.</strong> </br>You must specify which club(s) you're interested in.</li>
+<li><strong>Privacy.</strong> </br> These categories refer to the minimum level of membership necessary to view the event or announcement. Note that even if you choose "admin," you will only be able to see administrator-only information for the clubs in which you are an administrator. This option is not required; if unspecified, by default you view all events you are permitted to see--that is, all events under your privacy level for each respective club. 
+</ol> 
+</p>
+</div>
+<div class="modal-footer" style="text-align:left">
+<strong>tl;dr?</strong> Clubs are mandatory; privacy is not. Go forth and search!
 </div>
 
 </div>
 
-
-<div style="margin-top:-40px; margin-bottom:20px">
-    <img src="img/dots.jpg" width=80%>
-</div>
-
-<div id="divPrint"> </div> 
 <div id="eventsAnnouncements" class="row-fluid" style="height:500px; margin-bottom:40px">
 
     <div id="toggle" class ="span3" style="text-align:right; padding-top:20px; padding-left:30px">
@@ -109,38 +125,42 @@
 
 <div class="row-fluid">
 
-<h1> Popular events </h2>
+<div class="section-title" style="padding-top:26px; font-size:30px; letter-spacing:4px">Popular Events</div>
 
 <ul class="thumbnails">
 <li class="span3">
 <div class="thumbnail">
-<img src="http://placehold.it/300x200" alt="">
-<h3>Thumbnail label</h3>
-<p>Thumbnail caption...</p>
+<img src="img/cs50.jpg" alt="This is CS50.">
+<h3>This is CS50.</h3>
+<small>Now.</small>
+<p>No, really. This *is* CS50. Just look around.</p>
 </div>
 </li>
 
 <li class="span3">
 <div class="thumbnail">
-<img src="http://placehold.it/300x200" alt="">
-<h3>QQ</h3>
-<p>Thumbnail caption...</p>
+<img src="img/h-y.png" alt="Rematch and gloat.">
+<h3>The (Re)Game.</h3>
+<small>Wednesday 12/12/2012 at 12:12 PM</small>
+<p>Kick Those Who Are Down Association (KTWADA) </p>
 </div>
 </li>
 
 <li class="span3">
 <div class="thumbnail">
-<img src="http://placehold.it/300x200" alt="">
-<h3>QQ</h3>
-<p>Thumbnail caption...</p>
+<img src="img/pastries.jpg" alt="Have pastries with FAIL.">
+<h3>Breakfast à Paris</h3>
+<small>Sunday 12/17/2012 at 11:00 AM</small>
+<p>French Appreciation International Liaisons (FAIL)</p>
 </div>
 </li>
 
 <li class="span3">
 <div class="thumbnail">
-<img src="http://placehold.it/300x200" alt="">
-<h3>QQ</h3>
-<p>Thumbnail caption...</p>
+<img src="img/eating-snow.jpg" alt="Eat the most snow.">
+<h3>Snowmunching</h3>
+<small>Friday 12/22/2012 at 8:00 PM</small>
+<p>Brain Freeze Friends (BFF) </p>
 </div>
 </li>
 
