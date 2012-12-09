@@ -5,13 +5,6 @@
     </div>
 </div>
 
-<?php
-    if(empty($clubRows) && empty($annRows) && empty($eventRows))
-    {
-        $alert = "Your search returned no results.";
-    }
-?>      
-
 <div class = "row-fluid">
     
 <?php if(isset($alert)):?>
@@ -21,8 +14,6 @@
 <?php endif ?>
 
 <div class="accordion span10 offset1" id="accordion2">
-
-    <?php if (!empty($clubs)):?>
 
         <div class="accordion-group">
 
@@ -34,32 +25,34 @@
 
             <div id ="clubs" class="accordion-body collapse">
                 <div class="accordion-inner">
-                    <div class="span4" style="padding-bottom:20px">
-                <?php  
-                    $n = 0; 
-                    $col_max = count($clubRows)/3;
+                <?php if (!empty($clubRows))
+                    {
+                        print("<div class=\"span4\" style=\"padding-bottom:20px\">");
+                        $n = 0; 
+                        $col_max = count($clubRows)/3;
     
-                    foreach($clubRows as $club)
-                    { 
-                        print("<a href=\"allClubs.php?club=".str_replace(" ", "+", $club["name"])."\">".$club["name"]."</a></br>");
-                        $n++;
+                        foreach($clubRows as $club)
+                        { 
+                            print("<a href=\"allClubs.php?club=".str_replace(" ", "+", $club["name"])."\">".                $club["name"]."</a></br>");
+                            $n++;
         
-                        if ($n >= $col_max)
-                        {
-                            print("</div> <div class=\"span4\">");
-                            $n = 0;
+                            if ($n >= $col_max)
+                            {
+                                print("</div> <div class=\"span4\">");
+                                $n = 0;
+                            }
+                            // print($n);
+                            //  print($col_max);
                         }
-                        // print($n);
-                        //  print($col_max);
+                        print("</div>");
                     }
+                    else
+                        print("No clubs matched your query.");
                 ?>
-                </div>
             </div>
         </div>
     </div>
-    <?php endif?>
 
-    <?php if (!empty($annRows)):?>
         <div class="accordion-group">
             <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#announcements">
@@ -71,7 +64,8 @@
                     <div class="span8 offset2">
 
 
-<?php 
+<?php if (!empty($annRows)){
+
     // show max 10 announcements....
     for ($i = 0; $i < count($annRows) && $i < 3 ; $i++)  
     {                    
@@ -104,7 +98,11 @@
     {
         print("<div class=\"expand\" style=\"padding:20px\"> (Only top 10 results shown.) </div>");
     }
-    
+}
+    else
+    {
+        print("No announcements matched your query.");
+    }
 ?>
 
 
@@ -113,9 +111,7 @@
             </div>
         </div>
         
-    <?php endif?>
 
-<?php if (!empty($eventRows)):?>
 
 <div class="accordion-group">
     <div class="accordion-heading">
@@ -126,8 +122,8 @@
 
     <div id ="events" class="accordion-body collapse">
         <div class="accordion-inner">
-<div class="span4" style="padding-bottom:20px">
-<?php  
+<?php if (!empty($eventRows)){
+    print("<div class=\"span4\" style=\"padding-bottom:20px\">");
     $n = 0; 
     $col_max = count($eventRows)/3;
     
@@ -144,13 +140,15 @@
         // print($n);
         //  print($col_max);
     }
+    print("</div>");
+}
+    else
+    print("No events matched your query.");
     ?>
-</div>
         </div>
     </div>
 </div>
 
-<?php endif?>
 
 </div>
 
