@@ -116,12 +116,6 @@
 
 
 
-    <div class="control-group">
-        <div class="controls">
-            <button id="submit" type="submit" class="btn">Submit</button>
-        </div>
-    </div>
-
 <h3>Club Information</h3>
     <div class="control-group">
         <label class="control-label" for="club"><strong>Club</strong></label>
@@ -130,20 +124,22 @@
         <label class="control-label" for="text"><strong>Text Notifications</strong></label>
         </br>
         <div class="controls row-fluid" id = "checkboxes">
-        <?php foreach ($clubs as $key=>$club):?>
-            <label class="control-label" for="club"><?=$club["name"]?></label>
-            <input type="checkbox" id="<?=$club["id"]."member"?>" name="<?=$club["id"]."member"?>" value="1" checked>
-            <?php if ($subscriptions[$key]["subscription"] == 1 || $subscriptions[$key]["subscription"] == 3):?>
-                <input type="checkbox" id="<?=$club["id"]."emailsub"?>" name="<?=$club["id"]."emailsub"?>" value="1" checked>
-            <?php else: ?>        
-                <input type="checkbox" id="<?=$club["id"]."emailsub"?>" name="<?=$club["id"]."emailsub"?>" value="1">
-            <?php endif ?>
-            <?php if ($subscriptions[$key]["subscription"] == 2 || $subscriptions[$key]["subscription"] == 3):?>
-                <input type="checkbox" id="<?=$club["id"]."text"?>" name="<?=$club["id"]."text"?>" value= "1" checked><br>
-            <?php else: ?>        
-                <input type="checkbox" id="<?=$club["id"]."text"?>" name="<?=$club["id"]."text"?>" value= "1"><br>
-            <?php endif ?>
-        <?php endforeach?>
+        <?php if (!empty($subscriptions)):?>
+            <?php foreach ($clubs as $key=>$club):?>
+                <label class="control-label" for="club"><?=$club["name"]?></label>
+                <input type="checkbox" id="<?=$club["id"]."member"?>" name="<?=$club["id"]."member"?>" value="1" checked>
+                <?php if ($subscriptions[$key]["subscription"] == 1 || $subscriptions[$key]["subscription"] == 3):?>
+                    <input type="checkbox" id="<?=$club["id"]."emailsub"?>" name="<?=$club["id"]."emailsub"?>" value="1" checked>
+                <?php else: ?>        
+                    <input type="checkbox" id="<?=$club["id"]."emailsub"?>" name="<?=$club["id"]."emailsub"?>" value="1">
+                <?php endif ?>
+                <?php if ($subscriptions[$key]["subscription"] == 2 || $subscriptions[$key]["subscription"] == 3):?>
+                    <input type="checkbox" id="<?=$club["id"]."text"?>" name="<?=$club["id"]."text"?>" value= "1" checked><br>
+                <?php else: ?>        
+                    <input type="checkbox" id="<?=$club["id"]."text"?>" name="<?=$club["id"]."text"?>" value= "1"><br>
+                <?php endif ?>
+            <?php endforeach?>
+        <?php endif?>
         </div>
         </br>
     </div>
@@ -152,6 +148,13 @@
 <div class="span10 row error" id="oldpwText"></div>
 </div>
 </div>
+
+
+    <div class="control-group">
+        <div class="controls">
+            <button id="submit" type="submit" class="btn">Submit</button>
+        </div>
+    </div>
 
 </form>
 </div>
