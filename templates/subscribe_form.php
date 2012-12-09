@@ -18,7 +18,7 @@
         <?php else: ?>        
             <input type="checkbox" id="text" name="text" value= "1">Text<br>
         <?php endif ?>
-        <input type="text" id="number" name="number" placeholder="##########"><br>
+        <input type="text" id="number" name="number" value= <?=$number?>><br>
         <div class="span10 row error" id="numberText"></div>
 
         <select name="provider" id="provider">
@@ -64,6 +64,7 @@ $(document).ready(function(){
                   });
 
      $("#submit").click(function(){
+     
         hasError = false;
         numberError = false;
                         var text = $("#text").is(":checked");
@@ -71,10 +72,19 @@ $(document).ready(function(){
                         var number = $("#number").val();
                         var provider = $("#provider").val();
 
-                        var numReg = [0-9];
 
                         if (text) 
                         {
+                            if (provider == "SelectOne") 
+                            {
+                                $("#providerText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter your service provider.");
+                                hasError = true;
+                            }          
+                            else
+                            {
+                                $("#providerText").html("");
+                            }   
+
                             if (number == "") 
                             {
                                 $("#numberText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter your number.");
@@ -85,33 +95,21 @@ $(document).ready(function(){
                                 $("#numberText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Not a valid phone number.");
                                 hasError = true;
                             }
-                            else if(!numReg.test(number))
+                            else if(!number.match(/^\d+$/))
                             {
-                                $("#numberText").show();
                                 $("#numberText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Not a valid phone number.");
                                 hasError = true;
                             }
                             else
                             {
-                                $("#numberText").hide();
+                                $("#numberText").html("");
                             }
-                     
-                            if (provider == "SelectOne") 
-                            {
-                                $("#providerText").show();
-                                $("#providerText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please enter your service provider.");
-                                hasError = true;
-                            }          
-                            else
-                            {
-                                $("#providerText").hide();
-                            }   
 
                         }   
                         else
                         {
-                            $("#numberText").hide();
-                            $("#providerText").hide();
+                            $("#numberText").html("");
+                            $("#providerText").html("");
                         }                     
 
                         if (hasError == false) 

@@ -40,6 +40,7 @@
         
         $members = query("SELECT * FROM subscriptions WHERE clubID = ?", $_POST["club"]);
 
+        require("PHPMailer/class.phpmailer.php");
         foreach($members as $member)
         {
             if($member["level"] >= $_POST["privacy"])
@@ -47,7 +48,6 @@
                 query("INSERT INTO notifications (userID, time, text, seen, redirect) VALUES(?, NOW(), ?, 0, ?)", $member["userID"], 
                     $clubName . ' has added the announcement: '.$_POST["name"].'!',"allClubs.php?club=".$clubName);
                     
-                require("PHPMailer/class.phpmailer.php");
                 if($member["subscription"] == 1 || $member["subscription"] == 3)
                 {    
                     $mail = new PHPMailer();

@@ -38,6 +38,13 @@
             $email = 1;
             $text = 1;
         }        
-        render_div("subscribe_form.php", array("club" => $_GET["club"], "text" => $text, "email" => $email));
+        $number = query("SELECT * FROM users WHERE id=?", $_SESSION["id"])[0]["number"];
+        $provider = "SelectOne";
+        if(!empty($number))
+        {
+            $number = substr($number, 0, 10);
+            $provider = substr($number,11);
+        }
+        render_div("subscribe_form.php", array("club" => $_GET["club"], "text" => $text, "email" => $email, "number" => $number));
     }
 ?>
