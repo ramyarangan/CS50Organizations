@@ -9,7 +9,7 @@
                 
         // insert new user into database
         query("UPDATE users SET email=? WHERE id=?", $_POST["email"],$_SESSION["id"]);
-        query("UPDATE users SET number=? WHERE id=?", $_POST["number"],$_SESSION["id"]);
+        query("UPDATE users SET number=? WHERE id=?", $_POST["number"]."@".$_POST["provider"],$_SESSION["id"]);
 
         if($_POST["password"] != "")
             query("UPDATE users SET password=? WHERE id=?", crypt($_POST["password"]),$_SESSION["id"]);
