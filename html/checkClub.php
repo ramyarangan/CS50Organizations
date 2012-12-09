@@ -1,9 +1,9 @@
-
+<?php
 /*
  * checkClub.php
  * 
  * Helper php script for forms to validate via AJAX query whether a club already exists.
- */
+ */ ?>
 
 <?php
 
