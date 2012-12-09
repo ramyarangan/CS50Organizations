@@ -1,5 +1,10 @@
 <?php
 
+/**
+  Allows users to change their account settings, such as password,
+  email, phone number, service provider, as well as club subscriptions.
+**/
+
     // configuration
     require("../includes/config.php");
 
@@ -52,20 +57,24 @@
     else
     {
         // else render form
-        $user = query("SELECT * FROM users WHERE id=?",$_SESSION["id"])[0];
+        $user = query("SELECT * FROM users WHERE id=?",$_SESSION["id"]);
+        $user = $user[0];
         $end = strrpos($user["realname"]," ");
         $subscriptions = query("SELECT * FROM subscriptions WHERE userID=?", $_SESSION["id"]);
-        $clubs = [];
+        $clubs = array();
         foreach ($subscriptions as $subscription)
         {
-            array_push($clubs, query("SELECT * FROM clubs WHERE id=?", $subscription["clubID"])[0]);
+            $temp = query("SELECT * FROM clubs WHERE id=?", $subscription["clubID"]);
+            $temp = $temp[0];
+            array_push($clubs, $temp);
         }
 
-        $number = query("SELECT * FROM users WHERE id=?", $_SESSION["id"])[0]["number"];
+        $number = query("SELECT * FROM users WHERE id=?", $_SESSION["id"]);
+        $number = $number[0]["number"];
         if(!empty($number))
             $number = substr($number, 0, 10);
 
-        render("accountSettings_form.php", array("title" => "Account Settings",
+        render("accountSettings_form.php", array("title" => "CS50 Organizations: Account Settings",
         "username" => $user["name"], "email" => $user["email"], "clubs" => $clubs, "subscriptions" => $subscriptions, "number" => $number));
     }
 ?>

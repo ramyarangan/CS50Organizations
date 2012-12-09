@@ -146,21 +146,21 @@
                     <tbody>
 
 <?php if (!empty($subscriptions)):?>
-<?php foreach ($clubs as $key=>$club):?>
+<?php foreach ($subscriptions as $key=>$subscription):?>
         <tr>
-            <td><?=$club["name"]?></td>
-            <td><input type="checkbox" id="<?=$club["id"]."member"?>" name="<?=$club["id"]."member"?>" value="1" checked></td>
+            <td><?=$clubs[$key]["name"]?></td>
+            <td><input type="checkbox" id="<?=$clubs[$key]["id"]."member"?>" name="<?=$clubs[$key]["id"]."member"?>" value="1" checked></td>
 
-<?php if ($subscriptions[$key]["subscription"] == 1 || $subscriptions[$key]["subscription"] == 3):?>
-            <td><input type="checkbox" id="<?=$club["id"]."emailsub"?>" name="<?=$club["id"]."emailsub"?>" value="1" checked></td>
+<?php if ($subscription["subscription"] == 1 || $subscription["subscription"] == 3):?>
+            <td><input type="checkbox" id="<?=$clubs[$key]["id"]."emailsub"?>" name="<?=$clubs[$key]["id"]."emailsub"?>" value="1" checked></td>
 <?php else: ?>        
-            <td><input type="checkbox" id="<?=$club["id"]."emailsub"?>" name="<?=$club["id"]."emailsub"?>" value="1"></td>
+            <td><input type="checkbox" id="<?=$clubs[$key]["id"]."emailsub"?>" name="<?=$clubs[$key]["id"]."emailsub"?>" value="1"></td>
 <?php endif ?>
 
-<?php if ($subscriptions[$key]["subscription"] == 2 || $subscriptions[$key]["subscription"] == 3):?>
-            <td><input type="checkbox" id="<?=$club["id"]."text"?>" name="<?=$club["id"]."text"?>" value= "1" checked><br></td>
+<?php if ($subscription["subscription"] == 2 || $subscription["subscription"] == 3):?>
+            <td><input type="checkbox" id="<?=$clubs[$key]["id"]."text"?>" name="<?=$clubs[$key]["id"]."text"?>" value= "1" checked><br></td>
 <?php else: ?>        
-            <td><input type="checkbox" id="<?=$club["id"]."text"?>" name="<?=$club["id"]."text"?>" value= "1"><br></td>
+            <td><input type="checkbox" id="<?=$clubs[$key]["id"]."text"?>" name="<?=$clubs[$key]["id"]."text"?>" value= "1"><br></td>
 <?php endif ?>
         </tr>
 <?php endforeach ?>  

@@ -1,5 +1,10 @@
 <?php
 
+/**
+  Allows a user to recover their password by 
+  sending the user an email with a recovery code.   
+**/
+
     // configuration
     require("../includes/config.php"); 
 
@@ -47,6 +52,6 @@
     else
     {
         
-        render("recover_form.php", array("title"=>"Recover Password"));
+        render("recover_form.php", array("title"=>"CS50 Organizations: Recover Password"));
     }
 ?>

@@ -1,5 +1,11 @@
 <?php
 
+/**
+  Allows club admin to change the status of their
+  members, such as increasing their privacy levels
+  or removing them from the club.
+**/
+
     // configuration
     require("../includes/config.php"); 
     

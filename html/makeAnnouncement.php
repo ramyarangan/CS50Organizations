@@ -1,5 +1,10 @@
 <?php
 
+/**
+  Allows an admin to make an announcement for the 
+  club. Adds announcement to the database. 
+**/
+    
     // configuration
     require("../includes/config.php");
 
@@ -60,7 +65,8 @@
                     $mail->SetFrom($theclub["email"], $theclub["name"]);
 
                     // set To:
-                    $user = query("SELECT * FROM users WHERE id=?",$member["userID"])[0];
+                    $user = query("SELECT * FROM users WHERE id=?",$member["userID"]);
+                    $user = $user[0];
                     $mail->AddAddress($user["email"]);
 
                     // set Subject:
@@ -92,7 +98,8 @@
                     $mail->Subject = "New Announcement";
                     $mail->Body = $clubName." posted: ".$_POST["name"]."!";
                     // Send To  
-                    $user = query("SELECT * FROM users WHERE id=?",$member["userID"])[0];
+                    $user = query("SELECT * FROM users WHERE id=?",$member["userID"]);
+                    $user = $user[0];
                     $mail->AddAddress($user["number"] ); // Where to send it  
                     // send mail
                     if ($mail->Send() == false)
@@ -123,7 +130,7 @@
                 $privacy[$row["description"]] = $row["level"];
             }
             
-            render_div("makeAnnouncement_form.php", array("title" => "Make New Announcement", 
+            render_div("makeAnnouncement_form.php", array("title" => "CS50 Organizations: Make Announcement", 
                 "clubName" => $_GET["club"], "privacy" => $privacy));
         }
 

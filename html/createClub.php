@@ -1,5 +1,9 @@
 <?php
 
+/**
+  A page where a user can create a new club.
+**/
+
     // configuration
     require("../includes/config.php");
     
@@ -152,7 +156,6 @@
         //$otherID = $otherID[0]["id"];         
         
         // render form
-        render("createClub_form.php", array("title" => "Create a Club", "categories" => $categories 
-            ));
+        render("createClub_form.php", array("title" => "CS50 Organizations: Create an Organization", "categories" => $categories));
     }
 ?>

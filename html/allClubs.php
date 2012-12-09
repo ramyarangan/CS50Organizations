@@ -1,5 +1,10 @@
 <?php
 
+/**
+  Displays club pages using the club name passed through GET. 
+  If no club name is passed, displays all clubs, grouped by 
+  type.
+**/
     // configuration
     require("../includes/config.php"); 
 
@@ -55,7 +60,8 @@
         for($i = 1; $i <= $privacy; $i++)
         {
             $temp = query("SELECT link FROM calendarLinks WHERE id = ?", 
-                          $club["id"] . "." . $i)[0]["link"]; 
+                          $club["id"] . "." . $i);
+            $temp = $temp[0]["link"]; 
             $temp = substr($temp,38, strlen($temp) -51);
             $url = $url . $temp;
             $url = $url . "&amp;src=";

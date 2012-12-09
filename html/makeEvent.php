@@ -1,5 +1,10 @@
 <?php
 
+/**
+  Allows an admin to make a new event for a club and
+  adds the event to the database. 
+**/
+
     // configuration
     require("../includes/config.php");
 
@@ -40,7 +45,8 @@
         $clubName = $clubs[0]["name"];
         $theclub = $clubs[0];
         
-        $userName = query("SELECT * FROM users WHERE id = ?", $_SESSION["id"])[0]["realname"];
+        $userName = query("SELECT * FROM users WHERE id = ?", $_SESSION["id"]);
+        $userName = $userName[0]["realname"];
         //add notification of new event
         $result = query("INSERT INTO announcements (id, userID, text, title, privacy) VALUES(?, ?, ?, ?, ?)",
                     $_POST["club"], 0, $userName . ' has added the event ' . $_POST["name"] . '. Go check it out!', 
@@ -73,7 +79,8 @@
                     $mail->SetFrom($theclub["email"], $theclub["name"]);
 
                     // set To:
-                    $user = query("SELECT * FROM users WHERE id=?",$member["userID"])[0];
+                    $user = query("SELECT * FROM users WHERE id=?",$member["userID"]);
+                    $user = $user[0];
                     $mail->AddAddress($user["email"]);
 
                     // set Subject:
@@ -105,7 +112,8 @@
                     $mail->Subject = "New Event";
                     $mail->Body = $clubName." added a new event: ".$_POST["name"]."!";
                     // Send To  
-                    $user = query("SELECT * FROM users WHERE id=?",$member["userID"])[0];
+                    $user = query("SELECT * FROM users WHERE id=?",$member["userID"]);
+                    $user = $user[0];
                     $mail->AddAddress($user["number"] ); // Where to send it  
                     // send mail
                     if ($mail->Send() == false)
@@ -143,7 +151,8 @@
             $newEntry->when = array($when);
             
             $url  = query("SELECT link FROM calendarLinks WHERE id = ?", 
-                    $_POST["club"] . "." . $privacy)[0]["link"];
+                    $_POST["club"] . "." . $privacy);
+            $url = $url[0]["link"];
 
             $createdEntry = $gc->insertEvent($newEntry, $url);
         }
