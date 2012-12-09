@@ -342,7 +342,7 @@ padding: 8px 35px 8px 14px;
 
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <?php
-                                    $user= query("SELECT * FROM users WHERE id = ?", $_SESSION["id"])[0]["realname"];
+                                    $user=query("SELECT * FROM users WHERE id = ?", $_SESSION["id"])[0]["realname"];
                                     print($user);
                                 ?>
                                 <i class="icon-user"></i>
