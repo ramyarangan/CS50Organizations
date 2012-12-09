@@ -1,5 +1,12 @@
 <?php
 
+/**
+  Lets the user subscribe to email and text notifications.
+  If text is selected, asks the user for phone number and
+  phone provider so texts can be sent. 
+**/
+
+
     // configuration
     require("../includes/config.php"); 
 
@@ -20,7 +27,8 @@
             query("UPDATE users SET number=? WHERE id=?",$_POST["number"]."@".$_POST["provider"],$_SESSION["id"]);
         }
     
-        $clubID = query("SELECT id FROM clubs WHERE name=?",$_POST["club"])[0]["id"];
+        $clubID = query("SELECT id FROM clubs WHERE name=?",$_POST["club"]);
+        $clubID = $clubID[0]["id"];
         $result = query("UPDATE subscriptions SET subscription=? WHERE userID=? AND clubID=?", $subscription, $_SESSION["id"], $clubID);    
         redirect("allClubs.php?club=".str_replace(" ", "+", $_POST["club"])."&type=subscribe&success=1"); 
        
@@ -38,7 +46,8 @@
             $email = 1;
             $text = 1;
         }        
-        $number = query("SELECT * FROM users WHERE id=?", $_SESSION["id"])[0]["number"];
+        $number = query("SELECT * FROM users WHERE id=?", $_SESSION["id"]);
+        $number = $number[0]["number"];
         $provider = "SelectOne";
         if(!empty($number))
         {

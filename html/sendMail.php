@@ -1,5 +1,10 @@
 <?php
 
+/**
+  A page where the user can send an email to
+  the club email. 
+**/
+
     // configuration
     require("../includes/config.php"); 
 
