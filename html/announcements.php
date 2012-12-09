@@ -21,7 +21,12 @@
                 $privacies = array(1, 2, 3, 4, 5, 6);
             }
             
-            $myLevel = query("SELECT level FROM subscriptions WHERE userID = ? AND clubID = ?", $_SESSION["id"], $clubID);
+            if(isset($_SESSION["id"]))
+                $myLevel = query("SELECT level FROM subscriptions WHERE userID = ? AND clubID = ?", $_SESSION["id"], $clubID);
+                
+            if ((!isset($_SESSION["id"])) || empty($myLevel))
+                $maxPrivacy = 1;            
+
             
             if (empty($myLevel))
             {
