@@ -152,7 +152,7 @@
         $otherID = $otherID[0]["id"];         
         
         // render form
-        render("createClub_form.php", array("title" => "Register", "categories" => $categories, 
+        render("createClub_form.php", array("title" => "Create a Club", "categories" => $categories, 
             "otherID" => $otherID));
     }
 ?>
