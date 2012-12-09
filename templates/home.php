@@ -61,7 +61,15 @@
 <h3 id="infoModalLabel">How to search.</h3>
 </div>
 <div class="modal-body">
-<p>Blahbblahblhh info text here.</p>
+<p>This multi-selector allows you to toggle between different display settings, helping you view 
+ the events and announcements that are important to you. To narrow your results, choose between 
+ clubs by clicking on the left dropdown. The second dropdown lets you further filter results by 
+ choosing the privacy level of events you’d like to view. Choose “public” for events that are 
+ visible to all users on the site, “pending” for events visible to those with pending club 
+ membership, “all-club” for events visible to all club members, “comp” for events that apply 
+ only to compers, “non-comp” for events that apply to club members that are done with the comping 
+ process, and “admin” for events only available to club administrators. With these controls, you
+ can see the events you want, as long as you’re actually authorized to see them!</p>
 </div>
 
 </div>

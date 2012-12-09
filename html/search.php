@@ -42,7 +42,7 @@
 
         if(empty($clubs)&&empty($announcements)&&empty($events))
         {
-            redirect("allClubs.php");
+            redirect("allClubs.php?search=1");
         }
         
 

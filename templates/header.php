@@ -299,6 +299,7 @@ padding: 8px 35px 8px 14px;
 
                     <!--IF LOGGED IN-->
                     <?php if (isset($_SESSION["id"])): 
+                        $user = query("SELECT * FROM users WHERE id = ?", $_SESSION["id"]);
                         $myclubs = query("SELECT * FROM subscriptions JOIN clubs WHERE userID = ? AND subscriptions.ClubID = clubs.id", $_SESSION["id"]);?>
 
 
@@ -318,8 +319,12 @@ padding: 8px 35px 8px 14px;
                                 }?>
 
                                 <li class="nav-header">Manage</li>
-                                <li><a href="makeAnnouncement.php"> Make Announcement </a></li>
-                                <li><a href="makeEvent.php"> Create Event </a></li>
+                                <?php if($user[0]["admin"])
+                                  {  print("<li><a href=\"makeAnnouncement.php\"> Make Announcement </a></li>");
+                                
+                                    print("<li><a href=\"makeEvent.php\"> Create Event </a></li>");
+                                  }
+                                ?>
                                 <li><a href="createClub.php"> Create Organization </a></li>
                                 <li class="divider"></li>
                                 <li><a href="allClubs.php"> All Organizations </a></li>
@@ -369,7 +374,7 @@ padding: 8px 35px 8px 14px;
                                     if($notification["seen"]==1)
                                         print("<li><a href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
                                     else
-                                        print("<li><a style=\"background-color: Yellow;\" href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
+                                        print("<li><a style=\"background-color: #d9edf7;\" href=\"".$notification["redirect"]."\">".$notification["text"]."</a></li>");
                                 }   
 
                             ?> 
@@ -396,9 +401,9 @@ Organizations
 </li>
 </ul>
 
-                        <form class="navbar-search pull-left">
-                            <input type="text" class="search-query" placeholder="Search site">
-                        </form>
+                    <form class="navbar-search pull-left" action="search.php" method="get">
+                        <input type="text" id="tags" name="search" placeholder="Search"/>
+                    </form>
 
                         <ul class="nav pull-right"> 
                             <li><a href="login.php">Log In</a></li>

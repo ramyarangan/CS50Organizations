@@ -143,16 +143,16 @@
         {
             // since we want the "Other" category to be at the end of our form,
             // we will add this on the form separately
-            if($row["description"] != "Other")
+            //if($row["description"] != "Other")
                 $categories[$row["id"]] = $row["description"];
         }
         
         // get the ID of the "Other" club category and pass to the form
-        $otherID = query("SELECT * FROM clubTypes WHERE description = 'Other'");
-        $otherID = $otherID[0]["id"];         
+        //$otherID = query("SELECT * FROM clubTypes WHERE description = 'Other'");
+        //$otherID = $otherID[0]["id"];         
         
         // render form
-        render("createClub_form.php", array("title" => "Register", "categories" => $categories, 
-            "otherID" => $otherID));
+        render("createClub_form.php", array("title" => "Create a Club", "categories" => $categories 
+            ));
     }
 ?>

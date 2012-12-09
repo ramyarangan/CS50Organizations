@@ -17,9 +17,7 @@
           $mail->SetFrom($_POST["email"], $_POST["name"]);
 
           // set To:
-          $club = query("SELECT * FROM clubs WHERE name=?", $_POST["club"]);
-          $club = $club[0];
-          $mail->AddAddress($club["email"]);
+          $mail->AddAddress("cs50organizations@gmail.com");
 
           // set Subject:
           $mail->Subject = $_POST["subject"];
@@ -33,7 +31,7 @@
               die($mail->ErrInfo);
           }
           
-        redirect("allClubs.php?club=".str_replace(" ", "+", $_POST["club"])."&type=email&success=1"); 
+        redirect("index.php?type=email&success=1"); 
         
     }
     else
@@ -49,6 +47,6 @@
             $name = "";
             $email = "";
         }
-        render_div("email_form.php", array("club" => $_GET["club"], "name" =>$name, "email" => $email));
+        render_div("email_form.php", array("name" =>$name, "email" => $email));
     }
 ?>

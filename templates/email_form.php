@@ -1,7 +1,13 @@
-<form id="emailForm" class="form-horizontal" style="text-align:left" action="sendMail.php" method="post">
+<?php if(isset($_POST["club"]))
+    $action = "sendMail.php";
+    else
+        $action= "contactUs.php";
+?>
+<form id="emailForm" class="form-horizontal" style="text-align:left" action= <?=$action?> method="post">
     
+    <?php if(isset($_POST["club"])): ?>
     <input type ="hidden" name="club" value= <?="\"".$club."\""?> >
-
+    <?php endif ?>
 
     <div class="control-group">
         <label class="control-label" for="inputName">Your Name</label>
