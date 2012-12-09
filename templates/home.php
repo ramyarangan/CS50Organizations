@@ -96,7 +96,7 @@ color:#999999;
 
 </div>
 
-<div id="eventsAnnouncements" class="row-fluid" style="height:500px; margin-bottom:40px">
+<div id="eventsAnnouncements" class="row-fluid" style="height:500px; margin-bottom:40px; margin-top:30px">
 
     <div id="toggle" class ="span3" style="text-align:right; padding-top:20px; padding-left:30px">
         <ul class="nav nav-pills nav-stacked" style="text-align:right">
