@@ -273,7 +273,11 @@ $(document).ready(function(){
                                 $("#endText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> Please choose an end date/ time.");
                                 hasError = true;
                             }
-
+                            if (startDatetime > endDatetime)
+                           {
+                               $("#endText").html("<span class=\"label label-important\"><i class=\"icon-exclamation-sign icon-white\"></i></span> End date/ time must be after start date/ time.");
+                               hasError = true;
+                           }
 
                         if (hasError == false) 
                         {

@@ -53,3 +53,4 @@
     else
         render("search_page.php", array("title" => "CS50 Organizations: Search Results", "alert" => "Error: You seem to have clicked a wrong link...")); 
 ?>
+
