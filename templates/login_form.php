@@ -1,11 +1,10 @@
 <div class="row-fluid">
-    <div class="club-header">
-        <h1>
-            Log in.
-        </h1>
+    <div class="reg-header">
+        <h1>Log in.</h1>
         <div><img src="img/dots.jpg" width=80%></div>
     </div>
 </div>
+
 
 <div class = "row-fluid" style="padding:30px">
 <form class="form-horizontal offset2" id="logForm" style="text-align:left" action="login.php" method="post">

@@ -20,16 +20,17 @@
         {
             $privacy = $subscription[0]["level"];
             
-            if ($privacy == 6)
+            // check if admin
+            if ($privacy == 5)
             {
                 
-                $members = query("SELECT * FROM subscriptions JOIN users ON users.id = subscriptions.userID WHERE clubID=? AND level > 2 ORDER BY level, realname", $club["id"]);
+                $members = query("SELECT * FROM subscriptions JOIN users ON users.id = subscriptions.userID WHERE clubID=? AND level > 1 ORDER BY level, realname", $club["id"]);
                 
-                $pending = query("SELECT * FROM subscriptions JOIN users ON users.id = subscriptions.userID WHERE clubID= ? AND level = 2 ORDER BY realname", $club["id"]);
+              //  $pending = query("SELECT * FROM subscriptions JOIN users ON users.id = subscriptions.userID WHERE clubID= ? AND level = 2 ORDER BY realname", $club["id"]);
                 
                 $levels = query("SELECT * FROM privacy");
                 
-                render("editMembers_display.php", array("title" => $club["name"].": Edit Members", "clubInfo" => $club, "members" => $members, "pending" => $pending, "level" => $levels, "success" => $success));
+                render("editMembers_display.php", array("title" => "CS50 Organizations: Edit Members (".$club["name"].")", "clubInfo" => $club, "members" => $members, "level" => $levels, "success" => $success));
             
             }
             else

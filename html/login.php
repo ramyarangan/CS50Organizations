@@ -1,8 +1,11 @@
 <?php
 
-    // configuration
-    require("../includes/config.php"); 
+// configuration
+require("../includes/config.php"); 
 
+// if not already logged in
+if (!isset($_SESSION["id"]))
+{
     // if form was submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
@@ -57,5 +60,11 @@
         else
             render("login_form.php", array("title" => "Log In", "go" => $_GET["go"]));
     }
+}
 
+// if logged in already, redirect to index
+else
+{
+    redirect("index.php");
+}
 ?>

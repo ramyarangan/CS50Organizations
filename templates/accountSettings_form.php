@@ -5,9 +5,9 @@
 ?>
 
 <div class="row-fluid">
-    <div class="club-header">
+    <div class="reg-header">
         <h1>
-            Change Account Settings.
+            Change account settings.
         </h1>
         <div><img src="img/dots.jpg" width=80%></div>
     </div>
@@ -33,13 +33,6 @@
     <div class="controls row-fluid">
         <div class="span10 row error" id="nameText"></div>
     </div>
-</div>
-
-
-<div class="control-group" style="margin-top:-18px; margin-bottom:-15px;"> 
-<div class="controls row-fluid">
-<div class="span10 row error" id="usernameText"></div>
-</div>
 </div>
 
     <div class="control-group">
