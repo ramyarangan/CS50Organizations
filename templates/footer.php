@@ -23,6 +23,7 @@
 
 
 <div class="modal fade hide" id="contactUsModal" tabindex="-1" style="text-align:left" role="dialog" aria-labelledby="emailModalLabel" aria-hidden="true" data-remote= <?="\"contactUs.php\""?> >
+
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 <h3 id="emailModalLabel">Contact us.</h3>

@@ -1,7 +1,7 @@
 <?php
 
-   
-/***********************************************************************
+
+    /***********************************************************************
      * functions.php
      *
      * Computer Science 50
@@ -90,6 +90,7 @@
             // trigger (big, orange) error
 	     $temp = $handle->errorInfo();
             trigger_error($temp[2], E_USER_ERROR);
+
             exit;
         }
 
@@ -128,6 +129,7 @@
             $protocol = (isset($_SERVER["HTTPS"])) ? "https" : "http";
             $host = $_SERVER["HTTP_HOST"];
             header("Location: $protocol://$host/~cs50-groups$destination");
+
         }
 
         // handle relative path

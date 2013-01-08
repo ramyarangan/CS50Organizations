@@ -76,9 +76,8 @@ function outputCalendarList($client)
   echo "</ul>\n";
 }
 
-$client = 
-getClientLoginHttpClient("contact.cs50organizations@gmail.com", 
-"crimsongroups");
+$client = getClientLoginHttpClient("contact.cs50organizations@gmail.com", "crimsongroups");
+
 
 
 $_SESSION["client"] = $client;

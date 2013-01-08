@@ -1,3 +1,4 @@
+
 <div class="row-fluid">
 
 <div class="club-header">
@@ -71,6 +72,7 @@
 <div class="modal fade hide" id="emailModal" tabindex="-1" style="text-align:left" role="dialog" aria-labelledby="emailModalLabel" aria-hidden="true" data-remote= <?="\"sendMail.php?club=".str_replace(" ", "+", $clubInfo["name"])."\""?> >
     <div class="modal-header">
 		       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
         <h3 id="emailModalLabel">Email club admins.</h3>
     </div>
     <div class="modal-body">
@@ -79,6 +81,7 @@
 </div>
 
 <div class="modal fade hide" id="announcementModal" tabindex="-1" style="text-align:left" role="dialog" aria-labelledby="announcementModalLabel" aria-hidden="true" data-remote= <?="\"makeAnnouncement.php?club=".str_replace(" ", "+", $clubInfo["name"])."\""?> >
+
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 <h3 id="announcementModalLabel">Make club announcement.</h3>
@@ -90,7 +93,8 @@
 
 <div class="modal fade hide" id="subscribeModal" tabindex="-1" style="text-align:left" role="dialog" aria-labelledby="subscribeModalLabel" aria-hidden="true" data-remote= <?="\"subscribe.php?type=".$subscription[0]["subscription"]."&club=".str_replace(" ", "+", $clubInfo["name"])."\""?> >
     <div class="modal-header">
-   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
         <h3 id="subscribeModalLabel">Subscribe to email and text notifications.</h3>
     </div>
     <div class="modal-body">
@@ -103,6 +107,7 @@
 <div class="row">
         <div class="alert alert-info span6 offset3">
    <button type="button" class="close" data-dismiss="alert">&times;</button>
+
             <?=$alert?>
         </div>
 </div>
@@ -135,6 +140,7 @@
             $poster = "";
             if($alert["userID"]==0)
                 $poster = "Organizations Bot";
+
             else
             {
                 $poster = query("SELECT * FROM users WHERE id=?", $alert["userID"]);

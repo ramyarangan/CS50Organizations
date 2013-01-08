@@ -70,6 +70,7 @@
     $max = 10;
 
     for ($i = 0; $i < count($annRows) && $i < $max; $i++)  
+
     {                    
         print("<div class = \"announcement\">");
         print("<div class = \"announcement-subject\">");
@@ -84,6 +85,7 @@
         $poster = "";
         if($annRows[$i]["userID"]==0)
             $poster = "Organizations Bot";
+
         
         else
         {

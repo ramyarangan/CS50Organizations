@@ -108,6 +108,7 @@ color:#999999;
     <div id="eventsArea" class="span8" style="text-align:left; height:490px; overflow-y:auto; padding-right:20px" >
             <div class = "alert alert-info" style="text-align:center">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
+
             <strong> Welcome! </strong> Choose some clubs above to get started. </br> Note that only events and announcements visible to you can be displayed. 
             </div>
             <iframe src="https://www.google.com/calendar/embed?src=vkd9mihk989ohsv6lhr1i89m0o@group.calendar.google.com" style="border: 0" width="600" height="400" frameborder="0" scrolling="no">

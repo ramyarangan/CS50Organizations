@@ -21,4 +21,5 @@
     // your database's username
     define("USERNAME", "cs50-groups");
 
+
 ?>

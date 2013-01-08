@@ -1,4 +1,5 @@
 student-groups
 ==============
 
-Repo to host CS50 final project
+
+Repo to host CS50 final project. CS50 Organizations is a web application designed to help students and organizations connect more efficiently.

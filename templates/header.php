@@ -37,6 +37,7 @@
         $events = query("SELECT * FROM events");
         $announcements = query("SELECT * FROM announcements");
         $array = array();
+
         foreach($clubs as $club)
         {
             array_push($array,$club["name"]." (club)");
@@ -139,6 +140,7 @@
                     </ul>
 
                     <form class="navbar-search pull-left" action="search.php" method="get">
+
                         <input type="text" id="tags" name="search" placeholder="Search"/>
                     </form>
 

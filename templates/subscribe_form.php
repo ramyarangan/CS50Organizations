@@ -44,6 +44,7 @@
                 <option value="vtext.com">Verizon</option>
                 <option value="vmobl.com">Virgin Mobile USA</option>
             </select>
+
         </div>
     </div>
 
@@ -127,5 +128,6 @@
 	     }
 	   return false;            
 	 });
+
 
 </script>

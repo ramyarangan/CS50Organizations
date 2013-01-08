@@ -17,6 +17,7 @@
     $clientLibraryPath2 = '/nfs/home/groups/cs50-groups';
     set_include_path(get_include_path() . PATH_SEPARATOR . $clientLibraryPath . PATH_SEPARATOR . $clientLibraryPath2);
 
+
     // requirements
     require("constants.php");
     require("functions.php");

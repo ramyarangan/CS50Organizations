@@ -7,6 +7,7 @@
 -- Server version: 5.0.96
 -- PHP Version: 5.2.4-2ubuntu5.25
 
+
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -22,6 +23,7 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `cs50-groups` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `cs50-groups`;
 
+
 -- --------------------------------------------------------
 
 --
@@ -33,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `announcements` (
   `userID` int(11) NOT NULL,
   `text` longtext NOT NULL,
   `time` timestamp NOT NULL default CURRENT_TIMESTAMP,
+
   `title` varchar(255) NOT NULL,
   `privacy` int(4) NOT NULL,
   `seen` tinyint(1) NOT NULL,
@@ -72,6 +75,7 @@ us).', '2013-01-08 04:48:22', 'Second Semester Auditions', 1, 0),
 (59, 0, 'Ramya Rangan has added the event Second Semester Auditions. Go check it out!', '2013-01-08 04:50:31', 'Second 
 Semester Auditions', 1, 0);
 
+
 -- --------------------------------------------------------
 
 --
@@ -79,6 +83,7 @@ Semester Auditions', 1, 0);
 --
 
 CREATE TABLE IF NOT EXISTS `calendarLinks` (
+
   `id` varchar(6) NOT NULL,
   `link` varchar(255) NOT NULL,
   UNIQUE KEY `id` (`id`)
@@ -130,6 +135,7 @@ INSERT INTO `calendarLinks` (`id`, `link`) VALUES
 ('62.4', 'https://www.google.com/calendar/feeds/fcdlbfkes1hqevfabncjj8deog%40group.calendar.google.com/private/full'),
 ('62.5', 'https://www.google.com/calendar/feeds/223fjt0645f2vg91vlflcv1ufg%40group.calendar.google.com/private/full');
 
+
 -- --------------------------------------------------------
 
 --
@@ -140,6 +146,7 @@ CREATE TABLE IF NOT EXISTS `clubTypePairs` (
   `clubID` int(10) unsigned NOT NULL,
   `clubTypeID` int(6) unsigned NOT NULL,
   PRIMARY KEY  (`clubID`,`clubTypeID`),
+
   KEY `clubID` (`clubID`,`clubTypeID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -165,6 +172,7 @@ INSERT INTO `clubTypePairs` (`clubID`, `clubTypeID`) VALUES
 (62, 4),
 (62, 13);
 
+
 -- --------------------------------------------------------
 
 --
@@ -175,6 +183,7 @@ CREATE TABLE IF NOT EXISTS `clubTypes` (
   `id` int(6) unsigned NOT NULL auto_increment,
   `description` varchar(255) NOT NULL,
   PRIMARY KEY  (`id`)
+
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
@@ -182,6 +191,7 @@ CREATE TABLE IF NOT EXISTS `clubTypes` (
 --
 
 INSERT INTO `clubTypes` (`id`, `description`) VALUES
+
 (2, 'Social'),
 (3, 'Cultural'),
 (4, 'Pre-Professional'),
@@ -242,6 +252,7 @@ students find peer mentors, volunteer at hospitals in groups, and socialize with
 --
 
 CREATE TABLE IF NOT EXISTS `events` (
+
   `id` int(10) unsigned NOT NULL,
   `privacy` int(4) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -275,6 +286,7 @@ complete with songs from jazz to Broadway to pop. Get your tickets before they r
 (59, 1, 'Second Semester Auditions', '2013-01-16 05:00:00', '2013-01-16 08:00:00', 'Come prepared with a song of your 
 choice from any genre and some scales. Hope you can make it!', 'Conservatory Theater Backstage');
 
+
 -- --------------------------------------------------------
 
 --
@@ -282,6 +294,7 @@ choice from any genre and some scales. Hope you can make it!', 'Conservatory The
 --
 
 CREATE TABLE IF NOT EXISTS `notifications` (
+
   `userID` int(11) NOT NULL,
   `time` datetime NOT NULL,
   `text` tinytext NOT NULL,
@@ -319,6 +332,7 @@ Daily Herald'),
 'allClubs.php?club=Upbeat'),
 (16, '2013-01-07 23:50:31', 'Upbeat has added the event: Second Semester Auditions!', 1, 'allClubs.php?club=Upbeat');
 
+
 -- --------------------------------------------------------
 
 --
@@ -329,13 +343,16 @@ CREATE TABLE IF NOT EXISTS `privacy` (
   `level` int(4) unsigned NOT NULL,
   `description` varchar(255) NOT NULL,
   PRIMARY KEY  (`level`)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `privacy`
 --
 
+
 INSERT INTO `privacy` (`level`, `description`) VALUES
+
 (1, 'public'),
 (2, 'pending'),
 (3, 'comp'),
@@ -349,11 +366,13 @@ INSERT INTO `privacy` (`level`, `description`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `subscriptions` (
+
   `userID` int(10) unsigned NOT NULL,
   `clubID` int(10) unsigned NOT NULL,
   `level` int(4) unsigned NOT NULL,
   `subscription` int(11) NOT NULL,
   PRIMARY KEY  (`userID`,`clubID`),
+
   KEY `level` (`level`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -420,6 +439,7 @@ CREATE TABLE IF NOT EXISTS `tags` (
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL auto_increment,
+
   `name` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -428,6 +448,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `number` varchar(255) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+
 
 --
 -- Dumping data for table `users`
@@ -438,4 +459,5 @@ INSERT INTO `users` (`id`, `name`, `password`, `email`, `admin`, `realname`, `nu
 (16, 'ramyar', '$1$2A78uegw$PYa07mnTvq2MzZOGWZGLv.', 'ramya.rangan117@gmail.com', 1, 'Ramya Rangan', ''),
 (17, 'mdeng', '$1$1ICL2mD9$s5AHDalpzG85PCSr7VOnQ.', 'mdeng@college.harvard.edu', 0, 'Michelle Deng', ''),
 (18, 'lcheng', '$1$0KWBGQDb$W5g3Lhf0J3IOWCtQB5e7T/', 'lcheng@college.harvard.edu', 1, 'Lucy Cheng', '');
+
 
