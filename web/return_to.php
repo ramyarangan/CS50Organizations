@@ -68,7 +68,7 @@ if($user !== false)
         	$mail->Subject = "Welcome to CS50 Organizations!";
 
           // set body
-        	$mail->Body = "Hi ".$user["fullname"]."!";
+        	$mail->Body = "Hi ".$user["fullname"]."! Have fun with the CS50 Organizations!";
 
           // send mail
           if ($mail->Send() == false)

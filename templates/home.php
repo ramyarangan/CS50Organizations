@@ -120,54 +120,6 @@ color:#999999;
 
 
 
-<div >
-<img src="img/dots.jpg" width=80%>
-</div>
-
-<div class="row-fluid">
-
-<div class="section-title" style="padding-top:26px; font-size:30px; letter-spacing:4px">Popular Events</div>
-
-<ul class="thumbnails">
-<li class="span3">
-<div class="thumbnail">
-<img src="img/cs50.jpg" alt="This is CS50.">
-<h3>This is CS50.</h3>
-<small>Now.</small>
-<p>No, really. This *is* CS50. Just look around.</p>
-</div>
-</li>
-
-<li class="span3">
-<div class="thumbnail">
-<img src="img/h-y.png" alt="Rematch and gloat.">
-<h3>The (Re)Game.</h3>
-<small>Wednesday 12/12/2012 at 12:12 PM</small>
-<p>Kick Those Who Are Down Association (KTWADA) </p>
-</div>
-</li>
-
-<li class="span3">
-<div class="thumbnail">
-<img src="img/pastries.jpg" alt="Have pastries with FAIL.">
-<h3>Breakfast à Paris</h3>
-<small>Sunday 12/17/2012 at 11:00 AM</small>
-<p>French Appreciation International Liaisons (FAIL)</p>
-</div>
-</li>
-
-<li class="span3">
-<div class="thumbnail">
-<img src="img/eating-snow.jpg" alt="Eat the most snow.">
-<h3>Snowmunching</h3>
-<small>Friday 12/22/2012 at 8:00 PM</small>
-<p>Brain Freeze Friends (BFF) </p>
-</div>
-</li>
-
-</ul>
-
-</div>
 
 
 
