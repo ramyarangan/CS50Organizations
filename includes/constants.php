@@ -8,8 +8,12 @@
      *
      * Global constants.
      **********************************************************************/
-
-    // your database's name
+	
+	//used for CS50 ID
+	define("TRUST_ROOT", "https://hcs.harvard.edu/~cs50-groups/");
+	define("RETURN_TO", "https://hcs.harvard.edu/~cs50-groups/return_to.php");
+	
+	// your database's name
     define("DATABASE", "cs50-groups");
 
     // your database's password

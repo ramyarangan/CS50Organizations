@@ -215,7 +215,7 @@
                     </form>
 
                         <ul class="nav pull-right"> 
-                            <li><a href="login.php">Log In</a></li>
+                            <li><a href="login2.php">Log In</a></li>
                         </ul>
                     <?php endif?>
 

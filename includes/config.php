@@ -16,12 +16,11 @@
     $clientLibraryPath = '/nfs/home/groups/cs50-groups/ZendFramework-1.12.0/library';
     $clientLibraryPath2 = '/nfs/home/groups/cs50-groups';
     set_include_path(get_include_path() . PATH_SEPARATOR . $clientLibraryPath . PATH_SEPARATOR . $clientLibraryPath2);
-
-
+	
     // requirements
     require("constants.php");
     require("functions.php");
-
+	require_once("../library50-php-2/CS50/CS50.php");
 
     // enable sessions
     session_start();
